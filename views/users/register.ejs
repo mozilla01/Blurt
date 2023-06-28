@@ -1,0 +1,59 @@
+<% layout("layout/boilerplate")%>
+<div class="mt-5"></div>
+<h1>Register</h1>
+<br />
+<br />
+<form action="/register" method="POST" class="validated-form" novalidate>
+  <div class="mb-3 mt-4">
+    <label for="firstname" class="form-label">First Name: </label>
+    <input
+      type="text "
+      id="firstname"
+      name="firstname"
+      class="form-control"
+      required
+    />
+    <div class="valid-feedback">Looks Good !</div>
+  </div>
+  <div class="mb-3 mt-4">
+    <label for="lastname" class="form-label">Last Name : </label>
+    <input
+      type="text "
+      id="lastname"
+      name="lastname"
+      class="form-control"
+      required
+    />
+    <div class="valid-feedback">Looks Good !</div>
+  </div>
+  <div class="mb-3 mt-4">
+    <label for="username" class="form-label">Email : </label>
+    <input type="email" id="email" name="email" class="form-control" required />
+    <div class="valid-feedback">Looks Good !</div>
+  </div>
+  <div class="mb-3 mt-4">
+    <label for="username" class="form-label">Username : </label>
+    <input
+      type="text "
+      id="username"
+      name="username"
+      class="form-control"
+      required
+    />
+    <div class="valid-feedback">Looks Good !</div>
+  </div>
+
+  <div class="mb-3">
+    <label for="password" class="form-label">Password : </label>
+    <input
+      type="password"
+      id="password"
+      name="password"
+      class="form-control"
+      required
+    />
+    <div class="valid-feedback">Looks Good !</div>
+  </div>
+  <button type="submit" class="btn btn-success">Register</button>
+</form>
+<div class="mb-5"></div>
