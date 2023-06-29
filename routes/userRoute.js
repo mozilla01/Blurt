@@ -16,6 +16,23 @@ const fetchPosts = async () => {
     console.error(err);
   }
 };
+
+const createPost = async (user, messageText) => {
+  try {
+    const response = await fetch("http://127.0.0.1:8000/api/create-post/", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({ user: user, content: messageText }),
+    });
+    const data = await response.json();
+    console.log(data);
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 //Welcome Page
 router.get("/welcome", async (req, res) => {
   res.render("pages/welcome");
@@ -39,7 +56,7 @@ router.post(
       const { firstname, lastname, email, username, password } = req.body;
       const user = new User({ firstname, lastname, email, username });
       const registeredUser = await User.register(user, password);
-      req.login(registeredUser, err => {
+      req.login(registeredUser, (err) => {
         if (err) return next(err);
         req.flash("success", "Registered Successfully !");
         res.redirect("/social-media");
@@ -73,6 +90,16 @@ router.get(
   catchAsync(async (req, res) => {
     const posts = await fetchPosts();
     res.render("pages/main", { posts });
+  })
+);
+
+// Create post
+router.post(
+  "/social-media/create-post",
+  catchAsync(async (req, res) => {
+    createPost(res.locals.currentUser.username, req.body.content);
+    req.flash("success", "New post created!");
+    res.redirect("/social-media");
   })
 );
 
