@@ -7,9 +7,19 @@ const passport = require("passport");
 const { storeReturnTo } = require("../middleware");
 const { isLoggedIn } = require("../middleware");
 
+const fetchPosts = async () => {
+  try {
+    const response = await fetch("http://127.0.0.1:8000/api/posts/?q=");
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    console.error(err);
+  }
+};
 //Home Page
-router.get("/social-media", (req, res) => {
-  res.render("pages/home");
+router.get("/social-media", async (req, res) => {
+  const posts = await fetchPosts();
+  res.render("pages/home", { posts });
 });
 
 //Login Page
@@ -30,7 +40,7 @@ router.post(
       const { firstname, lastname, email, username, password } = req.body;
       const user = new User({ firstname, lastname, email, username });
       const registeredUser = await User.register(user, password);
-      req.login(registeredUser, err => {
+      req.login(registeredUser, (err) => {
         if (err) return next(err);
         req.flash("success", "Registered Successfully !");
         res.redirect("/welcome");
