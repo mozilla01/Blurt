@@ -1,0 +1,38 @@
+html,
+body {
+  background-color: #f1f5f8;
+  height: 100 vh;
+  margin: 0;
+}
+
+#main-body {
+  min-height: calc(100vh - 60px);
+  position: absolute;
+}
+
+#left-sidebar,
+#right-sidebar {
+  background-color: white;
+}
+
+#center-bar {
+  overflow: scroll;
+
+  height: 700px;
+}
+
+#flash-container {
+  min-height: 100px;
+}
+
+#explore-tag {
+  background-color: rgb(255, 255, 255);
+  font-family: "Montserrat";
+
+  border-radius: 8px;
+  border: 2px solid rgb(215, 224, 229);
+}
+
+#explore-tag {
+  margin-top: 5rem;
+}

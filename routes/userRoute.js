@@ -60,7 +60,7 @@ router.post(
 //Registered User Welcome
 router.get(
   "/welcome",
-  isLoggedIn,
+
   catchAsync(async (req, res) => {
     res.render("pages/welcome");
   })
