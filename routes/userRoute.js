@@ -16,10 +16,9 @@ const fetchPosts = async () => {
     console.error(err);
   }
 };
-//Home Page
-router.get("/social-media", async (req, res) => {
-  const posts = await fetchPosts();
-  res.render("pages/home", { posts });
+//Welcome Page
+router.get("/welcome", async (req, res) => {
+  res.render("pages/welcome");
 });
 
 //Login Page
@@ -40,10 +39,10 @@ router.post(
       const { firstname, lastname, email, username, password } = req.body;
       const user = new User({ firstname, lastname, email, username });
       const registeredUser = await User.register(user, password);
-      req.login(registeredUser, (err) => {
+      req.login(registeredUser, err => {
         if (err) return next(err);
         req.flash("success", "Registered Successfully !");
-        res.redirect("/welcome");
+        res.redirect("/social-media");
       });
     } catch (e) {
       req.flash("error", e.message);
@@ -62,17 +61,18 @@ router.post(
   }),
   (req, res) => {
     req.flash("success", "Welcome back !");
-    const redirectUrl = res.locals.returnTo || "/welcome";
+    const redirectUrl = res.locals.returnTo || "/social-media";
     res.redirect(redirectUrl);
   }
 );
 
 //Registered User Welcome
 router.get(
-  "/welcome",
-
+  "/social-media",
+  isLoggedIn,
   catchAsync(async (req, res) => {
-    res.render("pages/welcome");
+    const posts = await fetchPosts();
+    res.render("pages/main", { posts });
   })
 );
 
@@ -84,7 +84,7 @@ router.get("/logout", (req, res) => {
       return next(err);
     }
     req.flash("success", "Sucessfully Logged Out!");
-    res.redirect("/home");
+    res.redirect("/welcome");
   });
 });
 
