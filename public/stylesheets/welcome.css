@@ -59,12 +59,36 @@ body {
 }
 
 #your-posts-heading {
-  background-color: rgb(32, 160, 235);
-  margin-top: 3rem;
+  background-color: rgb(0, 0, 0);
+  margin-top: 1rem;
   border-radius: 10px;
 }
 
 #your-posts-heading h4 {
   color: white;
   padding: 3px;
+}
+
+#user-posts {
+  max-height: 345px;
+  overflow: scroll;
+  overflow-x: hidden;
+  background-color: #f1f5f8;
+}
+
+#edit-btn,
+#delete-btn {
+  background: none;
+  border: none;
+  width: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+#edit-btn {
+  color: rgb(19, 218, 169);
+}
+
+#delete-btn {
+  color: rgb(233, 62, 62);
 }
