@@ -7,9 +7,9 @@ const passport = require("passport");
 const { storeReturnTo } = require("../middleware");
 const { isLoggedIn } = require("../middleware");
 
-const fetchPosts = async () => {
+const fetchPosts = async (q) => {
   try {
-    const response = await fetch("http://127.0.0.1:8000/api/posts/?q=");
+    const response = await fetch(`http://127.0.0.1:8000/api/posts/?q=${q}`);
     const data = await response.json();
     return data;
   } catch (err) {
@@ -54,7 +54,7 @@ router.post(
       const { firstname, lastname, email, username, password } = req.body;
       const user = new User({ firstname, lastname, email, username });
       const registeredUser = await User.register(user, password);
-      req.login(registeredUser, err => {
+      req.login(registeredUser, (err) => {
         if (err) return next(err);
         req.flash("success", "Registered Successfully !");
         res.redirect("/social-media");
@@ -86,9 +86,10 @@ router.get(
   "/social-media",
   isLoggedIn,
   catchAsync(async (req, res) => {
-    const posts = await fetchPosts();
+    const posts = await fetchPosts("");
     const user = await res.locals.currentUser;
-    res.render("pages/main", { posts, user });
+    const userPosts = await fetchPosts(res.locals.currentUser.username);
+    res.render("pages/main", { posts, user, userPosts });
   })
 );
 
