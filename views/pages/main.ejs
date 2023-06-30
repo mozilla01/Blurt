@@ -99,7 +99,20 @@
             <%}%>
           </div>
           <div class="col-3" id="right-sidebar">
-            <h2>User1233</h2>
+            <div class="container" id="user-details">
+              <div class="d-flex">
+                <div id="circle" class="flex-start"></div>
+                <div id="username" class="align-self-center ms-5">
+                  <h2><%=user.username %></h2>
+                </div>
+              </div>
+              <div class="d-flex">
+                <p><%=user.firstname %> <%= user.lastname %></p>
+              </div>
+            </div>
+            <div id="your-posts-heading">
+              <h4 class="text-center">Your Posts</h4>
+            </div>
           </div>
         </div>
       </div>
