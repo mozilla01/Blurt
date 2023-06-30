@@ -37,3 +37,34 @@ body {
   margin-top: 5rem;
   margin-bottom: 5rem;
 }
+
+#user-details {
+  background-color: #f1f5f8;
+  border: 2px solid rgb(215, 223, 224);
+  border-radius: 10px;
+  margin-top: 5rem;
+  min-height: 150px;
+}
+
+.d-flex {
+  padding-top: 1rem;
+}
+
+#circle {
+  height: 90px;
+  width: 90px;
+  background-color: #2d2d2d;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+#your-posts-heading {
+  background-color: rgb(32, 160, 235);
+  margin-top: 3rem;
+  border-radius: 10px;
+}
+
+#your-posts-heading h4 {
+  color: white;
+  padding: 3px;
+}

@@ -26,8 +26,6 @@ const createPost = async (user, messageText) => {
       },
       body: JSON.stringify({ user: user, content: messageText }),
     });
-    const data = await response.json();
-    console.log(data);
   } catch (err) {
     console.error(err);
   }
@@ -56,7 +54,7 @@ router.post(
       const { firstname, lastname, email, username, password } = req.body;
       const user = new User({ firstname, lastname, email, username });
       const registeredUser = await User.register(user, password);
-      req.login(registeredUser, (err) => {
+      req.login(registeredUser, err => {
         if (err) return next(err);
         req.flash("success", "Registered Successfully !");
         res.redirect("/social-media");
@@ -89,7 +87,8 @@ router.get(
   isLoggedIn,
   catchAsync(async (req, res) => {
     const posts = await fetchPosts();
-    res.render("pages/main", { posts });
+    const user = await res.locals.currentUser;
+    res.render("pages/main", { posts, user });
   })
 );
 
