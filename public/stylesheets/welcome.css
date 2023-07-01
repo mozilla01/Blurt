@@ -77,8 +77,8 @@ body {
   background-color: #f1f5f8;
 }
 
-#edit-btn,
-#delete-btn {
+.edit-btn,
+.delete-btn {
   background: none;
   border: none;
   width: 20px;
@@ -86,11 +86,11 @@ body {
   margin-right: 10px;
 }
 
-#edit-btn {
+.edit-btn {
   color: rgb(19, 218, 169);
 }
 
-#delete-btn {
+.delete-btn {
   color: rgb(233, 62, 62);
 }
 
