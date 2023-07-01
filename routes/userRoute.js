@@ -164,6 +164,37 @@ router.post(
   })
 );
 
+//Follower Request
+
+router.get(
+  "/social-media/:username/request",
+  isLoggedIn,
+  catchAsync(async (req, res) => {
+    const { username } = req.params;
+    const user = await User.findOne({ username });
+    if (user) {
+      await user.updateOne({ $addToSet: { followers: req.user._id } });
+      await req.user.updateOne({ $addToSet: { following: user._id } });
+
+      req.flash("success", "Request Sent Successfully");
+
+      res.redirect("/social-media");
+    } else {
+      req.flash("error", "Could Not Find User");
+      res.redirect("/social-media");
+    }
+  })
+);
+
+//Friends Page
+router.get("/social-media/:username/friends", async (req, res) => {
+  const { username } = req.params;
+  const user = await User.findOne({ username })
+    .populate("followers", "username -_id")
+    .populate("following", "username -_id");
+  res.render("pages/friends", { user });
+});
+
 //Logout Get
 
 router.get("/logout", (req, res) => {

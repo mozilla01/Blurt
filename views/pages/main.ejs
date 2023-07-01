@@ -184,7 +184,7 @@
               </div>
             </div>
             <div class="text-heading">
-              <h4 class="text-center">Add Friends</h4>
+              <h4 class="text-center">Follow Suggestions</h4>
             </div>
             <div id="users" class="container">
               <% for( let user of users){ %>
@@ -193,10 +193,14 @@
                   <blockquote class="blockquote mb-0">
                     <p><%= user.username %></p>
                   </blockquote>
-
-                  <button class="ms-auto" id="edit-btn">
-                    <span class="material-symbols-outlined"> add </span>
-                  </button>
+                  <form
+                    action="/social-media/<%= user.username %>/request"
+                    class="ms-auto"
+                  >
+                    <button class="btn btn-dark">
+                      <span> Follow </span>
+                    </button>
+                  </form>
                 </div>
               </div>
               <br />
@@ -226,8 +230,7 @@
                       favorite
                     </span>
                   </div>
-
-                  <span class="ms-1">1 K</span>
+                  <span class="ms-2 pr-5">107870</span>
                 </div>
               </div>
             </div>
@@ -244,6 +247,11 @@
               </div>
               <div class="d-flex">
                 <p><%=user.firstname %> <%= user.lastname %></p>
+                <span
+                  ><a href="/social-media/<%=user.username %>/friends"
+                    >Friends</a
+                  ></span
+                >
               </div>
             </div>
             <div class="text-heading">
