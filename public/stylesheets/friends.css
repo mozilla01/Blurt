@@ -1,0 +1,22 @@
+html,
+body {
+  background-color: #f1f5f8;
+  height: 100 vh;
+  margin: 0;
+}
+
+#main-body {
+  min-height: calc(100vh - 50px);
+  position: absolute;
+}
+
+.scrollable {
+  overflow: scroll;
+  overflow-x: hidden;
+  height: 430px;
+}
+
+#alert {
+  height: 50px;
+  margin-top: 50px;
+}
