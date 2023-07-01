@@ -217,7 +217,11 @@
                   <footer class="blockquote-footer"><%= post.created %></footer>
                 </blockquote>
                 <div class="d-flex justify-content-end">
-                  <div class="heart-div-click" id="<%=post.id %>">
+                  <div
+                    class="heart-div-unclick"
+                    id="<%=post.id %>"
+                    onclick="likeResponse( `<%=post.id %>` )"
+                  >
                     <span id="heart" class="material-symbols-outlined">
                       favorite
                     </span>

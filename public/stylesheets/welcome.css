@@ -110,11 +110,11 @@ body {
 }
 
 .heart-div-click {
-  font-variation-settings: "FILL" 1, "wght" 700, "GRAD" 0, "opsz" 48;
+  font-variation-settings: "FILL" 1, "wght" 700, "GRAD" 0, "opsz" 48 !important;
 }
 
 .heart-div-click span {
-  color: rgb(233, 62, 62);
+  color: rgb(233, 62, 62) !important;
 }
 
 .heart-div-unclick {
@@ -127,4 +127,5 @@ body {
 
 #heart {
   cursor: pointer;
+  user-select: none;
 }
