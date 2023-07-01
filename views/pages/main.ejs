@@ -11,22 +11,12 @@
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
+
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
     />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
-    />
+
     <link rel="stylesheet" href="/stylesheets/welcome.css" />
   </head>
   <body>
@@ -226,6 +216,15 @@
                   <p><%= post.content %></p>
                   <footer class="blockquote-footer"><%= post.created %></footer>
                 </blockquote>
+                <div class="d-flex justify-content-end">
+                  <div class="heart-div-click" id="<%=post.id %>">
+                    <span id="heart" class="material-symbols-outlined">
+                      favorite
+                    </span>
+                  </div>
+
+                  <span class="ms-1">1 K</span>
+                </div>
               </div>
             </div>
             <br />
@@ -309,5 +308,6 @@
       crossorigin="anonymous"
     ></script>
     <script src="javascripts/validateForms.js"></script>
+    <script src="javascripts/clickResponses.js"></script>
   </body>
 </html>
