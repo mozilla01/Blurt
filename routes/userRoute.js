@@ -180,7 +180,7 @@ router.get(
       await user.updateOne({ $addToSet: { followers: req.user._id } });
       await req.user.updateOne({ $addToSet: { following: user._id } });
 
-      req.flash("success", "Request Sent Successfully");
+      req.flash("success", `Following ${username}`);
 
       res.redirect("/social-media");
     } else {
@@ -194,31 +194,55 @@ router.get(
 router.get(
   "/social-media/:username/followback",
   isLoggedIn,
-  async (req, res) => {
+  catchAsync(async (req, res) => {
     const { username } = req.params;
     const user = await User.findOne({ username });
     if (user) {
       await user.updateOne({ $addToSet: { followers: req.user._id } });
       await req.user.updateOne({ $addToSet: { following: user._id } });
 
-      req.flash("success", "Request Sent Successfully");
+      req.flash("success", `Following Back ${username}`);
 
       res.redirect(`/social-media/${req.user.username}/friends`);
     } else {
       req.flash("error", "Could Not Find User");
       res.redirect(`/social-media/${req.user.username}/friends`);
     }
-  }
+  })
+);
+
+//Unfollow
+router.get(
+  "/social-media/:username/unfollow",
+  isLoggedIn,
+  catchAsync(async (req, res) => {
+    const { username } = req.params;
+    const user = await User.findOne({ username });
+    if (user) {
+      await user.updateOne({ $pull: { followers: req.user._id } });
+      await req.user.updateOne({ $pull: { following: user._id } });
+
+      req.flash("error", `Unfollowed ${username}`);
+
+      res.redirect(`/social-media/${req.user.username}/friends`);
+    } else {
+      req.flash("error", "Could Not Find User");
+      res.redirect(`/social-media/${req.user.username}/friends`);
+    }
+  })
 );
 
 //Friends Page
-router.get("/social-media/:username/friends", async (req, res) => {
-  const { username } = req.params;
-  const user = await User.findOne({ username })
-    .populate("followers", "username -_id")
-    .populate("following", "username ");
-  res.render("pages/friends", { user });
-});
+router.get(
+  "/social-media/:username/friends",
+  catchAsync(async (req, res) => {
+    const { username } = req.params;
+    const user = await User.findOne({ username })
+      .populate("followers", "username -_id")
+      .populate("following", "username -_id");
+    res.render("pages/friends", { user });
+  })
+);
 
 //Logout Get
 

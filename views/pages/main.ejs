@@ -184,7 +184,6 @@
               </div>
             </div>
             <div class="text-heading">
-              <% console.log(user) %>
               <h4 class="text-center">Follow Suggestions</h4>
             </div>
             <div id="users" class="container">
@@ -197,17 +196,19 @@
                   <%if (user.following.some((following) => following.username
                   === friend.username)) {%>
                   <form
-                    action="/social-media/<%= friend.username %>/follow"
+                    action="/social-media/<%=user.username%>/friends"
                     class="ms-auto"
                   >
                     <button class="btn btn-light">
                       <span> Following </span>
                     </button>
                   </form>
-                  <% } else if(user.followers.some((followerz) =>
-                  followerz.username === friend.username)) {%>
+                  <% } else if((user.followers.some((followerz) =>
+                  followerz.username === friend.username))
+                  &&(user.following.some((followerz) => followerz.username !==
+                  friend.username)) ) {%>
                   <form
-                    action="/social-media/<%= friend.username %>/follow"
+                    action="/social-media/<%= friend.username %>/followback"
                     class="ms-auto"
                   >
                     <button class="btn btn-primary">
