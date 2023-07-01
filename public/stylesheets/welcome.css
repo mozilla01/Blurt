@@ -58,19 +58,20 @@ body {
   display: inline-block;
 }
 
-#your-posts-heading {
+.text-heading {
   background-color: rgb(0, 0, 0);
   margin-top: 1rem;
   border-radius: 10px;
 }
 
-#your-posts-heading h4 {
+.text-heading h4 {
   color: white;
   padding: 3px;
+  font-size: 1rem;
 }
 
 #user-posts {
-  max-height: 345px;
+  max-height: 350px;
   overflow: scroll;
   overflow-x: hidden;
   background-color: #f1f5f8;
@@ -91,4 +92,39 @@ body {
 
 .delete-btn {
   color: rgb(233, 62, 62);
+}
+
+#create-post {
+  background-color: #f1f5f8;
+  border: 2px solid rgb(215, 223, 224);
+  border-radius: 10px;
+  margin-top: 5rem;
+  height: 100px;
+}
+
+#users {
+  max-height: 350px;
+  overflow: scroll;
+  overflow-x: hidden;
+  background-color: #f1f5f8;
+}
+
+.heart-div-click {
+  font-variation-settings: "FILL" 1, "wght" 700, "GRAD" 0, "opsz" 48;
+}
+
+.heart-div-click span {
+  color: rgb(233, 62, 62);
+}
+
+.heart-div-unclick {
+  font-variation-settings: "FILL" 0, "wght" 700, "GRAD" 0, "opsz" 48;
+}
+
+.heart-div-unclick span {
+  color: rgb(88, 87, 87);
+}
+
+#heart {
+  cursor: pointer;
 }

@@ -11,18 +11,12 @@
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
+
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
     />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
-    />
+
     <link rel="stylesheet" href="/stylesheets/welcome.css" />
   </head>
   <body>
@@ -172,20 +166,44 @@
     <main>
       <div class="container-fluid" id="main-body">
         <div class="row vh-100">
-          <div
-            class="col-3 d-flex flex-column align-items-center justify-content-center"
-            id="left-sidebar"
-          >
-            <button
-              type="button"
-              class="btn btn-primary"
-              data-bs-toggle="modal"
-              data-bs-target="#exampleModal"
-              data-bs-whatever="@mdo"
+          <div class="col-3" id="left-sidebar">
+            <div
+              class="container d-flex justify-content-center align-items-center"
+              id="create-post"
             >
-              + Create New Post
-            </button>
+              <div class="align-self-center">
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                  data-bs-whatever="@mdo"
+                >
+                  + Create New Post
+                </button>
+              </div>
+            </div>
+            <div class="text-heading">
+              <h4 class="text-center">Add Friends</h4>
+            </div>
+            <div id="users" class="container">
+              <% for( let user of users){ %>
+              <div class="card mt-1 mb-1">
+                <div class="card-body d-flex">
+                  <blockquote class="blockquote mb-0">
+                    <p><%= user.username %></p>
+                  </blockquote>
+
+                  <button class="ms-auto" id="edit-btn">
+                    <span class="material-symbols-outlined"> add </span>
+                  </button>
+                </div>
+              </div>
+              <br />
+              <%}%>
+            </div>
           </div>
+
           <div class="col-6" id="center-bar">
             <div class="container" id="explore-tag">
               <h1 class="text-center" id="explore-heading">Explore</h1>
@@ -198,6 +216,15 @@
                   <p><%= post.content %></p>
                   <footer class="blockquote-footer"><%= post.created %></footer>
                 </blockquote>
+                <div class="d-flex justify-content-end">
+                  <div class="heart-div-click" id="<%=post.id %>">
+                    <span id="heart" class="material-symbols-outlined">
+                      favorite
+                    </span>
+                  </div>
+
+                  <span class="ms-1">1 K</span>
+                </div>
               </div>
             </div>
             <br />
@@ -215,13 +242,13 @@
                 <p><%=user.firstname %> <%= user.lastname %></p>
               </div>
             </div>
-            <div id="your-posts-heading">
+            <div class="text-heading">
               <h4 class="text-center">Your Posts</h4>
             </div>
             <div id="user-posts" class="container">
               <% for( let userPost of userPosts){ %>
-              <div class="card mt-3 mb-4">
-                <div class="card-header">@<%= userPost.user %></div>
+              <div class="card mt-1 mb-2">
+                <div class="card-header"><%= userPost.user %></div>
                 <div class="card-body">
                   <blockquote class="blockquote mb-0">
                     <p><%= userPost.content %></p>
@@ -281,5 +308,6 @@
       crossorigin="anonymous"
     ></script>
     <script src="javascripts/validateForms.js"></script>
+    <script src="javascripts/clickResponses.js"></script>
   </body>
 </html>
