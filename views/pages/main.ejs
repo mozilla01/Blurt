@@ -203,10 +203,8 @@
                       <span> Following </span>
                     </button>
                   </form>
-                  <% } else if((user.followers.some((followerz) =>
-                  followerz.username === friend.username))
-                  &&(user.following.some((followerz) => followerz.username !==
-                  friend.username)) ) {%>
+                  <% } else if(user.followers.some((followerz) =>
+                  followerz.username === friend.username)) {%>
                   <form
                     action="/social-media/<%= friend.username %>/followback"
                     class="ms-auto"
