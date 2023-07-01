@@ -39,7 +39,10 @@
                   </form>
                   <% } else { %>
 
-                  <form action="" class="ms-auto">
+                  <form
+                    action="/social-media/<%=follower.username%>/followback"
+                    class="ms-auto"
+                  >
                     <button class="btn btn-dark">
                       <span> Follow Back</span>
                     </button>
@@ -63,6 +66,11 @@
                   <blockquote class="blockquote mb-0">
                     <p><%= obj.username %></p>
                   </blockquote>
+                  <form action="" class="ms-auto">
+                    <button class="btn btn-danger">
+                      <span> Unfollow</span>
+                    </button>
+                  </form>
                 </div>
               </div>
               <% }) } %>

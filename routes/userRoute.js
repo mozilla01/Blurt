@@ -100,7 +100,10 @@ router.get(
   isLoggedIn,
   catchAsync(async (req, res) => {
     const posts = await fetchPosts("");
-    const user = await res.locals.currentUser;
+    const currentUser = await res.locals.currentUser;
+    const user = await User.findOne(currentUser._id)
+      .populate("followers", "username -_id")
+      .populate("following", "username -_id");
     const userPosts = await fetchPosts(user.username);
     const users = await User.find(
       { _id: { $ne: user._id } },
@@ -167,11 +170,12 @@ router.post(
 //Follower Request
 
 router.get(
-  "/social-media/:username/request",
+  "/social-media/:username/follow",
   isLoggedIn,
   catchAsync(async (req, res) => {
     const { username } = req.params;
     const user = await User.findOne({ username });
+
     if (user) {
       await user.updateOne({ $addToSet: { followers: req.user._id } });
       await req.user.updateOne({ $addToSet: { following: user._id } });
@@ -186,12 +190,33 @@ router.get(
   })
 );
 
+//Follow Back
+router.get(
+  "/social-media/:username/followback",
+  isLoggedIn,
+  async (req, res) => {
+    const { username } = req.params;
+    const user = await User.findOne({ username });
+    if (user) {
+      await user.updateOne({ $addToSet: { followers: req.user._id } });
+      await req.user.updateOne({ $addToSet: { following: user._id } });
+
+      req.flash("success", "Request Sent Successfully");
+
+      res.redirect(`/social-media/${req.user.username}/friends`);
+    } else {
+      req.flash("error", "Could Not Find User");
+      res.redirect(`/social-media/${req.user.username}/friends`);
+    }
+  }
+);
+
 //Friends Page
 router.get("/social-media/:username/friends", async (req, res) => {
   const { username } = req.params;
   const user = await User.findOne({ username })
     .populate("followers", "username -_id")
-    .populate("following", "username -_id");
+    .populate("following", "username ");
   res.render("pages/friends", { user });
 });
 
