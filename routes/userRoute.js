@@ -5,7 +5,7 @@ const User = require("../models/user");
 const catchAsync = require("../utils/catchAsync");
 const passport = require("passport");
 const { storeReturnTo } = require("../middleware");
-const { isLoggedIn } = require("../middleware");
+const { isLoggedIn, saveTrack } = require("../middleware");
 
 const fetchPosts = async q => {
   try {
@@ -103,13 +103,14 @@ router.get(
     const currentUser = await res.locals.currentUser;
     const user = await User.findOne(currentUser._id)
       .populate("followers", "username -_id")
-      .populate("following", "username -_id");
+      .populate("following", "username -_id")
+      .populate("requested_outgoing", "username -_id")
+      .populate("requested_incoming", "username -_id");
     const userPosts = await fetchPosts(user.username);
     const users = await User.find(
       { _id: { $ne: user._id } },
       { username: 1, _id: false }
     );
-
     res.render("pages/main", { posts, user, userPosts, users });
   })
 );
@@ -167,49 +168,49 @@ router.post(
   })
 );
 
-//Follower Request
+// //Follow
 
-router.get(
-  "/social-media/:username/follow",
-  isLoggedIn,
-  catchAsync(async (req, res) => {
-    const { username } = req.params;
-    const user = await User.findOne({ username });
+// router.get(
+//   "/social-media/:username/follow",
+//   isLoggedIn,
+//   catchAsync(async (req, res) => {
+//     const { username } = req.params;
+//     const user = await User.findOne({ username });
 
-    if (user) {
-      await user.updateOne({ $addToSet: { followers: req.user._id } });
-      await req.user.updateOne({ $addToSet: { following: user._id } });
+//     if (user) {
+//       await user.updateOne({ $addToSet: { followers: req.user._id } });
+//       await req.user.updateOne({ $addToSet: { following: user._id } });
 
-      req.flash("success", `Following ${username}`);
+//       req.flash("success", `Following ${username}`);
 
-      res.redirect("/social-media");
-    } else {
-      req.flash("error", "Could Not Find User");
-      res.redirect("/social-media");
-    }
-  })
-);
+//       res.redirect("/social-media");
+//     } else {
+//       req.flash("error", "Could Not Find User");
+//       res.redirect("/social-media");
+//     }
+//   })
+// );
 
-//Follow Back
-router.get(
-  "/social-media/:username/followback",
-  isLoggedIn,
-  catchAsync(async (req, res) => {
-    const { username } = req.params;
-    const user = await User.findOne({ username });
-    if (user) {
-      await user.updateOne({ $addToSet: { followers: req.user._id } });
-      await req.user.updateOne({ $addToSet: { following: user._id } });
+// //Follow Back
+// router.get(
+//   "/social-media/:username/followback",
+//   isLoggedIn,
+//   catchAsync(async (req, res) => {
+//     const { username } = req.params;
+//     const user = await User.findOne({ username });
+//     if (user) {
+//       await user.updateOne({ $addToSet: { followers: req.user._id } });
+//       await req.user.updateOne({ $addToSet: { following: user._id } });
 
-      req.flash("success", `Following Back ${username}`);
+//       req.flash("success", `Following Back ${username}`);
 
-      res.redirect(`/social-media/${req.user.username}/friends`);
-    } else {
-      req.flash("error", "Could Not Find User");
-      res.redirect(`/social-media/${req.user.username}/friends`);
-    }
-  })
-);
+//       res.redirect(`/social-media/${req.user.username}/friends`);
+//     } else {
+//       req.flash("error", "Could Not Find User");
+//       res.redirect(`/social-media/${req.user.username}/friends`);
+//     }
+//   })
+// );
 
 //Unfollow
 router.get(
@@ -239,8 +240,96 @@ router.get(
     const { username } = req.params;
     const user = await User.findOne({ username })
       .populate("followers", "username -_id")
-      .populate("following", "username -_id");
+      .populate("following", "username -_id")
+      .populate("requested_outgoing", "username -_id")
+      .populate("requested_incoming", "username -_id");
     res.render("pages/friends", { user });
+  })
+);
+
+//Send Request
+
+router.get(
+  "/social-media/:username/followrequest",
+  isLoggedIn,
+  catchAsync(async (req, res) => {
+    const { username } = req.params;
+    const user = await User.findOne({ username });
+
+    if (user) {
+      await user.updateOne({ $addToSet: { requested_incoming: req.user._id } });
+      await req.user.updateOne({ $addToSet: { requested_outgoing: user._id } });
+
+      req.flash("success", `Request Sent To ${username}`);
+      const previousUrl = req.headers.referer || "/social-media";
+      res.redirect(previousUrl);
+    } else {
+      req.flash("error", "Could Not Find User");
+      const previousUrl = req.headers.referer || "/social-media";
+      res.redirect(previousUrl);
+    }
+  })
+);
+
+//Accept Request
+router.get(
+  "/social-media/:username/acceptrequest",
+  isLoggedIn,
+  catchAsync(async (req, res) => {
+    const { username } = req.params;
+    const user = await User.findOne({ username });
+
+    if (user) {
+      await req.user.updateOne({ $pull: { requested_incoming: user._id } });
+      await user.updateOne({ $pull: { requested_outgoing: req.user._id } });
+      await req.user.updateOne({ $addToSet: { followers: user._id } });
+      await user.updateOne({ $addToSet: { following: req.user._id } });
+
+      req.flash("success", `${username} started following you`);
+
+      const previousUrl = req.headers.referer || "/social-media";
+      res.redirect(previousUrl);
+    } else {
+      req.flash("error", "Could Not Find User");
+      const previousUrl = req.headers.referer || "/social-media";
+      res.redirect(previousUrl);
+    }
+  })
+);
+
+//Cancel Request
+router.get(
+  "/social-media/:username/cancelrequest",
+  isLoggedIn,
+  catchAsync(async (req, res) => {
+    const { username } = req.params;
+    const user = await User.findOne({ username });
+
+    if (user) {
+      await req.user.updateOne({ $pull: { requested_outgoing: user._id } });
+      await user.updateOne({ $pull: { requested_incoming: req.user._id } });
+
+      req.flash("error", `Cancelled Request To ${username}`);
+
+      const previousUrl = req.headers.referer || "/social-media";
+      res.redirect(previousUrl);
+    } else {
+      req.flash("error", "Could Not Find User");
+      const previousUrl = req.headers.referer || "/social-media";
+      res.redirect(previousUrl);
+    }
+  })
+);
+
+//Invitations Page
+router.get(
+  "/social-media/:username/invitations",
+  catchAsync(async (req, res) => {
+    const { username } = req.params;
+    const user = await User.findOne({ username })
+      .populate("requested_incoming", "username -_id")
+      .populate("requested_outgoing", "username -_id");
+    res.render("pages/invitations", { user });
   })
 );
 

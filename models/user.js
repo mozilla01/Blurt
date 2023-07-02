@@ -30,6 +30,20 @@ const UserSchema = new Schema({
       unique: true,
     },
   ],
+  requested_incoming: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      unique: true,
+    },
+  ],
+  requested_outgoing: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      unique: true,
+    },
+  ],
 });
 
 UserSchema.plugin(passportLocalMongoose);
