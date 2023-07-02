@@ -199,23 +199,34 @@
                     action="/social-media/<%=user.username%>/friends"
                     class="ms-auto"
                   >
-                    <button class="btn btn-light">
+                    <button class="btn btn-success">
                       <span> Following </span>
+                    </button>
+                  </form>
+                  <% } else if(user.requested_outgoing.some((req_inc) =>
+                  req_inc.username === friend.username)) {%>
+                  <form
+                    action="/social-media/<%=friend.username%>/cancelrequest"
+                    class="ms-auto"
+                  >
+                    <button class="btn btn-light">
+                      <span> Requested </span>
                     </button>
                   </form>
                   <% } else if(user.followers.some((followerz) =>
                   followerz.username === friend.username)) {%>
                   <form
-                    action="/social-media/<%= friend.username %>/followback"
+                    action="/social-media/<%= friend.username %>/followrequest"
                     class="ms-auto"
                   >
                     <button class="btn btn-primary">
                       <span> Follow Back</span>
                     </button>
                   </form>
+
                   <% } else {%>
                   <form
-                    action="/social-media/<%= friend.username %>/follow"
+                    action="/social-media/<%= friend.username %>/followrequest"
                     class="ms-auto"
                   >
                     <button class="btn btn-dark">
@@ -286,6 +297,13 @@
               <div class="d-flex">
                 <p><%=user.firstname %> <%= user.lastname %></p>
               </div>
+              <span class="ms-2"
+                ><a
+                  class="text-dark"
+                  href="/social-media/<%=user.username %>/invitations"
+                  >Invitations</a
+                ></span
+              >
             </div>
             <div class="text-heading">
               <h4 class="text-center">Your Posts</h4>

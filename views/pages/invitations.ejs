@@ -17,53 +17,32 @@
     <main>
       <div class="container-fluid vh-100" id="main-body">
         <div id="alert"><%- include('../partials/flash')%></div>
+        <%
+        if((user.requested_incoming.length)||(user.requested_outgoing.length))
+        {%>
         <div class="d-flex">
           <div class="col-6">
             <div>
-              <h3 class="mt-2 mb-5 text-center">Followers</h3>
+              <h3 class="mt-2 mb-5 text-center">Follow Requests</h3>
             </div>
 
             <div class="scrollable">
-              <% if(user.followers && user.followers.length>0) { for(let
-              follower of user.followers){%>
+              <% if(user.requested_incoming && user.requested_incoming.length>0)
+              { for(let follower of user.requested_incoming){%>
               <div class="card mt-3 mb-3">
                 <div class="card-body d-flex">
                   <blockquote class="blockquote mb-0">
                     <p><%= follower.username %></p>
                   </blockquote>
-                  <% if (user.following && user.following.some((following) =>
-                  following.username === follower.username)) {%>
+
                   <form
-                    action="/social-media/<%= follower.username %>/unfollow"
+                    action="/social-media/<%= follower.username %>/acceptrequest"
                     class="ms-auto"
                   >
                     <button class="btn btn-success">
-                      <span> Following</span>
+                      <span> Accept</span>
                     </button>
                   </form>
-                  <% } else if(user.requested_outgoing &&
-                  user.requested_outgoing.some((req_user) => req_user.username
-                  === follower.username)) { %>
-
-                  <form
-                    action="/social-media/<%= follower.username %>/cancelrequest"
-                    class="ms-auto"
-                  >
-                    <button class="btn btn-light">
-                      <span> Requested</span>
-                    </button>
-                  </form>
-
-                  <% } else {%>
-                  <form
-                    action="/social-media/<%=follower.username%>/followrequest"
-                    class="ms-auto"
-                  >
-                    <button class="btn btn-dark">
-                      <span> Follow Back</span>
-                    </button>
-                  </form>
-                  <% }%>
                 </div>
               </div>
               <% } } %>
@@ -71,22 +50,22 @@
           </div>
           <div class="col-6">
             <div>
-              <h3 class="mt-2 mb-5 text-center">Following</h3>
+              <h3 class="mt-2 mb-5 text-center">Requested</h3>
             </div>
             <div class="scrollable">
-              <% if(user.following && user.following.length>0) {
-              user.following.map((obj)=>{ %>
+              <% if(user.requested_outgoing && user.requested_outgoing.length>0)
+              { user.requested_outgoing.map((obj)=>{ %>
               <div class="card mt-3 mb-3">
                 <div class="card-body d-flex">
                   <blockquote class="blockquote mb-0">
                     <p><%= obj.username %></p>
                   </blockquote>
                   <form
-                    action="/social-media/<%=obj.username%>/unfollow"
+                    action="/social-media/<%= obj.username %>/cancelrequest"
                     class="ms-auto"
                   >
                     <button class="btn btn-danger">
-                      <span> Unfollow</span>
+                      <span>Cancel Request</span>
                     </button>
                   </form>
                 </div>
@@ -95,6 +74,11 @@
             </div>
           </div>
         </div>
+        <% } else {%>
+        <div class="align-self-center ms-5">
+          <h1>No New Invitations</h1>
+        </div>
+        <% }%>
       </div>
       <%- include('../partials/footer')%>
     </main>
