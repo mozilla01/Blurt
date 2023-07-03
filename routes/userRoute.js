@@ -5,7 +5,12 @@ const User = require("../models/user");
 const catchAsync = require("../utils/catchAsync");
 const passport = require("passport");
 const { storeReturnTo } = require("../middleware");
-const { isLoggedIn, isAuthUser, isSelf } = require("../middleware");
+const {
+  isLoggedIn,
+  isAuthUser,
+  isSelf,
+  LogInRedirect,
+} = require("../middleware");
 
 const fetchPosts = async q => {
   try {
@@ -238,6 +243,7 @@ router.get(
   "/social-media/:username/friends",
   isLoggedIn,
   isAuthUser,
+  LogInRedirect,
   catchAsync(async (req, res) => {
     const { username } = req.params;
     const user = await User.findOne({ username })
@@ -255,6 +261,7 @@ router.get(
   "/social-media/:username/followrequest",
   isLoggedIn,
   isSelf,
+  LogInRedirect,
   catchAsync(async (req, res) => {
     const { username } = req.params;
     const user = await User.findOne({ username });
@@ -289,6 +296,8 @@ router.get(
 router.get(
   "/social-media/:username/acceptrequest",
   isLoggedIn,
+  isAuthUser,
+  LogInRedirect,
   catchAsync(async (req, res) => {
     const { username } = req.params;
     const user = await User.findOne({ username });
@@ -316,6 +325,7 @@ router.get(
   "/social-media/:username/cancelrequest",
   isLoggedIn,
   isSelf,
+  LogInRedirect,
   catchAsync(async (req, res) => {
     const { username } = req.params;
     const user = await User.findOne({ username });
@@ -341,6 +351,7 @@ router.get(
   "/social-media/:username/invitations",
   isLoggedIn,
   isAuthUser,
+  LogInRedirect,
   catchAsync(async (req, res) => {
     const { username } = req.params;
     const user = await User.findOne({ username })

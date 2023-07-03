@@ -29,11 +29,17 @@ module.exports.isAuthUser = async (req, res, next) => {
 
 module.exports.isSelf = async (req, res, next) => {
   const { username } = req.params;
-  console.log(username.str);
-  console.log(req.user.username.str);
+
   if (username === req.user.username) {
     req.flash("error", "You getting cheeky X)");
     return res.redirect(`/social-media`);
+  }
+  next();
+};
+
+module.exports.LogInRedirect = async (req, res, next) => {
+  if (req.headers.referer === "http://localhost:3001/login") {
+    return res.redirect("/social-media");
   }
   next();
 };
