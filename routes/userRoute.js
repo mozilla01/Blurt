@@ -379,7 +379,6 @@ router.get(
 router.get("/social-media/:username/:postId", async (req, res) => {
   const { username, postId } = req.params;
   const singlePost = await fetchSinglePost(postId);
-
   res.render("pages/post", { singlePost });
 });
 
