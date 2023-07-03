@@ -18,7 +18,7 @@ module.exports.storeReturnTo = (req, res, next) => {
 
 module.exports.isAuthUser = async (req, res, next) => {
   const { username } = req.params;
-  console.log(req.user);
+
   const user = await User.findOne({ username });
   if (!user._id.equals(req.user._id)) {
     req.flash("error", "You do not have permission");
@@ -29,9 +29,9 @@ module.exports.isAuthUser = async (req, res, next) => {
 
 module.exports.isSelf = async (req, res, next) => {
   const { username } = req.params;
-  console.log(username);
-  console.log(req.user);
-  if (username.str === req.user.username.str) {
+  console.log(username.str);
+  console.log(req.user.username.str);
+  if (username === req.user.username) {
     req.flash("error", "You getting cheeky X)");
     return res.redirect(`/social-media`);
   }

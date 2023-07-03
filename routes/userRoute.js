@@ -264,6 +264,12 @@ router.get(
       const previousUrl = req.headers.referer || "/social-media";
       res.redirect(previousUrl);
     }
+    if (req.user.requested_outgoing.includes(user._id)) {
+      req.flash("error", `Already Requested ${username}`);
+      const previousUrl = req.headers.referer || "/social-media";
+      res.redirect(previousUrl);
+    }
+
     if (user) {
       await user.updateOne({ $addToSet: { requested_incoming: req.user._id } });
       await req.user.updateOne({ $addToSet: { requested_outgoing: user._id } });
