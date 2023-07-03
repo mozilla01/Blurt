@@ -250,20 +250,35 @@
               <div class="card-header">@<%= post.user %></div>
               <div class="card-body">
                 <blockquote class="blockquote mb-0">
-                  <p><%= post.content %></p>
+                  <pre><%= post.content %></pre>
                   <footer class="blockquote-footer"><%= post.created %></footer>
                 </blockquote>
                 <div class="d-flex justify-content-end">
+                  <% if (post.liked) { %>
                   <div
-                    class="heart-div-unclick"
+                    class="heart-div-click"
                     id="<%=post.id %>"
-                    onclick="likeResponse( `<%=post.id %>` )"
+                    onclick="likeResponse(`<%=user.username%>`, `<%=post.id %>`, `<%=post.likes %>`)"
                   >
                     <span id="heart" class="material-symbols-outlined">
                       favorite
                     </span>
                   </div>
-                  <span class="ms-2 pr-5">107870</span>
+                  <% } else { %>
+
+                  <div
+                    class="heart-div-unclick"
+                    id="<%=post.id %>"
+                    onclick="likeResponse(`<%=user.username%>`, `<%=post.id %>`, `<%=post.likes %>`)"
+                  >
+                    <span id="heart" class="material-symbols-outlined">
+                      favorite
+                    </span>
+                  </div>
+                  <% } %>
+                  <span class="ms-2 pr-5" id="explore-likes--<%=post.id%>"
+                    ><%=post.likes%></span
+                  >
                 </div>
               </div>
             </div>
@@ -314,7 +329,7 @@
                 <div class="card-header"><%= userPost.user %></div>
                 <div class="card-body">
                   <blockquote class="blockquote mb-0">
-                    <p><%= userPost.content %></p>
+                    <pre><%= userPost.content %></pre>
                     <footer class="blockquote-footer">
                       <%= userPost.created %>
                     </footer>
@@ -329,7 +344,7 @@
                     >
                       <span
                         class="material-symbols-outlined"
-                        onclick="document.getElementById('message-text-edit').innerHTML='<%=userPost.content%>';document.getElementById('hidden-id').value = '<%=userPost.id%>';"
+                        onclick="document.getElementById('message-text-edit').innerHTML=setContent('<%=userPost.content%>');document.getElementById('hidden-id').value = '<%=userPost.id%>';"
                       >
                         edit_note
                       </span>
@@ -372,5 +387,6 @@
     ></script>
     <script src="javascripts/validateForms.js"></script>
     <script src="javascripts/clickResponses.js"></script>
+    <script src="javascripts/setContent.js"></script>
   </body>
 </html>
