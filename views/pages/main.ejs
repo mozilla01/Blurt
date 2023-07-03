@@ -248,6 +248,11 @@
             <%- include('../partials/flash')%> <% for( let post of posts){ %>
             <div class="card mt-3 mb-4">
               <div class="card-header">@<%= post.user %></div>
+              <a
+                class="ms-auto mr-5"
+                href="/social-media/<%= post.user %>/<%=post.id %>"
+                >View</a
+              >
               <div class="card-body">
                 <blockquote class="blockquote mb-0">
                   <p><%= post.content %></p>
@@ -370,7 +375,7 @@
       integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
       crossorigin="anonymous"
     ></script>
-    <script src="javascripts/validateForms.js"></script>
+    s
     <script src="javascripts/clickResponses.js"></script>
   </body>
 </html>
