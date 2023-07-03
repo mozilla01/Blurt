@@ -5,7 +5,7 @@ const User = require("../models/user");
 const catchAsync = require("../utils/catchAsync");
 const passport = require("passport");
 const { storeReturnTo } = require("../middleware");
-const { isLoggedIn, saveTrack } = require("../middleware");
+const { isLoggedIn, isAuthUser, isSelf } = require("../middleware");
 
 const fetchPosts = async q => {
   try {
@@ -236,6 +236,8 @@ router.get(
 //Friends Page
 router.get(
   "/social-media/:username/friends",
+  isLoggedIn,
+  isAuthUser,
   catchAsync(async (req, res) => {
     const { username } = req.params;
     const user = await User.findOne({ username })
@@ -252,10 +254,16 @@ router.get(
 router.get(
   "/social-media/:username/followrequest",
   isLoggedIn,
+  isSelf,
   catchAsync(async (req, res) => {
     const { username } = req.params;
     const user = await User.findOne({ username });
 
+    if (req.user.following.includes(user._id)) {
+      req.flash("error", `Already Following ${username}`);
+      const previousUrl = req.headers.referer || "/social-media";
+      res.redirect(previousUrl);
+    }
     if (user) {
       await user.updateOne({ $addToSet: { requested_incoming: req.user._id } });
       await req.user.updateOne({ $addToSet: { requested_outgoing: user._id } });
@@ -301,6 +309,7 @@ router.get(
 router.get(
   "/social-media/:username/cancelrequest",
   isLoggedIn,
+  isSelf,
   catchAsync(async (req, res) => {
     const { username } = req.params;
     const user = await User.findOne({ username });
@@ -324,6 +333,8 @@ router.get(
 //Invitations Page
 router.get(
   "/social-media/:username/invitations",
+  isLoggedIn,
+  isAuthUser,
   catchAsync(async (req, res) => {
     const { username } = req.params;
     const user = await User.findOne({ username })
