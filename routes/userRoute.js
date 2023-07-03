@@ -5,7 +5,12 @@ const User = require("../models/user");
 const catchAsync = require("../utils/catchAsync");
 const passport = require("passport");
 const { storeReturnTo } = require("../middleware");
-const { isLoggedIn, saveTrack } = require("../middleware");
+const {
+  isLoggedIn,
+  isAuthUser,
+  isSelf,
+  LogInRedirect,
+} = require("../middleware");
 const time = require("../public/javascripts/time");
 
 const fetchPosts = async (q) => {
@@ -15,6 +20,17 @@ const fetchPosts = async (q) => {
     return data;
   } catch (err) {
     console.error(err);
+  }
+};
+//http://127.0.0.1:8000/api/post/:id/
+
+const fetchSinglePost = async (q) => {
+  try {
+    const response = await fetch(`http://127.0.0.1:8000/api/post/${q}`);
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    console.log(err);
   }
 };
 
@@ -269,6 +285,9 @@ router.get(
 //Friends Page
 router.get(
   "/social-media/:username/friends",
+  isLoggedIn,
+  isAuthUser,
+  LogInRedirect,
   catchAsync(async (req, res) => {
     const { username } = req.params;
     const user = await User.findOne({ username })
@@ -285,9 +304,22 @@ router.get(
 router.get(
   "/social-media/:username/followrequest",
   isLoggedIn,
+  isSelf,
+  LogInRedirect,
   catchAsync(async (req, res) => {
     const { username } = req.params;
     const user = await User.findOne({ username });
+
+    if (req.user.following.includes(user._id)) {
+      req.flash("error", `Already Following ${username}`);
+      const previousUrl = req.headers.referer || "/social-media";
+      res.redirect(previousUrl);
+    }
+    if (req.user.requested_outgoing.includes(user._id)) {
+      req.flash("error", `Already Requested ${username}`);
+      const previousUrl = req.headers.referer || "/social-media";
+      res.redirect(previousUrl);
+    }
 
     if (user) {
       await user.updateOne({ $addToSet: { requested_incoming: req.user._id } });
@@ -308,6 +340,8 @@ router.get(
 router.get(
   "/social-media/:username/acceptrequest",
   isLoggedIn,
+  isAuthUser,
+  LogInRedirect,
   catchAsync(async (req, res) => {
     const { username } = req.params;
     const user = await User.findOne({ username });
@@ -334,6 +368,8 @@ router.get(
 router.get(
   "/social-media/:username/cancelrequest",
   isLoggedIn,
+  isSelf,
+  LogInRedirect,
   catchAsync(async (req, res) => {
     const { username } = req.params;
     const user = await User.findOne({ username });
@@ -357,6 +393,9 @@ router.get(
 //Invitations Page
 router.get(
   "/social-media/:username/invitations",
+  isLoggedIn,
+  isAuthUser,
+  LogInRedirect,
   catchAsync(async (req, res) => {
     const { username } = req.params;
     const user = await User.findOne({ username })
@@ -365,6 +404,16 @@ router.get(
     res.render("pages/invitations", { user });
   })
 );
+
+//************************************************* */
+
+//View Single Post
+
+router.get("/social-media/:username/:postId", async (req, res) => {
+  const { username, postId } = req.params;
+  const singlePost = await fetchSinglePost(postId);
+  res.render("pages/post", { singlePost });
+});
 
 //Logout Get
 
