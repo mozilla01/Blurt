@@ -13,7 +13,7 @@ const {
 } = require("../middleware");
 const time = require("../public/javascripts/time");
 
-const fetchPosts = async (q) => {
+const fetchPosts = async q => {
   try {
     const response = await fetch(`http://127.0.0.1:8000/api/posts/?q=${q}`);
     const data = await response.json();
@@ -24,7 +24,7 @@ const fetchPosts = async (q) => {
 };
 //http://127.0.0.1:8000/api/post/:id/
 
-const fetchSinglePost = async (q) => {
+const fetchSinglePost = async q => {
   try {
     const response = await fetch(`http://127.0.0.1:8000/api/post/${q}`);
     const data = await response.json();
@@ -34,7 +34,7 @@ const fetchSinglePost = async (q) => {
   }
 };
 
-const getLikes = async (user) => {
+const getLikes = async user => {
   try {
     const response = await fetch(
       `http://127.0.0.1:8000/api/get-likes/${user}/`
@@ -104,7 +104,7 @@ router.post(
       const data = await response.json();
       console.log(data);
 
-      req.login(registeredUser, (err) => {
+      req.login(registeredUser, err => {
         if (err) return next(err);
         req.flash("success", "Registered Successfully !");
         res.redirect("/social-media");
@@ -340,7 +340,6 @@ router.get(
 router.get(
   "/social-media/:username/acceptrequest",
   isLoggedIn,
-  isAuthUser,
   LogInRedirect,
   catchAsync(async (req, res) => {
     const { username } = req.params;
