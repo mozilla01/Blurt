@@ -20,28 +20,24 @@ const UserSchema = new Schema({
     {
       type: Schema.Types.ObjectId,
       ref: "User",
-      unique: true,
     },
   ],
   following: [
     {
       type: Schema.Types.ObjectId,
       ref: "User",
-      unique: true,
     },
   ],
   requested_incoming: [
     {
       type: Schema.Types.ObjectId,
       ref: "User",
-      unique: true,
     },
   ],
   requested_outgoing: [
     {
       type: Schema.Types.ObjectId,
       ref: "User",
-      unique: true,
     },
   ],
 });

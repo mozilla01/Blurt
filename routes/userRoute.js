@@ -11,6 +11,7 @@ const {
   isSelf,
   LogInRedirect,
 } = require("../middleware");
+const time = require("../public/javascripts/time");
 
 const fetchPosts = async q => {
   try {
@@ -33,22 +34,21 @@ const fetchSinglePost = async q => {
   }
 };
 
-const createPost = async (user, messageText) => {
+const getLikes = async user => {
   try {
-    const response = await fetch("http://127.0.0.1:8000/api/create-post/", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify({ user: user, content: messageText }),
-    });
+    const response = await fetch(
+      `http://127.0.0.1:8000/api/get-likes/${user}/`
+    );
+    const data = await response.json();
+    return data;
   } catch (err) {
     console.error(err);
   }
 };
-const editPost = async (id, user, messageText) => {
+
+const createPost = async (user, messageText) => {
   try {
-    const response = await fetch(`http://127.0.0.1:8000/api/edit-post/${id}/`, {
+    const response = await fetch("http://127.0.0.1:8000/api/create-post/", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -81,8 +81,29 @@ router.post(
   catchAsync(async (req, res) => {
     try {
       const { firstname, lastname, email, username, password } = req.body;
-      const user = new User({ firstname, lastname, email, username });
+
+      const user = new User({
+        firstname,
+        lastname,
+        email,
+        username,
+      });
       const registeredUser = await User.register(user, password);
+
+      // Creating a Like object for the user
+      const response = await fetch(
+        "http://127.0.0.1:8000/api/create-like-object/",
+        {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify({ user: username }),
+        }
+      );
+      const data = await response.json();
+      console.log(data);
+
       req.login(registeredUser, err => {
         if (err) return next(err);
         req.flash("success", "Registered Successfully !");
@@ -116,6 +137,16 @@ router.get(
   isLoggedIn,
   catchAsync(async (req, res) => {
     const posts = await fetchPosts("");
+    const likes = await getLikes(res.locals.currentUser.username);
+    console.log(likes);
+    for (let post of posts) {
+      post.created = time.timeSince(new Date(post.created));
+
+      // Finding which posts the user has liked.
+      for (let likeID of likes[0].post) {
+        if (likeID === post.id) post.liked = true;
+      }
+    }
     const currentUser = await res.locals.currentUser;
     const user = await User.findOne(currentUser._id)
       .populate("followers", "username -_id")
@@ -123,6 +154,9 @@ router.get(
       .populate("requested_outgoing", "username -_id")
       .populate("requested_incoming", "username -_id");
     const userPosts = await fetchPosts(user.username);
+    for (let userPost of userPosts) {
+      userPost.created = time.timeSince(new Date(userPost.created));
+    }
     const users = await User.find(
       { _id: { $ne: user._id } },
       { username: 1, _id: false }
@@ -158,7 +192,6 @@ router.post(
       }),
     });
     const data = await response.json();
-    console.log(data);
     res.redirect("/social-media");
   })
 );
@@ -307,7 +340,6 @@ router.get(
 router.get(
   "/social-media/:username/acceptrequest",
   isLoggedIn,
-  isAuthUser,
   LogInRedirect,
   catchAsync(async (req, res) => {
     const { username } = req.params;

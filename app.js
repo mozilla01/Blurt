@@ -18,7 +18,7 @@ mongoose
   .then(() => {
     console.log("MONGO CONNECTION OPEN !!");
   })
-  .catch(err => {
+  .catch((err) => {
     console.log("OH NO MONGO ERROR");
     console.log(err);
   });
@@ -77,5 +77,5 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(3001, () => {
-  console.log("Listening on port 3001");
+  console.log("Listening on port 3001\nhttp://127.0.0.1:3001/social-media/");
 });
