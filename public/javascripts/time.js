@@ -27,7 +27,7 @@ function timeSince(date) {
   if (interval > 1) {
     return (
       Math.floor(interval) +
-      `${Math.floor(interval) === 1 ? " minute ago" : " minutes ago"}`
+      `${Math.floor(interval) === 1 ? " hour ago" : " hours ago"}`
     );
   }
   interval = seconds / 60;
