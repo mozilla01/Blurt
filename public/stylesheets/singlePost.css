@@ -1,5 +1,7 @@
-#post_card p {
+#post_card pre {
   font-size: 2rem;
+  line-height: normal;
+  font-family: "Kanit", sans-serif;
 }
 
 #work {
@@ -11,4 +13,8 @@
 .input-reply {
   margin: 2rem 0;
   display: flex;
+}
+#delete-reply {
+  cursor: pointer;
+  user-select: none;
 }

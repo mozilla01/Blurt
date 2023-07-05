@@ -356,7 +356,7 @@
                     >
                       <span
                         class="material-symbols-outlined"
-                        onclick="document.getElementById('message-text-edit').innerHTML=setContent('<%=userPost.content%>');document.getElementById('hidden-id').value = '<%=userPost.id%>';"
+                        onclick="document.getElementById('hidden-id').value = '<%=userPost.id%>';editPost();"
                       >
                         edit_note
                       </span>

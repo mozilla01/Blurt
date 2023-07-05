@@ -101,6 +101,9 @@ body {
   margin-top: 5rem;
   height: 100px;
 }
+#message-text-edit {
+  min-height: 10em;
+}
 
 #users {
   max-height: 350px;
