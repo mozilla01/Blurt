@@ -129,3 +129,8 @@ body {
   cursor: pointer;
   user-select: none;
 }
+pre {
+  /* min-height: 10em; */
+  overflow-x: auto;
+  white-space: pre-wrap;
+}

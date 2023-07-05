@@ -34,10 +34,63 @@
                 </div>
                 <span class="ms-2 pr-5"><%=singlePost.likes%></span>
               </div>
-              <a href="#" class="btn btn-primary">View Comments</a>
+              <button
+                class="btn btn-primary"
+                onclick="document.querySelector('.replies-container').classList.toggle('hidden');"
+              >
+                View Comments
+              </button>
             </div>
             <div class="card-footer text-body-secondary">
               <%=singlePost.created %>
+            </div>
+          </div>
+          <!--Replies section-->
+          <div class="replies-container hidden">
+            <div class="input-reply">
+              <input
+                type="text"
+                name="reply"
+                class="form-control"
+                id="reply-content"
+                placeholder="Add comment"
+              />
+              <button
+                class="btn btn-secondary"
+                id="send-reply"
+                type="button"
+                onclick="sendReply('<%=user%>', '<%=singlePost.id%>')"
+              >
+                Send
+              </button>
+            </div>
+            <div id="replies">
+              <% for(const reply of replies) { %>
+              <div class="card mb-4" id="<%=reply.id%>">
+                <div class="card-body">
+                  <p><%=reply.content%></p>
+
+                  <div class="d-flex justify-content-between">
+                    <div class="d-flex flex-row align-items-center">
+                      <!-- <img
+                    src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(4).webp"
+                    alt="avatar"
+                    width="25"
+                    height="25"
+                    /> -->
+                      <p class="small mb-0 ms-2"><%=reply.user%></p>
+                    </div>
+                    <div class="d-flex flex-row align-items-center">
+                      <p class="small text-muted mb-0"><%=reply.created%></p>
+                      <i
+                        class="far fa-thumbs-up mx-2 fa-xs text-black"
+                        style="margin-top: -0.16rem"
+                      ></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <% } %>
             </div>
           </div>
         </div>
@@ -55,5 +108,6 @@
       integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
       crossorigin="anonymous"
     ></script>
+    <script src="/javascripts/reply.js"></script>
   </body>
 </html>

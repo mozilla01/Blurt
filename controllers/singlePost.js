@@ -1,4 +1,6 @@
-const fetchSinglePost = async q => {
+const time = require("../public/javascripts/time");
+
+const fetchSinglePost = async (q) => {
   try {
     const response = await fetch(`http://127.0.0.1:8000/api/post/${q}`);
     const data = await response.json();
@@ -11,5 +13,15 @@ const fetchSinglePost = async q => {
 module.exports.viewSinglePost = async (req, res) => {
   const { username, postId } = req.params;
   const singlePost = await fetchSinglePost(postId);
-  res.render("pages/post", { singlePost });
+  const user = res.locals.currentUser.username;
+  singlePost.created = time.timeSince(new Date(singlePost.created));
+
+  //Getting post replies
+  const response = await fetch(`http://127.0.0.1:8000/api/replies/${postId}/`);
+  const replies = await response.json();
+
+  for (let reply of replies) {
+    reply.created = time.timeSince(new Date(reply.created));
+  }
+  res.render("pages/post", { singlePost, replies, user });
 };

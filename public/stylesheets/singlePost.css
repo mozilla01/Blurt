@@ -5,3 +5,10 @@
 #work {
   margin-top: 8rem;
 }
+.hidden {
+  display: none;
+}
+.input-reply {
+  margin: 2rem 0;
+  display: flex;
+}
