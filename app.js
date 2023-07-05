@@ -10,6 +10,10 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 
 const userRoute = require("./routes/userRoute");
+const CRUDpostRoute = require("./routes/CRUDpostRoute");
+const requestRoute = require("./routes/requestRoute");
+const mainPageRoute = require("./routes/mainPageRoute");
+const singlePostRoute = require("./routes/singlePostRoute");
 const ExpressError = require("./utils/ExpressError");
 const User = require("./models/user");
 
@@ -18,7 +22,7 @@ mongoose
   .then(() => {
     console.log("MONGO CONNECTION OPEN !!");
   })
-  .catch((err) => {
+  .catch(err => {
     console.log("OH NO MONGO ERROR");
     console.log(err);
   });
@@ -57,7 +61,11 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use("/", CRUDpostRoute);
+app.use("/", mainPageRoute);
+app.use("/", requestRoute);
 app.use("/", userRoute);
+app.use("/", singlePostRoute);
 
 app.get("/", (req, res) => {
   res.send("Social Media App");

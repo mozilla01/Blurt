@@ -20,7 +20,7 @@ module.exports.isAuthUser = async (req, res, next) => {
   const { username } = req.params;
 
   const user = await User.findOne({ username });
-  console.log(req.user);
+
   if (!user._id.equals(req.user._id)) {
     req.flash("error", "You do not have permission");
     return res.redirect(`/social-media`);

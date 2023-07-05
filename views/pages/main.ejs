@@ -317,13 +317,20 @@
               <div class="d-flex">
                 <p><%=user.firstname %> <%= user.lastname %></p>
               </div>
-              <span class="ms-2"
-                ><a
-                  class="text-dark"
+              <div class="d-flex">
+                <a
+                  class="ms-auto"
                   href="/social-media/<%=user.username %>/invitations"
-                  >Invitations</a
-                ></span
-              >
+                >
+                  <button class="btn btn-light">
+                    Invitations <% if(user.requested_incoming.length) {%>
+                    <span class="badge bg-danger"
+                      ><%=user.requested_incoming.length %></span
+                    >
+                    <% }%>
+                  </button>
+                </a>
+              </div>
             </div>
             <div class="text-heading">
               <h4 class="text-center">Your Posts</h4>
@@ -390,7 +397,7 @@
       integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
       crossorigin="anonymous"
     ></script>
-    s
+
     <script src="javascripts/clickResponses.js"></script>
     <script src="javascripts/setContent.js"></script>
   </body>
