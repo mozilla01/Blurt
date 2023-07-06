@@ -293,7 +293,17 @@
           <div class="col-3" id="right-sidebar">
             <div class="container" id="user-details">
               <div class="d-flex">
-                <div id="circle" class="flex-start"></div>
+                <div id="circle" class="flex-start">
+                  <% if(user.image) { %>
+                  <img src="<%=user.image.thumbnail%>" alt="" />
+                  <% } else {%>
+                  <img
+                    src="https://res.cloudinary.com/dyg5zmebj/image/upload//c_fill,g_face,h_90,w_90/f_png/r_max/v1688626927/Social-Media/umntgolhyfldrjkcxm27.jpg"
+                    alt=""
+                  />
+                  <% }%>
+                </div>
+
                 <div id="username" class="align-self-start ms-3">
                   <h2 class="ms-4"><%=user.username %></h2>
                   <div>
@@ -313,6 +323,17 @@
                     >
                   </div>
                 </div>
+              </div>
+              <div class="container d-flex align-items-center" id="edit-pic">
+                <% if(user.image) {%>
+                <a href="/editProfilePic" class="btn btn-dark" id="edit-pic-btn"
+                  ><p>Edit</p></a
+                >
+                <% } else { %>
+                <a href="/addProfilePic" class="btn btn-dark" id="edit-pic-btn"
+                  ><p>Add</p></a
+                >
+                <% } %>
               </div>
               <div class="d-flex">
                 <p><%=user.firstname %> <%= user.lastname %></p>

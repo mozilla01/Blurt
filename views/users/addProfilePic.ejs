@@ -1,0 +1,14 @@
+<% layout("layout/boilerplate")%>
+<div class="container mt-5">
+  <form
+    action="/addProfilePic"
+    method="POST"
+    class="validated-form"
+    novalidate
+    enctype="multipart/form-data"
+  >
+    <label for="profile_pic">Add A Profile Picture : </label>
+    <input type="file" id="profile_pic" name="image" />
+    <button type="submit" class="btn btn-dark">Add</button>
+  </form>
+</div>

@@ -1,3 +1,7 @@
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
+
 const express = require("express");
 const path = require("path");
 const app = express();
@@ -14,6 +18,7 @@ const CRUDpostRoute = require("./routes/CRUDpostRoute");
 const requestRoute = require("./routes/requestRoute");
 const mainPageRoute = require("./routes/mainPageRoute");
 const singlePostRoute = require("./routes/singlePostRoute");
+const imageUploadRoute = require("./routes/imageUploadRoute");
 const ExpressError = require("./utils/ExpressError");
 const User = require("./models/user");
 
@@ -66,6 +71,7 @@ app.use("/", mainPageRoute);
 app.use("/", requestRoute);
 app.use("/", userRoute);
 app.use("/", singlePostRoute);
+app.use("/", imageUploadRoute);
 
 app.get("/", (req, res) => {
   res.send("Social Media App");
