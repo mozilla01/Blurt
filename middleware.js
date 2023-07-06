@@ -18,7 +18,6 @@ module.exports.storeReturnTo = (req, res, next) => {
 
 module.exports.isAuthUser = async (req, res, next) => {
   const { username } = req.params;
-
   const user = await User.findOne({ username });
 
   if (!user._id.equals(req.user._id)) {

@@ -39,7 +39,11 @@ router.get(
 );
 
 //Unfollow
-router.get("/social-media/:username/unfollow", isLoggedIn, catchAsync());
+router.get(
+  "/social-media/:username/unfollow",
+  isLoggedIn,
+  catchAsync(request.unfollow)
+);
 
 //Friends Page
 router.get(

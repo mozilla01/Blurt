@@ -16,9 +16,11 @@ const LocalStrategy = require("passport-local");
 const userRoute = require("./routes/userRoute");
 const CRUDpostRoute = require("./routes/CRUDpostRoute");
 const requestRoute = require("./routes/requestRoute");
+const profileRoute = require("./routes/profileRoute");
 const mainPageRoute = require("./routes/mainPageRoute");
 const singlePostRoute = require("./routes/singlePostRoute");
 const imageUploadRoute = require("./routes/imageUploadRoute");
+
 const ExpressError = require("./utils/ExpressError");
 const User = require("./models/user");
 
@@ -72,6 +74,7 @@ app.use("/", requestRoute);
 app.use("/", userRoute);
 app.use("/", singlePostRoute);
 app.use("/", imageUploadRoute);
+app.use("/", profileRoute);
 
 app.get("/", (req, res) => {
   res.send("Social Media App");
