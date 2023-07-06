@@ -19,6 +19,32 @@
   cursor: pointer;
   user-select: none;
 }
+.heart-div-click {
+  font-variation-settings: "FILL" 1, "wght" 700, "GRAD" 0, "opsz" 48 !important;
+}
+
+.heart-div-click span {
+  color: rgb(233, 62, 62) !important;
+}
+
+.heart-div-unclick {
+  font-variation-settings: "FILL" 0, "wght" 700, "GRAD" 0, "opsz" 48;
+}
+
+.heart-div-unclick span {
+  color: rgb(87, 87, 88);
+}
+
+#heart {
+  cursor: pointer;
+  user-select: none;
+}
+.replies-container {
+  margin-bottom: 4rem;
+}
+#delete-reply {
+  color: rgb(233, 62, 62);
+}
 
 #replies {
   overflow: scroll;

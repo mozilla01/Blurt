@@ -255,7 +255,15 @@
               >
               <div class="card-body">
                 <blockquote class="blockquote mb-0">
-                  <pre><%= post.content %></pre>
+                  <pre><%= post.content %> 
+                   <% if (post.trimmed) { %>
+                  ...<a
+                    class="ms-auto mr-5"
+                    href="/social-media/<%= post.user %>/<%=post.id %>"
+                    >Read more</a
+                  >
+                  <% } %>
+                  </pre>
                   <footer class="blockquote-footer"><%= post.created %></footer>
                 </blockquote>
                 <div class="d-flex justify-content-end">
@@ -294,7 +302,7 @@
             <div class="container" id="user-details">
               <div class="d-flex">
                 <div id="circle" class="flex-start">
-                  <% if(user.image) { %>
+                  <% if (user.image) { %>
                   <img src="<%=user.image.thumbnail%>" alt="" />
                   <% } else {%>
                   <img

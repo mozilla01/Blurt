@@ -71,17 +71,36 @@
       <div class="container-fluid" id="main-body">
         <div class="container" id="work">
           <div class="card text-center" id="post_card">
-            <div class="card-header">@ <%=singlePost.user%></div>
+            <div class="card-header">@<%=singlePost.user%></div>
             <div class="card-body">
               <h5 class="card-title"></h5>
               <pre class="card-text"><%=singlePost.content %></pre>
               <div class="d-flex justify-content-end">
-                <div>
+                <% if (singlePost.liked) { %>
+                <div
+                  class="heart-div-click"
+                  id="<%=singlePost.id %>"
+                  onclick="likeResponse(`<%=user%>`, `<%=singlePost.id %>`, `<%=singlePost.likes %>`)"
+                >
                   <span id="heart" class="material-symbols-outlined">
                     favorite
                   </span>
                 </div>
-                <span class="ms-2 pr-5"><%=singlePost.likes%></span>
+                <% } else { %>
+
+                <div
+                  class="heart-div-unclick"
+                  id="<%=singlePost.id %>"
+                  onclick="likeResponse(`<%=user%>`, `<%=singlePost.id %>`, `<%=singlePost.likes %>`)"
+                >
+                  <span id="heart" class="material-symbols-outlined">
+                    favorite
+                  </span>
+                </div>
+                <% } %>
+                <span class="ms-2 pr-5" id="explore-likes--<%=singlePost.id%>"
+                  ><%=singlePost.likes%></span
+                >
               </div>
               <button
                 class="btn btn-primary"
@@ -121,12 +140,6 @@
 
                   <div class="d-flex justify-content-between">
                     <div class="d-flex flex-row align-items-center">
-                      <!-- <img
-                    src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(4).webp"
-                    alt="avatar"
-                    width="25"
-                    height="25"
-                    /> -->
                       <p class="small mb-0 ms-2"><%=reply.user%></p>
                     </div>
                     <div class="d-flex flex-row align-items-center">
@@ -170,5 +183,6 @@
       crossorigin="anonymous"
     ></script>
     <script src="/javascripts/reply.js"></script>
+    <script src="/javascripts/clickResponses.js"></script>
   </body>
 </html>
