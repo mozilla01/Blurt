@@ -1,7 +1,7 @@
 const time = require("../public/javascripts/time");
 const User = require("../models/user");
 
-const fetchPosts = async q => {
+const fetchPosts = async (q) => {
   try {
     const response = await fetch(`http://127.0.0.1:8000/api/posts/?q=${q}`);
     const data = await response.json();
@@ -11,7 +11,7 @@ const fetchPosts = async q => {
   }
 };
 
-const getLikes = async user => {
+const getLikes = async (user) => {
   try {
     const response = await fetch(
       `http://127.0.0.1:8000/api/get-likes/${user}/`
@@ -23,13 +23,19 @@ const getLikes = async user => {
   }
 };
 
+const cutPost = (post) => {};
+
 module.exports.renderMainPage = async (req, res) => {
   const posts = await fetchPosts("");
   const likes = await getLikes(res.locals.currentUser.username);
   console.log(likes);
   for (let post of posts) {
     post.created = time.timeSince(new Date(post.created));
-
+    const trimmedPost = post.content.split("\r\n");
+    if (trimmedPost.length >= 7) {
+      post.content = trimmedPost.filter((phrase, i) => i < 7).join("\r\n");
+      post.trimmed = true;
+    }
     // Finding which posts the user has liked.
     for (let likeID of likes[0].post) {
       if (likeID === post.id) post.liked = true;
@@ -51,3 +57,5 @@ module.exports.renderMainPage = async (req, res) => {
   );
   res.render("pages/main", { posts, user, userPosts, users });
 };
+
+exports.getLikes = getLikes;
