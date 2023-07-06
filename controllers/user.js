@@ -32,7 +32,6 @@ module.exports.registerUser = async (req, res) => {
       }
     );
     const data = await response.json();
-    console.log(data);
 
     req.login(registeredUser, err => {
       if (err) return next(err);

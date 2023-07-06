@@ -58,6 +58,17 @@ body {
   display: inline-block;
 }
 
+#edit-pic-btn {
+  height: 20px;
+  width: 70px;
+  font-size: 0.8rem;
+  transform: translateX(-15px);
+}
+
+#edit-pic-btn p {
+  transform: translateY(-5px);
+}
+
 .text-heading {
   background-color: rgb(0, 0, 0);
   margin-top: 1rem;
