@@ -88,17 +88,17 @@ module.exports.unfollow = async (req, res) => {
 module.exports.renderFriendsPage = async (req, res) => {
   const { username } = req.params;
   const user = await User.findOne({ username })
-    .populate("followers", "username -_id")
-    .populate("following", "username -_id")
-    .populate("requested_outgoing", "username -_id")
-    .populate("requested_incoming", "username -_id");
+    .populate("followers", "username image -_id")
+    .populate("following", "username image -_id")
+    .populate("requested_outgoing", "username image -_id")
+    .populate("requested_incoming", "username image -_id");
   res.render("pages/friends", { user });
 };
 
 module.exports.renderInvitationsPage = async (req, res) => {
   const { username } = req.params;
   const user = await User.findOne({ username })
-    .populate("requested_incoming", "username -_id")
-    .populate("requested_outgoing", "username -_id");
+    .populate("requested_incoming", "username image -_id")
+    .populate("requested_outgoing", "username image -_id");
   res.render("pages/invitations", { user });
 };
