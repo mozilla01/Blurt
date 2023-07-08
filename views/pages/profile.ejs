@@ -157,23 +157,29 @@
             </div>
           </div>
           <div
-            class="col-3 d-flex container-fluid flex-column bg-white align-items-center"
+            class="col-3 d-flex container-fluid flex-column bg-white align-items-start"
             id="right-sidebar"
           >
-            <div class="d-flex container-fluid">
+            <div
+              class="d-flex container-fluid align-items-center"
+              id="list_heading"
+            >
+              <% let flag= 1;%>
               <button
-                class="container btn text-center bg-dark border border-white"
+                class="container btn text-center bg-dark border m-1 border-white"
                 id="btn-followers"
+                onclick=""
               >
-                <a class="fs-4 text-decoration-none text-white">Followers</a>
+                <a class="fs-5 text-decoration-none text-white">Followers</a>
               </button>
               <button
-                class="container btn text-center bg-dark border border-white"
+                class="container btn text-center bg-dark border m-1 border-white"
                 id="btn_following"
               >
-                <a class="fs-4 text-decoration-none text-white">Following</a>
+                <a class="fs-5 text-decoration-none text-white">Following</a>
               </button>
             </div>
+            <div class="container d-flex" id="friends_list"></div>
           </div>
         </div>
       </div>

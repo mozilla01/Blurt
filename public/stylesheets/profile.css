@@ -58,4 +58,17 @@ body {
 #right-sidebar {
   border-radius: 20px;
   height: 550px;
+  display: flex;
+  flex-direction: column;
+}
+
+#list_heading {
+  flex-grow: 0.5;
+}
+
+#friends_list {
+  background-color: #f1f5f8;
+  overflow: scroll;
+  overflow-x: hidden;
+  height: 420px;
 }
