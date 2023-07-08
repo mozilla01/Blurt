@@ -1,5 +1,6 @@
 const time = require("../public/javascripts/time");
 const userLikes = require("./mainPage");
+const User = require("../models/user");
 
 const fetchSinglePost = async (q) => {
   try {
@@ -14,10 +15,11 @@ const fetchSinglePost = async (q) => {
 module.exports.viewSinglePost = async (req, res) => {
   const { postId } = req.params;
   const singlePost = await fetchSinglePost(postId);
-  const user = res.locals.currentUser.username;
-  const likes = await userLikes.getLikes(user);
+  const user = res.locals.currentUser;
+  const likes = await userLikes.getLikes(user.username);
   singlePost.created = time.timeSince(new Date(singlePost.created));
 
+  console.log(user.username);
   //Getting post replies
   const response = await fetch(`http://127.0.0.1:8000/api/replies/${postId}/`);
   const replies = await response.json();
@@ -28,6 +30,9 @@ module.exports.viewSinglePost = async (req, res) => {
 
   for (let reply of replies) {
     reply.created = time.timeSince(new Date(reply.created));
+
+    const userObject = await User.findOne({ username: reply.user });
+    reply.pfp = userObject.image.pfp;
   }
   res.render("pages/post", { singlePost, replies, user });
 };

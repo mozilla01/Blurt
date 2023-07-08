@@ -17,6 +17,12 @@ ImageSchema.virtual("thumbnail").get(function () {
     "/upload/c_fill,g_face,h_90,w_90/f_png/r_max"
   );
 });
+ImageSchema.virtual("pfp").get(function () {
+  return this.url.replace(
+    "/upload",
+    "/upload/c_fill,g_face,h_48,w_48/f_png/r_max"
+  );
+});
 
 ImageSchema.virtual("profile").get(function () {
   return this.url.replace(
