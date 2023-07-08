@@ -23,8 +23,6 @@ const getLikes = async (user) => {
   }
 };
 
-const cutPost = (post) => {};
-
 module.exports.renderMainPage = async (req, res) => {
   const posts = await fetchPosts("");
   const likes = await getLikes(res.locals.currentUser.username);
@@ -36,6 +34,8 @@ module.exports.renderMainPage = async (req, res) => {
       post.content = trimmedPost.filter((phrase, i) => i < 7).join("\r\n");
       post.trimmed = true;
     }
+    const userObject = await User.findOne({ username: post.user });
+    post.pfp = userObject.image.pfp;
     // Finding which posts the user has liked.
     for (let likeID of likes[0].post) {
       if (likeID === post.id) post.liked = true;

@@ -1,4 +1,5 @@
-const sendReply = async (user, post) => {
+const sendReply = async (user, post, pfp) => {
+  console.log(user);
   const content = document.getElementById("reply-content").value;
   const response = await fetch("http://127.0.0.1:8000/api/send-reply/", {
     method: "POST",
@@ -13,12 +14,12 @@ const sendReply = async (user, post) => {
             <p>${content}</p>
             <div class="d-flex justify-content-between">
                 <div class="d-flex flex-row align-items-center">
-                <!-- <img
-                src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(4).webp"
+                <img
+                src="${pfp}"
                 alt="avatar"
                 width="25"
                 height="25"
-                /> -->
+                />
                 <p class="small mb-0 ms-2">${user}</p>
                 </div>
                 <div class="d-flex flex-row align-items-center">

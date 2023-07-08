@@ -80,7 +80,7 @@
                 <div
                   class="heart-div-click"
                   id="<%=singlePost.id %>"
-                  onclick="likeResponse(`<%=user%>`, `<%=singlePost.id %>`, `<%=singlePost.likes %>`)"
+                  onclick="likeResponse(`<%=user.username%>`, `<%=singlePost.id %>`, `<%=singlePost.likes %>`)"
                 >
                   <span id="heart" class="material-symbols-outlined">
                     favorite
@@ -91,7 +91,7 @@
                 <div
                   class="heart-div-unclick"
                   id="<%=singlePost.id %>"
-                  onclick="likeResponse(`<%=user%>`, `<%=singlePost.id %>`, `<%=singlePost.likes %>`)"
+                  onclick="likeResponse(`<%=user.username%>`, `<%=singlePost.id %>`, `<%=singlePost.likes %>`)"
                 >
                   <span id="heart" class="material-symbols-outlined">
                     favorite
@@ -127,7 +127,7 @@
                 class="btn btn-secondary"
                 id="send-reply"
                 type="button"
-                onclick="sendReply('<%=user%>', '<%=singlePost.id%>')"
+                onclick="sendReply('<%=user.username%>', '<%=singlePost.id%>', '<%=user.image.pfp%>')"
               >
                 Send
               </button>
@@ -140,6 +140,12 @@
 
                   <div class="d-flex justify-content-between">
                     <div class="d-flex flex-row align-items-center">
+                      <img
+                        src="<%=reply.pfp%>"
+                        alt="avatar"
+                        width="25"
+                        height="25"
+                      />
                       <p class="small mb-0 ms-2"><%=reply.user%></p>
                     </div>
                     <div class="d-flex flex-row align-items-center">
@@ -148,7 +154,7 @@
                         class="far fa-thumbs-up mx-2 fa-xs text-black"
                         style="margin-top: -0.16rem"
                       ></i>
-                      <% if (reply.user === user) { %>
+                      <% if (reply.user === user.username) { %>
                       <span
                         class="material-symbols-outlined"
                         id="delete-reply"

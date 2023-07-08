@@ -63,6 +63,7 @@ body {
   width: 70px;
   font-size: 0.8rem;
   transform: translateX(-15px);
+  padding-bottom: 1.5em;
 }
 
 #edit-pic-btn p {
