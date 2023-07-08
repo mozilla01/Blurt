@@ -20,50 +20,54 @@
         <div class="d-flex">
           <div class="col-6">
             <div>
-              <h3 class="mt-2 mb-5 text-center">Followers</h3>
+              <h3 class="mt-2 mb-4 text-center">Followers</h3>
             </div>
 
             <div class="scrollable">
               <% if(user.followers && user.followers.length>0) { for(let
               follower of user.followers){%>
-              <div class="card mt-3 mb-3">
+              <div class="card mb-3">
                 <div class="card-body d-flex">
-                  <blockquote class="blockquote mb-0">
-                    <p><%= follower.username %></p>
-                  </blockquote>
-                  <% if (user.following && user.following.some((following) =>
-                  following.username === follower.username)) {%>
-                  <form
-                    action="/social-media/<%= follower.username %>/unfollow"
-                    class="ms-auto"
-                  >
-                    <button class="btn btn-success">
-                      <span> Following</span>
-                    </button>
-                  </form>
-                  <% } else if(user.requested_outgoing &&
-                  user.requested_outgoing.some((req_user) => req_user.username
-                  === follower.username)) { %>
+                  <img src="<%=follower.image.thumbnail%>" alt="" />
+                  <div class="container d-flex align-items-center ms-3">
+                    <blockquote class="blockquote mb-0">
+                      <h3><%= follower.username %></h3>
+                    </blockquote>
 
-                  <form
-                    action="/social-media/<%= follower.username %>/cancelrequest"
-                    class="ms-auto"
-                  >
-                    <button class="btn btn-light">
-                      <span> Requested</span>
-                    </button>
-                  </form>
+                    <% if (user.following && user.following.some((following) =>
+                    following.username === follower.username)) {%>
+                    <form
+                      action="/social-media/<%= follower.username %>/unfollow"
+                      class="ms-auto"
+                    >
+                      <button class="btn btn-success">
+                        <span> Following</span>
+                      </button>
+                    </form>
+                    <% } else if(user.requested_outgoing &&
+                    user.requested_outgoing.some((req_user) => req_user.username
+                    === follower.username)) { %>
 
-                  <% } else {%>
-                  <form
-                    action="/social-media/<%=follower.username%>/followrequest"
-                    class="ms-auto"
-                  >
-                    <button class="btn btn-dark">
-                      <span> Follow Back</span>
-                    </button>
-                  </form>
-                  <% }%>
+                    <form
+                      action="/social-media/<%= follower.username %>/cancelrequest"
+                      class="ms-auto"
+                    >
+                      <button class="btn btn-light">
+                        <span> Requested</span>
+                      </button>
+                    </form>
+
+                    <% } else {%>
+                    <form
+                      action="/social-media/<%=follower.username%>/followrequest"
+                      class="ms-auto"
+                    >
+                      <button class="btn btn-dark">
+                        <span> Follow Back</span>
+                      </button>
+                    </form>
+                    <% }%>
+                  </div>
                 </div>
               </div>
               <% } } %>
@@ -71,24 +75,28 @@
           </div>
           <div class="col-6">
             <div>
-              <h3 class="mt-2 mb-5 text-center">Following</h3>
+              <h3 class="mt-2 mb-4 text-center">Following</h3>
             </div>
             <div class="scrollable">
               <% if(user.following && user.following.length>0) {
               user.following.map((obj)=>{ %>
-              <div class="card mt-3 mb-3">
+              <div class="card mb-3">
                 <div class="card-body d-flex">
-                  <blockquote class="blockquote mb-0">
-                    <p><%= obj.username %></p>
-                  </blockquote>
-                  <form
-                    action="/social-media/<%=obj.username%>/unfollow"
-                    class="ms-auto"
-                  >
-                    <button class="btn btn-danger">
-                      <span> Unfollow</span>
-                    </button>
-                  </form>
+                  <img src="<%=obj.image.thumbnail%>" alt="" />
+                  <div class="container d-flex align-items-center ms-3">
+                    <blockquote class="blockquote mb-0">
+                      <h3><%= obj.username %></h3>
+                    </blockquote>
+
+                    <form
+                      action="/social-media/<%=obj.username%>/unfollow"
+                      class="ms-auto"
+                    >
+                      <button class="btn btn-danger">
+                        <span> Unfollow</span>
+                      </button>
+                    </form>
+                  </div>
                 </div>
               </div>
               <% }) } %>

@@ -13,7 +13,7 @@ body {
 .scrollable {
   overflow: scroll;
   overflow-x: hidden;
-  height: 430px;
+  height: 400px;
 }
 
 #alert {

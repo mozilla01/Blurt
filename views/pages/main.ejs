@@ -191,7 +191,11 @@
               <div class="card mt-1 mb-1">
                 <div class="card-body d-flex">
                   <blockquote class="blockquote mb-0">
-                    <p><%= friend.username %></p>
+                    <a
+                      class="text-decoration-none text-dark"
+                      href="/social-media/<%= friend.username %>"
+                      ><p><%= friend.username %></p></a
+                    >
                   </blockquote>
                   <%if (user.following.some((following) => following.username
                   === friend.username)) {%>
@@ -290,8 +294,8 @@
                   </div>
                   <% } %>
                   <span class="ms-2 pr-5" id="explore-likes--<%=post.id%>"
-                    ><%=post.likes%></span
-                  >
+                    ><%=post.likes%>
+                  </span>
                 </div>
               </div>
             </div>
@@ -313,13 +317,18 @@
                 </div>
 
                 <div id="username" class="align-self-start ms-3">
-                  <h2 class="ms-4"><%=user.username %></h2>
+                  <a
+                    class="text-dark text-decoration-none"
+                    href="/social-media/<%=user.username%>"
+                    ><h2 class="ms-4"><%=user.username %></h2>
+                  </a>
                   <div>
                     <span
                       ><a
                         class="text-dark"
                         href="/social-media/<%=user.username %>/friends"
-                        ><%=user.followers.length %> Followers</a
+                        ><%=user.followers.length %>
+                        <%=(user.followers.length===1)?"Follower":"Followers"%></a
                       ></span
                     >
                     <span class="ms-2"
