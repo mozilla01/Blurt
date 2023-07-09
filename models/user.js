@@ -20,7 +20,7 @@ ImageSchema.virtual("thumbnail").get(function () {
 ImageSchema.virtual("pfp").get(function () {
   return this.url.replace(
     "/upload",
-    "/upload/c_fill,g_face,h_48,w_48/f_png/r_max"
+    "/upload/c_fill,g_face,h_60,w_60/f_png/r_max"
   );
 });
 
