@@ -34,6 +34,7 @@
             <img
               src="https://res.cloudinary.com/dyg5zmebj/image/upload//c_fill,g_face,h_200,w_200/f_png/r_max/v1688626927/Social-Media/umntgolhyfldrjkcxm27.jpg"
               alt=""
+              class="img-fluid"
             />
             <% } %>
           </div>
@@ -109,11 +110,12 @@
               <div class="container d-flex column">
                 <div class="pe-2">
                   <% if(user.image) {%>
-                  <img src="<%=user.image.pfp%>" alt="" />
+                  <img src="<%=user.image.pfp%>" alt="" class="img-fluid" />
                   <% } else {%>
                   <img
                     src="https://res.cloudinary.com/dyg5zmebj/image/upload//c_fill,g_face,h_60,w_60/f_png/r_max/v1688626927/Social-Media/umntgolhyfldrjkcxm27.jpg"
                     alt=""
+                    class="img-fluid"
                   />
                   <% } %>
                 </div>
