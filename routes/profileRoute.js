@@ -32,7 +32,7 @@ router.get("/social-media/:username", isLoggedIn, async (req, res) => {
     .populate("requested_outgoing", "username -_id")
     .populate("requested_incoming", "username -_id");
 
-  res.render("pages/profile", { user, thisUser, userPosts });
+  res.render("pages/profile2", { user, thisUser, userPosts });
 });
 
 module.exports = router;

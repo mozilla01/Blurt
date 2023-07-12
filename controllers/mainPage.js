@@ -1,7 +1,7 @@
 const time = require("../public/javascripts/time");
 const User = require("../models/user");
 
-const fetchPosts = async (q) => {
+const fetchPosts = async q => {
   try {
     const response = await fetch(`http://127.0.0.1:8000/api/posts/?q=${q}`);
     const data = await response.json();
@@ -11,7 +11,7 @@ const fetchPosts = async (q) => {
   }
 };
 
-const getLikes = async (user) => {
+const getLikes = async user => {
   try {
     const response = await fetch(
       `http://127.0.0.1:8000/api/get-likes/${user}/`
@@ -35,7 +35,13 @@ module.exports.renderMainPage = async (req, res) => {
       post.trimmed = true;
     }
     const userObject = await User.findOne({ username: post.user });
-    post.pfp = userObject.image.pfp;
+    if (!userObject.image) {
+      post.pfp =
+        "https://res.cloudinary.com/dyg5zmebj/image/upload//c_fill,g_face,h_48,w_48/f_png/r_max/v1688626927/Social-Media/umntgolhyfldrjkcxm27.jpg";
+    } else {
+      post.pfp = userObject.image.pfp;
+    }
+
     // Finding which posts the user has liked.
     for (let likeID of likes[0].post) {
       if (likeID === post.id) post.liked = true;
