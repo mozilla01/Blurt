@@ -5,6 +5,11 @@ body {
   margin: 0;
 }
 
+.alert-partial {
+  position: absolute !important;
+  z-index: 1 !important;
+}
+
 #main-body {
   min-height: calc(100vh - 60px);
   position: absolute;

@@ -31,6 +31,13 @@ ImageSchema.virtual("profile").get(function () {
   );
 });
 
+ImageSchema.virtual("img_48").get(function () {
+  return this.url.replace(
+    "/upload",
+    "/upload/c_fill,g_face,h_48,w_48/f_png/r_max"
+  );
+});
+
 const UserSchema = new Schema({
   firstname: {
     type: String,

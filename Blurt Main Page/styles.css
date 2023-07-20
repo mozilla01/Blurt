@@ -155,6 +155,18 @@ h5 {
   content: none;
 }
 
+#drop-down-ul {
+  background-color: red !important;
+  padding: 0rem !important;
+  height: 50px !important;
+}
+
+#log-out li {
+  font-family: "Montserrat", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
 @media (max-width: 992px) {
   #left-sidebar {
     display: none !important;
@@ -173,10 +185,6 @@ h5 {
   .contents {
     justify-content: center;
   }
-
-  #log-out .container {
-    display: none;
-  }
 }
 
 @media (min-width: 1200px) {
@@ -188,24 +196,12 @@ h5 {
   .contents {
     margin-left: 0.5rem;
     margin-right: 0.5rem;
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
   }
 
-  #log-out {
-    margin-left: 0.6rem !important;
-  }
-  #log-out p {
-    margin-left: 1rem;
-  }
   #log-out ul {
-    padding: 0 !important;
-  }
-  #log-out ul :hover {
-    background-color: rgb(177, 20, 20) !important;
-  }
-  #log-out li {
-    font-family: "Montserrat", sans-serif;
-    margin: 0;
-    padding: 0;
+    width: 300px !important;
   }
 }
 
