@@ -423,7 +423,7 @@
               </div>
             </a>
 
-            <a href="/social-media/<%=thisUser.username%>">
+            <a href="/social-media/<%=thisUser.username %>">
               <div class="d-flex contents">
                 <span class="material-symbols-outlined fs-2"> person </span>
                 <h3>Profile</h3>
@@ -445,19 +445,17 @@
                 <% if(thisUser.image) {%>
                 <img
                   src="<%=thisUser.image.img_48%>"
-                  alt=""
                   class="img-fluid p-1"
+                  alt=""
                 />
                 <% } else {%>
                 <img
                   src="https://res.cloudinary.com/dyg5zmebj/image/upload//c_fill,g_face,h_48,w_48/f_png/r_max/v1688626927/Social-Media/umntgolhyfldrjkcxm27.jpg"
                   alt=""
-                  class="img-fluid p1"
+                  class="img-fluid p-1"
                 />
-                <% } %>
-                <div
-                  class="container text-break text-wrap d-flex flex-column align-items-start"
-                >
+                <%} %>
+                <div class="container text-break text-wrap">
                   <h5 class="m-0 p-0 pt-1">
                     <%=thisUser.firstname%> <%=thisUser.lastname%>
                   </h5>
@@ -469,7 +467,7 @@
                 <li class="dropdown-item">
                   <a
                     class="text-center bg-warning dropdrown-anchor"
-                    href="/logout"
+                    href="https://www.google.com/"
                     ><h5>Logout</h5></a
                   >
                 </li>

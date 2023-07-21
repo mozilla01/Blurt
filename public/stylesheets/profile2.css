@@ -155,6 +155,15 @@ h5 {
   font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 48;
 }
 
+#post button {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  outline: inherit;
+}
+
 #log-out h5 {
   font-weight: bold;
   font-size: 1rem;
@@ -169,29 +178,11 @@ h5 {
   width: 200px;
 }
 
-#post button {
-  background: none !important;
-  color: inherit !important;
-  border: none !important;
-  padding: 0 !important;
-  font: inherit;
-  outline: inherit !important;
-  margin: 0 !important;
-}
-
 .dropdown-item {
   font-family: "Montserrat", sans-serif;
   font-weight: 100;
   margin: 0;
   padding: 0;
-}
-
-#zero-posts {
-  padding: 8rem !important;
-}
-
-#zero-posts h2 {
-  font-family: "Montserrat", sans-serif;
 }
 
 .suggested img {
@@ -213,32 +204,6 @@ footer {
 
 #mobile-logout {
   display: none !important;
-}
-
-.heart-div-click {
-  font-variation-settings: "FILL" 1, "wght" 700, "GRAD" 0, "opsz" 48 !important;
-}
-
-.heart-div-click span {
-  color: rgb(233, 62, 62) !important;
-}
-
-.heart-div-unclick {
-  font-variation-settings: "FILL" 0, "wght" 700, "GRAD" 0, "opsz" 48;
-}
-
-.heart-div-unclick span {
-  color: rgb(87, 87, 88);
-}
-
-#heart {
-  cursor: pointer;
-  user-select: none;
-}
-pre {
-  /* min-height: 10em; */
-  overflow-x: auto;
-  white-space: pre-wrap;
 }
 
 @media (max-width: 992px) {
@@ -387,16 +352,6 @@ pre {
     padding: 0rem !important;
   }
 
-  #create-post-button {
-    background: none !important;
-    color: inherit !important;
-    border: none !important;
-    padding: 0 !important;
-    font: inherit;
-    outline: inherit !important;
-    margin: 0 !important;
-  }
-
   section {
     margin-bottom: 3rem !important;
   }
@@ -422,10 +377,12 @@ pre {
     font-size: 0.8rem;
   }
 
-  #zero-posts {
-    padding: 2rem !important;
-  }
-  #zero-posts h2 {
-    font-size: 1rem !important;
+  #create-post-button {
+    background: none !important;
+    color: inherit !important ;
+    border: none !important;
+    padding: 0 !important;
+    font: inherit !important;
+    outline: inherit !important;
   }
 }
