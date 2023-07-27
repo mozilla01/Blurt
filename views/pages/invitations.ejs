@@ -31,7 +31,14 @@
               { for(let follower of user.requested_incoming){%>
               <div class="card mb-3">
                 <div class="card-body d-flex">
-                  <img src="<%=follower.image.thumbnail%>" alt="" />
+                  <% if(user.image) {%>
+                  <img src="<%=user.image.profile%>" alt="" />
+                  <% } else {%>
+                  <img
+                    src="https://res.cloudinary.com/dyg5zmebj/image/upload//c_fill,g_face,h_48,w_48/f_png/r_max/v1688626927/Social-Media/umntgolhyfldrjkcxm27.jpg"
+                    alt=""
+                  />
+                  <% } %>
                   <div class="container d-flex align-items-center ms-3">
                     <blockquote class="blockquote mb-0">
                       <h3><%= follower.username %></h3>
@@ -59,7 +66,14 @@
               { user.requested_outgoing.map((obj)=>{ %>
               <div class="card mb-3">
                 <div class="card-body d-flex">
-                  <img src="<%=obj.image.thumbnail%>" alt="" />
+                  <% if(obj.image) {%>
+                  <img src="<%=obj.image.profile%>" alt="" />
+                  <% } else {%>
+                  <img
+                    src="https://res.cloudinary.com/dyg5zmebj/image/upload//c_fill,g_face,h_48,w_48/f_png/r_max/v1688626927/Social-Media/umntgolhyfldrjkcxm27.jpg"
+                    alt=""
+                  />
+                  <% } %>
                   <div class="container d-flex align-items-center ms-3">
                     <blockquote class="blockquote mb-0">
                       <h3><%= obj.username %></h3>
