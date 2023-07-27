@@ -93,26 +93,58 @@
             ></button>
           </div>
           <div class="modal-body">
-            <form method="post" action="/social-media/create-post">
+            <form
+              id="createPostForm"
+              method="post"
+              action="/social-media/create-post"
+              enctype="multipart/form-data"
+            >
               <div class="mb-3">
                 <label for="message-text" class="col-form-label"
-                  >What's cookin', <%= thisUser.username %>?</label
+                  >What's cookin', <%= user.username %>?</label
                 >
                 <textarea
                   class="form-control"
                   id="message-text"
                   name="content"
                 ></textarea>
+                <label for="post-image" class="col-form-label"
+                  >Attach an image</label
+                ><br />
+                <input
+                  type="file"
+                  name="image"
+                  class="form-control form-control-sm"
+                  id="post-image"
+                />
+                <input
+                  type="hidden"
+                  value="<%=user.username%>"
+                  %
+                  id="create-post-user"
+                />
+                <input
+                  type="hidden"
+                  value="<%=user.image.thumbnail%>"
+                  id="user-img"
+                />
               </div>
               <div class="modal-footer">
                 <button
                   type="button"
                   class="btn btn-secondary"
                   data-bs-dismiss="modal"
+                  id="create-post-close"
                 >
                   Close
                 </button>
-                <button type="submit" class="btn btn-dark">Post</button>
+                <button
+                  type="submit"
+                  class="btn btn-dark"
+                  onclick="console.log('hello')"
+                >
+                  Post
+                </button>
               </div>
             </form>
           </div>
@@ -192,7 +224,7 @@
           </div>
           <div id="follow-container" class="btn-group">
             <a href="/social-media/<%=user.username %>/friends"
-              ><button class="btn btn-light">
+              ><button class="btn btn-light mr-1">
                 <h4>
                   <%=user.followers.length %>
                   <%=(user.followers.length===1)?"Follower":"Followers"%>
@@ -200,7 +232,7 @@
               </button></a
             >
             <a href="/social-media/<%=user.username %>/friends"
-              ><button class="btn btn-light">
+              ><button class="btn btn-light ms-1">
                 <h4><%=user.following.length %> Following</h4>
               </button></a
             >
@@ -236,7 +268,13 @@
                 <span> Follow Back</span>
               </button>
             </form>
-            <% } else if(thisUser.username===user.username) {} else {%>
+            <% } else if(thisUser.username===user.username) { %>
+            <form action="/logout" class="ms-auto" id="log-out-mobile">
+              <button class="btn btn-danger mt-3">
+                <span>Log Out</span>
+              </button>
+            </form>
+            <% } else {%>
             <form
               action="/social-media/<%= user.username %>/followrequest"
               class="ms-auto"
@@ -268,135 +306,142 @@
             <h2>Hasn't Posted In Awhile</h2>
           </div>
 
-          <% }%> <% for( let userPost of userPosts){ %>
-          <div class="card mt-3 mb-2 pt-3 pb-3" id="post">
-            <div>
-              <div class="container d-flex column">
-                <div class="pe-2">
-                  <% if(user.image) {%>
-                  <img
-                    src="<%=user.image.pfp%>"
-                    alt=""
-                    class="img-fluid post-pfp"
-                  />
-                  <% } else {%>
-                  <img
-                    src="https://res.cloudinary.com/dyg5zmebj/image/upload//c_fill,g_face,h_60,w_60/f_png/r_max/v1688626927/Social-Media/umntgolhyfldrjkcxm27.jpg"
-                    alt=""
-                    class="img-fluid post-pfp"
-                  />
-                  <% } %>
-                </div>
-                <div class="container p-0 pe-3">
-                  <div class="card-title d-flex" id="post-title">
-                    <div
-                      class="text-start text-wrap text-break col-7"
-                      id="post-username"
-                    >
-                      <h4>@<%=user.username %></h4>
-                    </div>
-                    <div class="text-end col-5">
-                      <p class="me-2">- <%=userPost.created%></p>
-                      <%if(thisUser.username===user.username) { %>
-                      <button
-                        id="post-control-button"
-                        class="btn btn-secondary dropdown-toggle m-0 p-0"
-                        type="button"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                      >
-                        <span class="material-symbols-outlined p-0 m-0">
-                          more_vert
-                        </span>
-                      </button>
-                      <ul class="dropdown-menu">
-                        <li class="text-center p-1">
-                          <button
-                            class="container-fluid edit-btn"
-                            type="button"
-                            data-bs-toggle="modal"
-                            data-bs-whatever="@mdo"
-                            data-bs-target="#editModal"
-                            onclick="document.getElementById('hidden-id').value = '<%=userPost.id%>';editPost();"
-                          >
-                            <span> Edit </span>
-                          </button>
-                        </li>
-                        <li class="text-center p-1">
-                          <button
-                            class="delete-btn container-fluid"
-                            type="button"
-                            data-bs-toggle="modal"
-                            data-bs-target="#deleteModal"
-                            data-bs-whatever="@mdo"
-                            onclick="document.getElementById('delete-id').value = '<%=userPost.id%>';"
-                          >
-                            <span> Delete </span>
-                          </button>
-                        </li>
-                      </ul>
-                      <% }%>
-                    </div>
-                  </div>
-
-                  <p class="text-start" id="post-content">
-                    <%=userPost.content%>
-                  </p>
-
-                  <div class="bg-light">
+          <% }%>
+          <div id="posts-container">
+            <% for( let userPost of userPosts){ %>
+            <div class="card mt-3 mb-2 pt-3 pb-3" id="post">
+              <div>
+                <div class="container d-flex column">
+                  <div class="pe-2">
+                    <% if(user.image) {%>
                     <img
-                      src="https://m.media-amazon.com/images/M/MV5BMjMxNjY2MDU1OV5BMl5BanBnXkFtZTgwNzY1MTUwNTM@._V1_.jpg"
+                      src="<%=user.image.pfp%>"
                       alt=""
-                      class="img-fluid"
+                      class="img-fluid post-pfp"
                     />
+                    <% } else {%>
+                    <img
+                      src="https://res.cloudinary.com/dyg5zmebj/image/upload//c_fill,g_face,h_60,w_60/f_png/r_max/v1688626927/Social-Media/umntgolhyfldrjkcxm27.jpg"
+                      alt=""
+                      class="img-fluid post-pfp"
+                    />
+                    <% } %>
                   </div>
-                  <div class="d-flex mt-2" id="post-interactions">
-                    <div class="d-flex col-6 pt-2">
-                      <% if (userPost.liked) { %>
+                  <div class="container p-0 pe-3">
+                    <div class="card-title d-flex" id="post-title">
                       <div
-                        class="heart-div-click"
-                        id="<%=userPost.id %>"
-                        onclick="likeResponse(`<%=user.username%>`, `<%=userPost.id %>`, `<%=userPost.likes %>`)"
+                        class="text-start text-wrap text-break col-7"
+                        id="post-username"
                       >
-                        <span id="heart" class="material-symbols-outlined">
-                          favorite
-                        </span>
+                        <h4>@<%=user.username %></h4>
                       </div>
-                      <% } else { %>
-
-                      <div
-                        class="heart-div-unclick"
-                        id="<%=userPost.id %>"
-                        onclick="likeResponse(`<%=user.username%>`, `<%=userPost.id %>`, `<%=userPost.likes %>`)"
-                      >
-                        <span id="heart" class="material-symbols-outlined">
-                          favorite
-                        </span>
+                      <div class="text-end col-5">
+                        <p class="me-2">- <%=userPost.created%></p>
+                        <%if(thisUser.username===user.username) { %>
+                        <button
+                          id="post-control-button"
+                          class="btn btn-secondary dropdown-toggle m-0 p-0"
+                          type="button"
+                          data-bs-toggle="dropdown"
+                          aria-expanded="false"
+                        >
+                          <span class="material-symbols-outlined p-0 m-0">
+                            more_vert
+                          </span>
+                        </button>
+                        <ul class="dropdown-menu">
+                          <li class="text-center p-1">
+                            <button
+                              class="container-fluid edit-btn"
+                              type="button"
+                              data-bs-toggle="modal"
+                              data-bs-whatever="@mdo"
+                              data-bs-target="#editModal"
+                              onclick="document.getElementById('hidden-id').value = '<%=userPost.id%>';editPost();"
+                            >
+                              <span> Edit </span>
+                            </button>
+                          </li>
+                          <li class="text-center p-1">
+                            <button
+                              class="delete-btn container-fluid"
+                              type="button"
+                              data-bs-toggle="modal"
+                              data-bs-target="#deleteModal"
+                              data-bs-whatever="@mdo"
+                              onclick="document.getElementById('delete-id').value = '<%=userPost.id%>';"
+                            >
+                              <span> Delete </span>
+                            </button>
+                          </li>
+                        </ul>
+                        <% }%>
                       </div>
-                      <% } %>
-                      <span
-                        class="ms-2 pr-5"
-                        id="explore-likes--<%=userPost.id%>"
-                        ><%=userPost.likes%>
-                      </span>
                     </div>
-                    <div class="d-flex justify-content-end col-6 pt-2">
-                      <a
-                        href="/social-media/<%= userPost.user %>/<%=userPost.id %>"
-                        class="d-flex"
-                      >
-                        <span class="material-symbols-outlined ms-1 me-2">
-                          comment
-                        </span>
-                        <h5 class="me-3">14</h5>
-                      </a>
+
+                    <p class="text-start" id="post-content">
+                      <%=userPost.content%>
+                    </p>
+
+                    <div class="bg-light">
+                      <% if(userPost.image) { %>
+                      <img
+                        src="http://127.0.0.1:8000/<%=userPost.image%>"
+                        alt=""
+                        class="img-fluid"
+                      />
+                      <% } %>
+                    </div>
+                    <div class="d-flex mt-2" id="post-interactions">
+                      <div class="d-flex col-6 pt-2">
+                        <% if (userPost.liked) { %>
+                        <div
+                          class="heart-div-click"
+                          id="<%=userPost.id %>"
+                          onclick="likeResponse(`<%=user.username%>`, `<%=userPost.id %>`, `<%=userPost.likes %>`)"
+                        >
+                          <span id="heart" class="material-symbols-outlined">
+                            favorite
+                          </span>
+                        </div>
+                        <% } else { %>
+
+                        <div
+                          class="heart-div-unclick"
+                          id="<%=userPost.id %>"
+                          onclick="likeResponse(`<%=user.username%>`, `<%=userPost.id %>`, `<%=userPost.likes %>`)"
+                        >
+                          <span id="heart" class="material-symbols-outlined">
+                            favorite
+                          </span>
+                        </div>
+                        <% } %>
+                        <h5>
+                          <span
+                            class="ms-2 pr-5"
+                            id="explore-likes--<%=userPost.id%>"
+                            ><%=userPost.likes%>
+                          </span>
+                        </h5>
+                      </div>
+                      <div class="d-flex justify-content-end col-6 pt-2">
+                        <a
+                          href="/social-media/<%= userPost.user %>/<%=userPost.id %>"
+                          class="d-flex"
+                        >
+                          <span class="material-symbols-outlined ms-1 me-2">
+                            comment
+                          </span>
+                          <h5 class="me-3">14</h5>
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+            <% }%>
           </div>
-          <% }%>
         </div>
         <div
           class="col-xl-2 d-flex flex-column col-1 container p-0"
@@ -531,8 +576,9 @@
       integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
       crossorigin="anonymous"
     ></script>
-    <script src="/javascripts/bug.js"></script>
+
     <script src="/javascripts/clickResponses.js"></script>
     <script src="/javascripts/setContent.js"></script>
+    <script src="/javascripts/createPostSubmit.js"></script>
   </body>
 </html>

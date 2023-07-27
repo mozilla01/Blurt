@@ -23,7 +23,7 @@ body {
 #center-bar {
   overflow: scroll;
 
-  height: 700px;
+  max-height: 100vh;
 }
 
 #flash-container {

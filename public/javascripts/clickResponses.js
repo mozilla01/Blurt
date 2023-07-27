@@ -14,7 +14,7 @@ function getCookie(name) {
   return cookieValue;
 }
 
-const likeResponse = async (user, id, likes) => {
+const likeResponse = async (user, id) => {
   const csrftoken = getCookie("csrftoken");
   const like = document.getElementById(id);
 

@@ -6,7 +6,7 @@ const User = require("../models/user");
 const { isLoggedIn } = require("../middleware");
 const time = require("../public/javascripts/time");
 
-const fetchPosts = async q => {
+const fetchPosts = async (q) => {
   try {
     const response = await fetch(`http://127.0.0.1:8000/api/posts/?q=${q}`);
     const data = await response.json();
@@ -16,7 +16,7 @@ const fetchPosts = async q => {
   }
 };
 
-const getLikes = async user => {
+const getLikes = async (user) => {
   try {
     const response = await fetch(
       `http://127.0.0.1:8000/api/get-likes/${user}/`

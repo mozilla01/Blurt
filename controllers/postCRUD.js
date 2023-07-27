@@ -1,23 +1,3 @@
-const createPost = async (user, messageText) => {
-  try {
-    const response = await fetch("http://127.0.0.1:8000/api/create-post/", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify({ user: user, content: messageText }),
-    });
-  } catch (err) {
-    console.error(err);
-  }
-};
-
-module.exports.createPost = async (req, res) => {
-  createPost(res.locals.currentUser.username, req.body.content);
-  req.flash("success", "New post created!");
-  res.redirect("/social-media");
-};
-
 module.exports.editPost = async (req, res) => {
   const id = req.body.post_id;
   const content = req.body.content;
