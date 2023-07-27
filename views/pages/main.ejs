@@ -115,7 +115,12 @@
             ></button>
           </div>
           <div class="modal-body">
-            <form method="post" action="/social-media/create-post">
+            <form
+              id="createPostForm"
+              method="post"
+              action="/social-media/create-post"
+              enctype="multipart/form-data"
+            >
               <div class="mb-3">
                 <label for="message-text" class="col-form-label"
                   >What's cookin', <%= user.username %>?</label
@@ -125,16 +130,43 @@
                   id="message-text"
                   name="content"
                 ></textarea>
+                <label for="post-image" class="col-form-label"
+                  >Attach an image</label
+                ><br />
+                <input
+                  type="file"
+                  name="image"
+                  class="form-control form-control-sm"
+                  id="post-image"
+                />
+                <input
+                  type="hidden"
+                  value="<%=user.username%>"
+                  %
+                  id="create-post-user"
+                />
+                <input
+                  type="hidden"
+                  value="<%=user.image.thumbnail%>"
+                  id="user-img"
+                />
               </div>
               <div class="modal-footer">
                 <button
                   type="button"
                   class="btn btn-secondary"
                   data-bs-dismiss="modal"
+                  id="create-post-close"
                 >
                   Close
                 </button>
-                <button type="submit" class="btn btn-dark">Post</button>
+                <button
+                  type="submit"
+                  class="btn btn-dark"
+                  onclick="console.log('hello')"
+                >
+                  Post
+                </button>
               </div>
             </form>
           </div>
@@ -274,52 +306,55 @@
             <div class="container" id="explore-tag">
               <h1 class="text-center" id="explore-heading">Explore</h1>
             </div>
-            <%- include('../partials/flash')%> <% for( let post of posts){ %>
-            <!--New post template-->
-            <div class="card mx-auto custom-card" id="prova">
-              <div class="row post-header col-12 py-2 px-3">
-                <div class="col-6 float-left">
-                  <img src="<%=post.pfp%>" alt="pfp" />
-                  <span><%= post.user %></span>
-                </div>
-                <div class="col-6 float-right text-right post-number">
-                  <span><%= post.created %></span>
-                </div>
-              </div>
-              <img
-                class="card-img"
-                src="https://assets.breatheco.de/apis/img/images.php?blob&tags=bobdylan"
-                alt="Card image cap"
-              />
-              <div class="card-body px-3">
-                <div class="d-flex justify-content-start">
-                  <% if (post.liked) { %>
-                  <div
-                    class="heart-div-click"
-                    id="<%=post.id %>"
-                    onclick="likeResponse(`<%=user.username%>`, `<%=post.id %>`, `<%=post.likes %>`)"
-                  >
-                    <span id="heart" class="material-symbols-outlined">
-                      favorite
-                    </span>
+            <div id="posts-container">
+              <%- include('../partials/flash')%> <% for( let post of posts){ %>
+              <!--New post template-->
+              <div class="card mx-auto custom-card" id="prova">
+                <div class="row post-header col-12 py-2 px-3">
+                  <div class="col-6 float-left">
+                    <img src="<%=post.pfp%>" alt="pfp" />
+                    <span><%= post.user %></span>
                   </div>
-                  <% } else { %>
+                  <div class="col-6 float-right text-right post-number">
+                    <span><%= post.created %></span>
+                  </div>
+                </div>
+                <% if (post.image) { %>
+                <img
+                  class="img-fluid"
+                  src="http://127.0.0.1:8000/<%=post.image%>"
+                  alt="Card image cap"
+                />
+                <% } %>
+                <div class="card-body px-3">
+                  <div class="d-flex justify-content-start">
+                    <% if (post.liked) { %>
+                    <div
+                      class="heart-div-click"
+                      id="<%=post.id %>"
+                      onclick="likeResponse(`<%=user.username%>`, `<%=post.id %>`, `<%=post.likes %>`)"
+                    >
+                      <span id="heart" class="material-symbols-outlined">
+                        favorite
+                      </span>
+                    </div>
+                    <% } else { %>
 
-                  <div
-                    class="heart-div-unclick"
-                    id="<%=post.id %>"
-                    onclick="likeResponse(`<%=user.username%>`, `<%=post.id %>`, `<%=post.likes %>`)"
-                  >
-                    <span id="heart" class="material-symbols-outlined">
-                      favorite
+                    <div
+                      class="heart-div-unclick"
+                      id="<%=post.id %>"
+                      onclick="likeResponse(`<%=user.username%>`, `<%=post.id %>`, `<%=post.likes %>`)"
+                    >
+                      <span id="heart" class="material-symbols-outlined">
+                        favorite
+                      </span>
+                    </div>
+                    <% } %>
+                    <span class="ms-2 pr-5" id="explore-likes--<%=post.id%>"
+                      ><%=post.likes%>
                     </span>
                   </div>
-                  <% } %>
-                  <span class="ms-2 pr-5" id="explore-likes--<%=post.id%>"
-                    ><%=post.likes%>
-                  </span>
-                </div>
-                <pre><%= post.content %> 
+                  <pre><%= post.content %> 
                   <% if (post.trimmed) { %>
                  ...<a
                  class="ms-auto mr-5"
@@ -328,17 +363,18 @@
                  >
                  <% } %>
                  </pre>
+                </div>
+                <div class="row post-header px-3 pb-3">
+                  <a
+                    href="/social-media/<%= post.user %>/<%=post.id %>"
+                    class="col-10 float-left text-left"
+                    >Read more...</a
+                  >
+                </div>
               </div>
-              <div class="row post-header px-3 pb-3">
-                <a
-                  href="/social-media/<%= post.user %>/<%=post.id %>"
-                  class="col-10 float-left text-left"
-                  >Read more...</a
-                >
-              </div>
+              <!--End-->
+              <%}%>
             </div>
-            <!--End-->
-            <%}%>
           </div>
           <div class="col-3" id="right-sidebar">
             <div class="container" id="user-details">
@@ -475,5 +511,6 @@
 
     <script src="javascripts/clickResponses.js"></script>
     <script src="javascripts/setContent.js"></script>
+    <script src="javascripts/createPostSubmit.js"></script>
   </body>
 </html>

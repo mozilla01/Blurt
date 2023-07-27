@@ -26,7 +26,6 @@ const getLikes = async user => {
 module.exports.renderMainPage = async (req, res) => {
   const posts = await fetchPosts("");
   const likes = await getLikes(res.locals.currentUser.username);
-  console.log(likes);
   for (let post of posts) {
     post.created = time.timeSince(new Date(post.created));
     const trimmedPost = post.content.split("\r\n");
