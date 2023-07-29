@@ -10,10 +10,19 @@ nav {
   display: flex;
 }
 
+#friend img {
+  width: 3rem !important;
+  height: 3rem !important;
+}
+
 #centerbar {
   flex: 1;
 
   background-color: #f1f5f8;
+}
+
+#friend {
+  border-radius: 5px;
 }
 
 #image-container img {
@@ -51,7 +60,7 @@ nav {
 }
 
 .users-container div {
-  border-radius: 25px;
+  border-radius: 50px;
   background-color: white;
   transform: all 0.1s;
 }
@@ -62,7 +71,7 @@ nav {
 
 .users-container h5 {
   font-family: "Montserrat", sans-serif;
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   font-weight: 400;
   margin-left: 0.5rem !important;
 }
@@ -85,6 +94,26 @@ nav {
   font-weight: bold;
   font-size: 1.2rem;
   margin-left: 2rem !important;
+
+  border-radius: 4px;
+}
+
+.home-toggle h5 {
+  transition: all 0.4s;
+  padding: 0.1rem;
+  border-bottom: 3px solid transparent;
+}
+
+.home-toggle h5:hover {
+  border-bottom: 3px solid rgb(0, 0, 0);
+
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
 #post h4,
@@ -130,7 +159,7 @@ h5 {
 }
 
 .d-flex.contents {
-  border-radius: 15px;
+  border-radius: 50px;
   transition: all 0.1s;
 }
 
@@ -155,16 +184,37 @@ h5 {
   content: none;
 }
 
-#drop-down-ul {
-  background-color: red !important;
-  padding: 0rem !important;
-  height: 50px !important;
+.dropdown-item {
+  padding: 0 !important;
+  width: 200px;
 }
 
-#log-out li {
+.dropdown-item {
   font-family: "Montserrat", sans-serif;
+  font-weight: 100;
   margin: 0;
   padding: 0;
+}
+
+.suggested img {
+  width: 2.5rem !important;
+  height: 2.5rem !important;
+}
+
+.dropdown-menu h5 {
+  font-size: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0rem;
+  font-weight: 100 !important;
+}
+
+footer {
+  display: none;
+}
+
+#mobile-logout {
+  display: none !important;
 }
 
 @media (max-width: 992px) {
@@ -175,6 +225,11 @@ h5 {
   #centerbar {
     margin-left: 0 !important;
   }
+
+  .d-flex.contents {
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
+  }
 }
 
 @media (max-width: 1200px) {
@@ -184,6 +239,14 @@ h5 {
 
   .contents {
     justify-content: center;
+  }
+
+  #log-out .container {
+    display: none;
+  }
+  .d-flex.contents {
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
   }
 }
 
@@ -196,12 +259,16 @@ h5 {
   .contents {
     margin-left: 0.5rem;
     margin-right: 0.5rem;
+
     padding-top: 0.8rem;
     padding-bottom: 0.8rem;
   }
 
-  #log-out ul {
-    width: 300px !important;
+  #log-out {
+    margin-left: 0.6rem !important;
+  }
+  #log-out p {
+    margin-left: 1rem;
   }
 }
 
@@ -209,6 +276,11 @@ h5 {
   #left-sidebar {
     height: 100vh;
     position: fixed;
+  }
+
+  .home-toggle h5:hover {
+    margin-left: 4rem;
+    margin-right: 4rem;
   }
 
   #image-container {
@@ -231,6 +303,13 @@ h5 {
   }
 }
 
+@media (min-width: 1200px) {
+  #home-tag a {
+    pointer-events: none;
+    cursor: default;
+  }
+}
+
 @media (min-width: 992px) and (max-width: 1200px) {
   #centerbar {
     margin-left: calc((100% / 3));
@@ -246,6 +325,61 @@ h5 {
     width: 10%;
   }
   #post-content {
+    font-size: 0.9rem;
+  }
+  .post-pfp {
+    width: 2rem;
+  }
+  #post-username h4 {
+    font-size: 1rem;
+  }
+
+  #friend {
+    margin-top: 0.3rem !important;
+    margin-bottom: 0.3rem !important;
+    padding: 0.5rem !important;
+    padding-left: 1rem !important;
+  }
+}
+
+@media (max-width: 450px) {
+  #right-sidebar {
+    display: none !important;
+  }
+  #centerbar {
+    margin-right: 0rem !important;
+  }
+
+  #post p {
+    font-size: 0.6rem;
+  }
+
+  #post-content {
+    font-size: 0.7rem !important;
+  }
+  footer {
+    display: block;
+    padding: 0rem !important;
+  }
+
+  section {
+    margin-bottom: 3rem !important;
+  }
+
+  footer a {
+    padding-top: 0.2rem;
+  }
+
+  #mobile-logout {
+    display: flex !important;
+    padding-bottom: 1rem;
+    padding-right: 0.5rem;
+    padding-top: 0.5rem;
+  }
+  #post-interactions span {
+    font-size: 1.2rem;
+  }
+  #post-interactions h5 {
     font-size: 0.9rem;
   }
 }
