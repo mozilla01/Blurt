@@ -55,8 +55,9 @@ module.exports.renderMainPage = async (req, res) => {
 
   const users = await User.find(
     { _id: { $ne: thisUser._id } },
-    { username: 1, _id: false }
+    { username: 1, image: 1, _id: false }
   );
+
   res.render("pages/main2", { userPosts, thisUser, users });
 };
 

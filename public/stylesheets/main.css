@@ -68,6 +68,19 @@ button {
   flex-grow: 1 !important;
 }
 
+.users-container::-webkit-scrollbar {
+  width: 4px;
+}
+
+.users-container::-webkit-scrollbar-thumb {
+  background-color: rgb(144, 144, 144);
+}
+
+.users-container::-webkit-scrollbar-track {
+  background-color: rgb(235, 235, 235);
+  border-radius: 1px;
+}
+
 .users-container div {
   border-radius: 50px;
   background-color: white;

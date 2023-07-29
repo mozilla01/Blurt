@@ -223,11 +223,15 @@
               <div
                 class="d-flex col-2 bg-transparent m-0 p-0 justify-content-center"
               >
+                <% if(user.image) {%>
+                <img src="<%=user.image.img_36%>" alt="" class="img-fluid" />
+                <% } else {%>
                 <img
-                  src="https://res.cloudinary.com/dyg5zmebj/image/upload/c_fill,g_face,h_36,w_36/f_png/r_max/v1688793640/Social-Media/zlxan6mdcglmtrommpr3.webp"
+                  src="https://res.cloudinary.com/dyg5zmebj/image/upload//c_fill,g_face,h_36,w_36/f_png/r_max/v1688626927/Social-Media/umntgolhyfldrjkcxm27.jpg"
                   alt=""
                   class="img-fluid"
                 />
+                <%} %>
               </div>
               <div
                 class="d-flex col-6 bg-transparent text-wrap text-break align-items-end justify-content-start p-0 m-0 pe-1"
