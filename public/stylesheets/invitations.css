@@ -7,11 +7,6 @@ nav {
   background-color: transparent;
 }
 
-#zero-posts {
-  font-family: "Montserrat", sans-serif;
-  padding-top: 4rem;
-}
-
 .row {
   display: flex;
 }
@@ -19,10 +14,6 @@ nav {
 #centerbar {
   flex: 1;
   background-color: #f1f5f8;
-}
-
-#image-container img {
-  margin: 2rem;
 }
 
 #right-sidebar {
@@ -38,125 +29,47 @@ nav {
 } */
 
 #left-sidebar {
+  background-color: rgb(255, 255, 255);
   margin-right: calc(100% / 12);
+  display: flex !important;
+  flex-direction: column !important;
 }
 
-#name-container h2 {
-  font-family: "Montserrat", sans-serif;
-  font-weight: 500;
-  font-size: 2.7rem;
-}
-
-#username-container h3 {
-  margin-top: 1rem;
-  font-family: "Montserrat", sans-serif;
-  font-weight: bold;
-  color: rgb(64, 102, 169);
-}
-
-#follow-container {
+#form-container {
   margin-top: 3rem;
 }
 
-#follow-container h4 {
+.users-container {
+  padding-left: 0 !important;
+  overflow: scroll;
+  overflow-x: hidden;
+  flex-grow: 1 !important;
+}
+
+.users-container div {
+  border-radius: 50px;
+  background-color: white;
+  transform: all 0.1s;
+}
+
+.users-container div:hover {
+  background-color: #f2f3f5;
+}
+
+.users-container h5 {
   font-family: "Montserrat", sans-serif;
-  font-weight: 100;
-  font-size: 1rem;
-}
-
-#follow-btn-container {
-  margin: 3rem;
-}
-
-ul {
-  font-family: "Montserrat", sans-serif;
-}
-
-#follow-btn-container button {
-  font-family: "Montserrat", sans-serif;
-  font-size: 1.3rem;
-  padding-left: 30px;
-  padding-right: 30px;
-}
-
-#image-container img {
-  margin: 2rem;
+  font-size: 1.1rem;
+  font-weight: 400;
+  margin-left: 0.5rem !important;
 }
 
 #flash-1 {
   display: none !important;
 }
 
-#post-tag {
-  background-color: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(18px);
-}
-#post-tag h5 {
-  font-weight: bold;
-  font-size: 0.9rem;
-}
-
-#post-tag h4 {
-  font-family: "Montserrat", sans-serif;
-  font-weight: bold;
-  color: rgb(0, 0, 0);
-
-  font-size: 1rem;
-}
-
 a {
   text-decoration: none;
   color: inherit;
-}
-
-#post h4,
-p,
-h5 {
-  font-family: "Montserrat", sans-serif;
-  font-weight: 100;
-}
-
-#post-username h4 {
-  font-weight: bold;
-}
-
-#post-interactions h5 {
-  font-size: 1.1rem;
-}
-
-#post {
-  background-color: white;
-  transition: all 0.1s;
-}
-
-#post:hover {
-  background-color: #f2f3f5;
-}
-
-#post-title p {
-  font-size: 0.8rem;
-  color: rgb(97, 97, 97);
-}
-
-.heart-div-click {
-  font-variation-settings: "FILL" 1, "wght" 700, "GRAD" 0, "opsz" 48 !important;
-}
-
-.heart-div-click span {
-  color: rgb(233, 62, 62) !important;
-}
-
-.heart-div-unclick {
-  font-variation-settings: "FILL" 0, "wght" 700, "GRAD" 0, "opsz" 48;
-}
-
-.heart-div-unclick span {
-  color: rgb(87, 87, 88);
-}
-
-#heart {
-  cursor: pointer;
-  user-select: none;
 }
 
 #centerbar {
@@ -224,10 +137,6 @@ h5 {
   height: 2.5rem !important;
 }
 
-#log-out-mobile {
-  display: none;
-}
-
 .dropdown-menu h5 {
   font-size: 1rem;
   padding-top: 0.5rem;
@@ -266,9 +175,6 @@ footer {
 }
 
 @media (max-width: 992px) {
-  #post:hover {
-    background-color: white;
-  }
   #flash-1 {
     display: flex !important;
   }
@@ -277,14 +183,6 @@ footer {
     display: none !important;
   }
 
-  #zero-posts {
-    padding-top: 3rem;
-    padding-bottom: 3rem;
-  }
-
-  #zero-posts h2 {
-    font-size: 1.3rem;
-  }
   #centerbar {
     margin-left: 0 !important;
   }
@@ -292,9 +190,6 @@ footer {
   .d-flex.contents {
     padding-top: 0.4rem;
     padding-bottom: 0.4rem;
-  }
-  #post-tag {
-    margin-top: 2rem;
   }
 }
 
@@ -349,10 +244,6 @@ footer {
     margin-right: 4rem;
   }
 
-  #image-container {
-    display: flex;
-    justify-content: start;
-  }
   #name-container h2 {
     font-size: 2.3rem;
   }
@@ -396,20 +287,8 @@ footer {
 }
 
 @media (max-width: 576px) {
-  #name-container h2 {
-    font-size: 2rem;
-  }
   #right-sidebar {
     width: 10%;
-  }
-  #post-content {
-    font-size: 0.9rem;
-  }
-  .post-pfp {
-    width: 2rem;
-  }
-  #post-username h4 {
-    font-size: 1rem;
   }
 }
 
@@ -421,22 +300,10 @@ footer {
     margin-right: 0rem !important;
   }
 
-  #log-out-mobile {
-    display: block;
-  }
-
   #left-sidebar {
     width: 100%;
-    height: 100vh !important;
   }
 
-  #post p {
-    font-size: 0.7rem;
-  }
-
-  #post-content {
-    font-size: 0.9rem !important;
-  }
   footer {
     display: block;
     padding: 0rem !important;
@@ -455,16 +322,6 @@ footer {
     padding-bottom: 1rem;
     padding-right: 0.5rem;
     padding-top: 0.5rem;
-  }
-  /* #post-interactions span {
-    font-size: 1.2rem;
-  } */
-  #post-interactions h5 {
-    font-size: 1rem;
-  }
-
-  #post-tag h4 {
-    font-size: 0.8rem;
   }
 
   #create-post-button {
