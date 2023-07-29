@@ -41,6 +41,11 @@ nav {
   margin-right: calc(100% / 12);
 }
 
+.modal-font-family {
+  font-family: "Montserrat", sans-serif !important;
+  font-weight: lighter !important;
+}
+
 #name-container h2 {
   font-family: "Montserrat", sans-serif;
   font-weight: 500;

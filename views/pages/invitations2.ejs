@@ -25,7 +25,7 @@
   </head>
   <body>
     <div
-      class="modal fade"
+      class="modal fade modal-font-family"
       id="exampleModal"
       tabindex="-1"
       aria-labelledby="exampleModalLabel"
@@ -159,9 +159,9 @@
           </div>
           <div class="d-flex container-fluid p-0" id="friend-container">
             <div class="container-fluid m-0 p-0 row">
-              <div class="col-12 m-0 p-0">
+              <div class="col-xl-6 p-2 friend-column">
                 <div
-                  class="container-fluid bg-white ps-4 p-3 m-0 mt-3 mb-3"
+                  class="container-fluid bg-white ps-4 p-3 m-0 mt-2 mb-2"
                   id="friend"
                 >
                   <div class="container-fluid row p-0">
@@ -176,15 +176,46 @@
                       />
                     </div>
                     <div
-                      class="d-flex col-4 text-break text-wrap align-items-end justify-content-start p-0 m-0"
+                      class="d-flex col-6 text-break text-wrap align-items-end justify-content-start p-0 m-0"
                     >
                       <a href=""><h5 class="ms-1 pb-2">@thor</h5></a>
                     </div>
                     <div
-                      class="d-flex col-6 justify-content-end p-0 pt-2 align-items-start bg-transparent"
+                      class="d-flex col-4 flex-column align-items-end p-0 pt-2 justify-content-start bg-transparent"
                     >
-                      <button class="btn btn-success mr-2 me-1 btn-sm">
+                      <button class="btn btn-success ms-auto mr-2 btn-sm">
                         Accept
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-6 p-2 friend-column">
+                <div
+                  class="container-fluid bg-white ps-4 p-3 m-0 mt-2 mb-2"
+                  id="friend"
+                >
+                  <div class="container-fluid row p-0">
+                    <div
+                      class="d-flex col-2 m-0 p-0 justify-content-center"
+                      id="friend-img-container"
+                    >
+                      <img
+                        src="https://res.cloudinary.com/dyg5zmebj/image/upload/c_fill,g_face,h_48,w_48/f_png/r_max/v1688793640/Social-Media/zlxan6mdcglmtrommpr3.webp"
+                        alt=""
+                        class="img-fluid"
+                      />
+                    </div>
+                    <div
+                      class="d-flex col-6 text-break text-wrap align-items-end justify-content-start p-0 m-0"
+                    >
+                      <a href=""><h5 class="ms-1 pb-2">@thor</h5></a>
+                    </div>
+                    <div
+                      class="d-flex col-4 flex-column align-items-end p-0 pt-2 justify-content-start bg-transparent"
+                    >
+                      <button class="btn btn-danger ms-auto mr-2 btn-sm">
+                        Cancel
                       </button>
                     </div>
                   </div>
@@ -268,7 +299,7 @@
                     <%=user.firstname%> <%=user.lastname%>
                   </h5>
 
-                  <p class="m-0 p-0 text-secondary">@ <%=user.username%></p>
+                  <p class="m-0 p-0 text-secondary">@<%=user.username%></p>
                 </div>
               </button>
               <ul class="dropdown-menu">

@@ -100,5 +100,5 @@ module.exports.renderInvitationsPage = async (req, res) => {
   const user = await User.findOne({ username })
     .populate("requested_incoming", "username image -_id")
     .populate("requested_outgoing", "username image -_id");
-  res.render("pages/invitations", { user });
+  res.render("pages/invitations2", { user });
 };
