@@ -97,8 +97,8 @@ module.exports.renderFriendsPage = async (req, res) => {
 
 module.exports.renderInvitationsPage = async (req, res) => {
   const { username } = req.params;
-  const user = await User.findOne({ username })
+  const thisUser = await User.findOne({ username })
     .populate("requested_incoming", "username image -_id")
     .populate("requested_outgoing", "username image -_id");
-  res.render("pages/invitations2", { user });
+  res.render("pages/invitations2", { thisUser });
 };

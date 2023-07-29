@@ -1,5 +1,5 @@
 html {
-  overflow-y: scroll;
+  overflow-y: scroll !important;
 }
 
 body {
@@ -15,6 +15,16 @@ nav {
   background-color: transparent;
 }
 
+button {
+  font-family: "Montserrat", sans-serif !important;
+  font-weight: lighter !important;
+}
+
+#zero-posts {
+  font-family: "Montserrat", sans-serif;
+  padding-top: 4rem;
+}
+
 .row {
   display: flex;
 }
@@ -24,23 +34,14 @@ nav {
   background-color: #f1f5f8;
 }
 
+#image-container img {
+  margin: 2rem;
+}
+
 #right-sidebar {
   height: 100vh;
   position: fixed;
   right: 0;
-}
-
-#friend {
-  font-family: "Montserrat", sans-serif;
-}
-
-/* .friend-column:nth-of-type(1) {
-  border-right: 1px solid #d8e1e5;
-} */
-
-.modal-font-family {
-  font-family: "Montserrat", sans-serif !important;
-  font-weight: lighter !important;
 }
 
 /* #left-sidebar {
@@ -50,7 +51,7 @@ nav {
 } */
 
 #left-sidebar {
-  background-color: rgb(255, 255, 255);
+  background-color: white;
   margin-right: calc(100% / 12);
   display: flex !important;
   flex-direction: column !important;
@@ -84,8 +85,21 @@ nav {
   margin-left: 0.5rem !important;
 }
 
-#flash-1 {
-  display: none !important;
+.users-container button {
+  font-size: 0.8rem;
+}
+
+.suggested h5 {
+  font-size: 1rem !important;
+}
+
+.modal-font-family {
+  font-family: "Montserrat", sans-serif !important;
+  font-weight: lighter !important;
+}
+
+ul {
+  font-family: "Montserrat", sans-serif;
 }
 
 #home-tag {
@@ -93,7 +107,6 @@ nav {
   backdrop-filter: blur(18px);
 }
 #home-tag h5 {
-  font-family: "Montserrat", sans-serif;
   font-weight: bold;
   font-size: 0.9rem;
 }
@@ -120,13 +133,67 @@ nav {
   margin-right: 1rem;
 }
 
-button {
-  font-family: "Montserrat", sans-serif !important;
-}
-
 a {
   text-decoration: none;
   color: inherit;
+}
+
+#follow-back-span {
+  font-size: 0.7rem;
+}
+
+#post h4,
+p,
+h5 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 100;
+}
+
+#post-username h4 {
+  font-weight: bold;
+}
+
+#post-interactions h5 {
+  font-size: 1.1rem;
+}
+
+#post {
+  background-color: white;
+  transition: all 0.1s;
+}
+
+#user-post-image {
+  border-radius: 15px;
+}
+
+#post:hover {
+  background-color: #f2f3f5;
+}
+
+#post-title p {
+  font-size: 0.8rem;
+  color: rgb(97, 97, 97);
+}
+
+.heart-div-click {
+  font-variation-settings: "FILL" 1, "wght" 700, "GRAD" 0, "opsz" 48 !important;
+}
+
+.heart-div-click span {
+  color: rgb(233, 62, 62) !important;
+}
+
+.heart-div-unclick {
+  font-variation-settings: "FILL" 0, "wght" 700, "GRAD" 0, "opsz" 48;
+}
+
+.heart-div-unclick span {
+  color: rgb(87, 87, 88);
+}
+
+#heart {
+  cursor: pointer;
+  user-select: none;
 }
 
 #centerbar {
@@ -159,6 +226,15 @@ a {
   font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 48;
 }
 
+#post button {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  outline: inherit;
+}
+
 #log-out h5 {
   font-weight: bold;
   font-size: 1rem;
@@ -183,6 +259,10 @@ a {
 .suggested img {
   width: 2.5rem !important;
   height: 2.5rem !important;
+}
+
+#log-out-mobile {
+  display: none;
 }
 
 .dropdown-menu h5 {
@@ -222,6 +302,12 @@ footer {
   display: none !important;
 }
 
+@media (min-width: 576px) {
+  #post-content {
+    margin-top: 2rem !important;
+  }
+}
+
 @media (min-width: 576px) and (max-width: 992px) {
   #centerbar {
     margin-right: calc((100% / 12)) !important;
@@ -235,17 +321,22 @@ footer {
 }
 
 @media (max-width: 992px) {
+  #post:hover {
+    background-color: white;
+  }
+
   #left-sidebar {
     display: none !important;
   }
-  #flash-1 {
-    display: flex !important;
+
+  #zero-posts {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
   }
 
-  #flash-2 {
-    display: none !important;
+  #zero-posts h2 {
+    font-size: 1.3rem;
   }
-
   #centerbar {
     margin-left: 0 !important;
   }
@@ -253,6 +344,9 @@ footer {
   .d-flex.contents {
     padding-top: 0.4rem;
     padding-bottom: 0.4rem;
+  }
+  #post-tag {
+    margin-top: 2rem;
   }
 }
 
@@ -278,11 +372,6 @@ footer {
   .contents span {
     padding-left: 1rem;
     padding-right: 1rem;
-  }
-
-  #home-tag a {
-    pointer-events: none;
-    cursor: default;
   }
 
   .contents {
@@ -312,18 +401,16 @@ footer {
     margin-right: 4rem;
   }
 
+  #image-container {
+    display: flex;
+    justify-content: start;
+  }
   #name-container h2 {
     font-size: 2.3rem;
   }
   #centerbar {
     margin-left: 25%;
     margin-right: calc((100% / 6));
-  }
-}
-
-@media (max-width: 992px) {
-  #left-sidebar {
-    width: calc(90%);
   }
 }
 
@@ -348,8 +435,20 @@ footer {
 }
 
 @media (max-width: 576px) {
+  #name-container h2 {
+    font-size: 2rem;
+  }
   #right-sidebar {
     width: 10%;
+  }
+  #post-content {
+    font-size: 0.9rem;
+  }
+  .post-pfp {
+    width: 2rem;
+  }
+  #post-username h4 {
+    font-size: 1rem;
   }
 }
 
@@ -361,10 +460,22 @@ footer {
     margin-right: 0rem !important;
   }
 
-  #left-sidebar {
-    width: 100%;
+  #log-out-mobile {
+    display: block;
   }
 
+  #left-sidebar {
+    width: 100%;
+    height: 100vh !important;
+  }
+
+  #post p {
+    font-size: 0.7rem;
+  }
+
+  #post-content {
+    font-size: 0.9rem !important;
+  }
   footer {
     display: block;
     padding: 0rem !important;
@@ -383,6 +494,16 @@ footer {
     padding-bottom: 1rem;
     padding-right: 0.5rem;
     padding-top: 0.5rem;
+  }
+  /* #post-interactions span {
+    font-size: 1.2rem;
+  } */
+  #post-interactions h5 {
+    font-size: 1rem;
+  }
+
+  #post-tag h4 {
+    font-size: 0.8rem;
   }
 
   #create-post-button {

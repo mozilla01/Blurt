@@ -1,6 +1,14 @@
+html {
+  overflow-y: scroll;
+}
+
 body {
   background-color: #f1f5f8;
-  overflow-y: scroll !important;
+  user-select: none;
+}
+
+.modal-open[style] {
+  padding-right: 0px !important;
 }
 
 nav {
@@ -132,6 +140,10 @@ h5 {
 #post {
   background-color: white;
   transition: all 0.1s;
+}
+
+#user-post-image {
+  border-radius: 15px;
 }
 
 #post:hover {
@@ -268,6 +280,24 @@ footer {
 
 #mobile-logout {
   display: none !important;
+}
+
+@media (min-width: 576px) {
+  #post-content {
+    margin-top: 2rem !important;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 992px) {
+  #centerbar {
+    margin-right: calc((100% / 12)) !important;
+  }
+}
+
+@media (width: 576px) {
+  #centerbar {
+    margin-right: calc((100% / 10)) !important;
+  }
 }
 
 @media (max-width: 992px) {

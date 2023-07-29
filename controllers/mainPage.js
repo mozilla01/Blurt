@@ -24,9 +24,9 @@ const getLikes = async user => {
 };
 
 module.exports.renderMainPage = async (req, res) => {
-  const posts = await fetchPosts("");
+  const userPosts = await fetchPosts("");
   const likes = await getLikes(res.locals.currentUser.username);
-  for (let post of posts) {
+  for (let post of userPosts) {
     post.created = time.timeSince(new Date(post.created));
     const trimmedPost = post.content.split("\r\n");
     if (trimmedPost.length >= 7) {
@@ -47,20 +47,17 @@ module.exports.renderMainPage = async (req, res) => {
     }
   }
   const currentUser = await res.locals.currentUser;
-  const user = await User.findOne(currentUser._id)
+  const thisUser = await User.findOne(currentUser._id)
     .populate("followers", "username -_id")
     .populate("following", "username -_id")
     .populate("requested_outgoing", "username -_id")
     .populate("requested_incoming", "username -_id");
-  const userPosts = await fetchPosts(user.username);
-  for (let userPost of userPosts) {
-    userPost.created = time.timeSince(new Date(userPost.created));
-  }
+
   const users = await User.find(
-    { _id: { $ne: user._id } },
+    { _id: { $ne: thisUser._id } },
     { username: 1, _id: false }
   );
-  res.render("pages/main", { posts, user, userPosts, users });
+  res.render("pages/main2", { userPosts, thisUser, users });
 };
 
 exports.getLikes = getLikes;
