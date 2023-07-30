@@ -371,7 +371,7 @@
                           name="reply"
                           class="form-control me-2 ms-2"
                           id="reply-content"
-                          placeholder="Add comment"
+                          placeholder="Add a comment..."
                         />
                         <button
                           class="btn btn-dark"
@@ -427,26 +427,6 @@
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-            <!--replies container-->
-            <div class="replies-container hidden">
-              <div class="input-reply d-flex">
-                <input
-                  type="text"
-                  name="reply"
-                  class="form-control"
-                  id="reply-content"
-                  placeholder="Add comment"
-                />
-                <button
-                  class="btn btn-secondary"
-                  id="send-reply"
-                  type="button"
-                  onclick="sendReply('<%=thisUser.username%>', '<%=singlePost.id%>', '<%=thisUser.image.pfp%>')"
-                >
-                  Send
-                </button>
               </div>
             </div>
           </div>
