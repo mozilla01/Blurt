@@ -179,9 +179,9 @@ h5 {
   border-radius: 15px;
 }
 
-#post:hover {
+/* #post:hover {
   background-color: #f2f3f5;
-}
+} */
 
 #post-title p {
   font-size: 0.8rem;
@@ -204,9 +204,18 @@ h5 {
   color: rgb(87, 87, 88);
 }
 
+h5 b {
+  font-weight: bold;
+  padding-left: 0.5rem;
+}
+
 #heart {
   cursor: pointer;
   user-select: none;
+}
+
+#comment-heading {
+  min-height: 100vh !important;
 }
 
 #centerbar {
@@ -239,13 +248,32 @@ h5 {
   font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 48;
 }
 
-#post button {
+/* #post button {
   background: none;
   color: inherit;
   border: none;
   padding: 0;
   font: inherit;
   outline: inherit;
+} */
+
+#home-tag {
+  display: inline-block;
+  z-index: 2;
+}
+
+#thisUserComment {
+  border-bottom: 1px solid rgb(203, 203, 203);
+  display: inline-block;
+  padding-top: 4rem !important;
+  padding-bottom: 1rem !important;
+  z-index: 1;
+  margin-bottom: 1rem;
+  background-color: white;
+}
+
+#comment-heading {
+  padding-top: 4rem !important;
 }
 
 #log-out h5 {
@@ -317,7 +345,7 @@ footer {
 
 @media (min-width: 576px) {
   #post-content {
-    margin-top: 2rem !important;
+    margin-top: 3rem !important;
   }
 }
 
@@ -462,6 +490,7 @@ footer {
   }
   #post-content {
     font-size: 0.9rem;
+    margin-top: 2rem;
   }
   .post-pfp {
     width: 2rem;
@@ -472,6 +501,10 @@ footer {
 }
 
 @media (max-width: 450px) {
+  #post-main-container {
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+  }
   #right-sidebar {
     display: none !important;
   }

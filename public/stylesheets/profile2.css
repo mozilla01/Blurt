@@ -379,6 +379,10 @@ footer {
     position: fixed;
   }
 
+  #find-friends {
+    display: none;
+  }
+
   .home-toggle h5:hover {
     margin-left: 4rem;
     margin-right: 4rem;
@@ -420,6 +424,9 @@ footer {
   }
   #left-sidebar {
     width: calc(100% / 3) !important;
+  }
+  #find-friends {
+    display: block;
   }
 }
 

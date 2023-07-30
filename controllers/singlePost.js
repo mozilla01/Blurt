@@ -2,7 +2,7 @@ const time = require("../public/javascripts/time");
 const userLikes = require("./mainPage");
 const User = require("../models/user");
 
-const fetchSinglePost = async (q) => {
+const fetchSinglePost = async q => {
   try {
     const response = await fetch(`http://127.0.0.1:8000/api/post/${q}`);
     const data = await response.json();
@@ -15,9 +15,18 @@ const fetchSinglePost = async (q) => {
 module.exports.viewSinglePost = async (req, res) => {
   const { postId } = req.params;
   const singlePost = await fetchSinglePost(postId);
+
   const user = res.locals.currentUser;
   const likes = await userLikes.getLikes(user.username);
   singlePost.created = time.timeSince(new Date(singlePost.created));
+
+  const singlePostObject = await User.findOne({ username: singlePost.user });
+  if (!singlePostObject.image) {
+    singlePost.pfp =
+      "https://res.cloudinary.com/dyg5zmebj/image/upload//c_fill,g_face,h_48,w_48/f_png/r_max/v1688626927/Social-Media/umntgolhyfldrjkcxm27.jpg";
+  } else {
+    singlePost.pfp = singlePostObject.image.pfp;
+  }
 
   console.log(user.username);
   //Getting post replies
@@ -34,5 +43,18 @@ module.exports.viewSinglePost = async (req, res) => {
     const userObject = await User.findOne({ username: reply.user });
     reply.pfp = userObject.image.pfp;
   }
-  res.render("pages/post", { singlePost, replies, user });
+
+  const currentUser = await res.locals.currentUser;
+  const thisUser = await User.findOne(currentUser._id)
+    .populate("followers", "username -_id")
+    .populate("following", "username -_id")
+    .populate("requested_outgoing", "username -_id")
+    .populate("requested_incoming", "username -_id");
+
+  const users = await User.find(
+    { _id: { $ne: thisUser._id } },
+    { username: 1, image: 1, _id: false }
+  );
+
+  res.render("pages/post2", { singlePost, replies, thisUser, users });
 };
