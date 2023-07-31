@@ -297,7 +297,9 @@
                         </div>
                       </div>
                       <div class="d-flex m-0 p-0">
-                        <p class="">- <%=singlePost.created%></p>
+                        <p id="single-post-created">
+                          - <%=singlePost.created%>
+                        </p>
                       </div>
                     </div>
 
@@ -356,7 +358,7 @@
                         Comments <b>16</b>
                       </h5>
                       <div
-                        class="d-flex justify-content-between container-fluid p-0 sticky-top"
+                        class="d-flex justify-content-between container-fluid p-0 ps-2 pe-2 sticky-top"
                         id="thisUserComment"
                       >
                         <% if(thisUser.image) { %>
@@ -385,39 +387,57 @@
                       <div id="replies">
                         <% for(const reply of replies) { %>
                         <div class="card mb-4" id="reply-<%=reply.id%>">
-                          <div class="card-body text-start">
-                            <p><%=reply.content%></p>
-
-                            <div class="d-flex justify-content-between">
-                              <div class="d-flex flex-row align-items-center">
+                          <div class="card-body pe-0 m-0 pt-2">
+                            <div class="d-flex row container-fluid p-0">
+                              <div class="d-inline-flex col-auto ps-0 pe-2">
                                 <img
                                   src="<%=reply.pfp%>"
-                                  alt="avatar"
-                                  width="25"
-                                  height="25"
+                                  class="m-1"
+                                  width="30"
+                                  height="30"
+                                  alt=""
                                 />
-                                <p class="small mb-0 ms-2"><%=reply.user%></p>
                               </div>
-                              <div class="d-flex flex-row align-items-center">
-                                <p class="small text-muted mb-0">
-                                  <%=reply.created%>
-                                </p>
-                                <i
-                                  class="far fa-thumbs-up mx-2 fa-xs text-black"
-                                  style="margin-top: -0.16rem"
-                                ></i>
-                                <% if (reply.user === thisUser.username) { %>
-                                <span
-                                  class="material-symbols-outlined"
-                                  id="delete-reply"
-                                  data-bs-toggle="modal"
-                                  data-bs-target="#deleteModal"
-                                  data-bs-whatever="@mdo"
-                                  onclick="document.getElementById('delete-id').value=`<%=reply.id%>`"
-                                >
-                                  delete
-                                </span>
-                                <% } %>
+                              <div class="col p-0">
+                                <div class="col">
+                                  <div
+                                    class="d-flex justify-content-between container-fluid p-0"
+                                  >
+                                    <div class="d-flex p-0">
+                                      <div
+                                        class="d-flex m-0 p-0 text-break text-wrap"
+                                      >
+                                        <h5 id="reply-user">
+                                          @<%=reply.user%>
+                                        </h5>
+                                      </div>
+                                      <div
+                                        class="d-flex container-fluid col-auto p-0"
+                                      >
+                                        <p id="reply-created">
+                                          - <%=reply.created%>
+                                        </p>
+                                      </div>
+                                    </div>
+                                    <div class="d-flex">
+                                      <% if (reply.user === thisUser.username) {
+                                      %>
+                                      <span
+                                        class="material-symbols-outlined"
+                                        id="delete-reply"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#deleteModal"
+                                        data-bs-whatever="@mdo"
+                                        onclick="document.getElementById('delete-id').value=`<%=reply.id%>`"
+                                      >
+                                        delete
+                                      </span>
+                                      <% } %>
+                                    </div>
+                                  </div>
+
+                                  <p id="reply-content"><%=reply.content%></p>
+                                </div>
                               </div>
                             </div>
                           </div>
