@@ -235,6 +235,9 @@ h5 b {
   font-family: "Montserrat", sans-serif;
   font-size: 1.3rem;
 }
+#delete-reply {
+  cursor: pointer;
+}
 
 .d-flex.contents {
   border-radius: 50px;

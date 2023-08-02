@@ -73,11 +73,19 @@
                   %
                   id="create-post-user"
                 />
+                <% if (thisUser.image) { %>
                 <input
                   type="hidden"
                   value="<%=thisUser.image.thumbnail%>"
                   id="user-img"
                 />
+                <% } else { %>
+                <input
+                  type="hidden"
+                  value="https://res.cloudinary.com/dyg5zmebj/image/upload//c_fill,g_face,h_48,w_48/f_png/r_max/v1688626927/Social-Media/umntgolhyfldrjkcxm27.jpg"
+                  id="user-img"
+                />
+                <% } %>
               </div>
               <div class="modal-footer">
                 <button
@@ -114,7 +122,12 @@
             <h1 class="modal-title fs-5" id="exampleModalLabel">
               Delete reply?
             </h1>
-            <button type="button" class="btn-close" aria-label="Close"></button>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
           </div>
           <div class="modal-body">
             <div id="delete-reply-form">
@@ -355,7 +368,7 @@
                       id="comment-heading"
                     >
                       <h5 class="" id="comment-heading-h5">
-                        Comments <b>16</b>
+                        Comments <b><%=singlePost.comments%></b>
                       </h5>
                       <div
                         class="d-flex justify-content-between container-fluid p-0 ps-2 pe-2 sticky-top"
@@ -375,6 +388,7 @@
                           id="reply-content"
                           placeholder="Add a comment..."
                         />
+                        <% if (thisUser.image) { %>
                         <button
                           class="btn btn-dark"
                           id="send-reply"
@@ -383,6 +397,16 @@
                         >
                           Send
                         </button>
+                        <% } else { %>
+                        <button
+                          class="btn btn-dark"
+                          id="send-reply"
+                          type="button"
+                          onclick="sendReply('<%=thisUser.username%>', '<%=singlePost.id%>', 'https://res.cloudinary.com/dyg5zmebj/image/upload//c_fill,g_face,h_48,w_48/f_png/r_max/v1688626927/Social-Media/umntgolhyfldrjkcxm27.jpg')"
+                        >
+                          Send
+                        </button>
+                        <% } %>
                       </div>
                       <div id="replies">
                         <% for(const reply of replies) { %>

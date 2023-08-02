@@ -145,11 +145,19 @@
                   %
                   id="create-post-user"
                 />
+                <% if (user.image) { %>
                 <input
                   type="hidden"
                   value="<%=user.image.thumbnail%>"
                   id="user-img"
                 />
+                <% } else { %>
+                <input
+                  type="hidden"
+                  value="https://res.cloudinary.com/dyg5zmebj/image/upload//c_fill,g_face,h_48,w_48/f_png/r_max/v1688626927/Social-Media/umntgolhyfldrjkcxm27.jpg"
+                  id="user-img"
+                />
+                <% } %>
               </div>
               <div class="modal-footer">
                 <button

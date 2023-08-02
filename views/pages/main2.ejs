@@ -123,11 +123,19 @@
                   %
                   id="create-post-user"
                 />
+                <% if (thisUser.image) { %>
                 <input
                   type="hidden"
                   value="<%=thisUser.image.thumbnail%>"
                   id="user-img"
                 />
+                <% } else { %>
+                <input
+                  type="hidden"
+                  value="https://res.cloudinary.com/dyg5zmebj/image/upload//c_fill,g_face,h_90,w_90/f_png/r_max/v1688626927/Social-Media/umntgolhyfldrjkcxm27.jpg"
+                  id="user-img"
+                />
+                <% } %>
               </div>
               <div class="modal-footer">
                 <button
@@ -302,11 +310,13 @@
                   data-bs-toggle="dropdown"
                   id="log-out"
                 >
+                  <% if (thisUser.image) { %>
                   <img
                     src="<%=thisUser.image.img_36%>"
                     alt=""
                     class="img-fluid"
                   />
+                  <% } %>
                 </button>
                 <ul class="dropdown-menu">
                   <li class="dropdown-item">
