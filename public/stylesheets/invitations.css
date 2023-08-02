@@ -1,6 +1,14 @@
+html {
+  overflow-y: scroll;
+}
+
 body {
   background-color: #f1f5f8;
-  overflow-y: scroll !important;
+  user-select: none;
+}
+
+.modal-open[style] {
+  padding-right: 0px !important;
 }
 
 nav {
@@ -214,6 +222,18 @@ footer {
   display: none !important;
 }
 
+@media (min-width: 576px) and (max-width: 992px) {
+  #centerbar {
+    margin-right: calc((100% / 12)) !important;
+  }
+}
+
+@media (width: 576px) {
+  #centerbar {
+    margin-right: calc((100% / 10)) !important;
+  }
+}
+
 @media (max-width: 992px) {
   #left-sidebar {
     display: none !important;
@@ -287,6 +307,10 @@ footer {
     position: fixed;
   }
 
+  #find-friends {
+    display: none;
+  }
+
   .home-toggle h5:hover {
     margin-left: 4rem;
     margin-right: 4rem;
@@ -317,6 +341,9 @@ footer {
 @media (width: 992px) {
   #post-tag {
     margin: 0rem;
+  }
+  #find-friends {
+    display: block;
   }
 }
 

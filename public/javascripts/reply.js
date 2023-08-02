@@ -10,41 +10,42 @@ const sendReply = async (user, post, pfp) => {
   });
   const data = await response.json();
   console.log(data);
-  const html = `<div class="card mb-4" id="reply-${data.id}"><div class="card-body">
-            <p>${content}</p>
-            <div class="d-flex justify-content-between">
-                <div class="d-flex flex-row align-items-center">
-                <img
-                src="${pfp}"
-                alt="avatar"
-                width="25"
-                height="25"
-                />
-                <p class="small mb-0 ms-2">${user}</p>
-                </div>
-                <div class="d-flex flex-row align-items-center">
-                <p class="small text-muted mb-0">Just now</p>
-                <i
-                    class="far fa-thumbs-up mx-2 fa-xs text-black"
-                    style="margin-top: -0.16rem"
-                ></i>
-                      <span
-                        class="material-symbols-outlined"
-                        id="delete-reply"
-                        data-bs-toggle="modal"
-                        data-bs-target="#deleteModal"
-                        data-bs-whatever="@mdo"
-                        onclick="document.getElementById('delete-id').value=${data.id}"
-                      >
-                        delete
-                      </span>
-                </div>
-            </div>
-            </div>
-        </div>`;
-  const repliesContainer = document.getElementById("replies");
-  repliesContainer.insertAdjacentHTML("afterbegin", html);
-  document.getElementById("reply-content").value = "";
+  // const html = `<div class="card mb-4" id="reply-${data.id}"><div class="card-body">
+  //           <p>${content}</p>
+  //           <div class="d-flex justify-content-between">
+  //               <div class="d-flex flex-row align-items-center">
+  //               <img
+  //               src="${pfp}"
+  //               alt="avatar"
+  //               width="25"
+  //               height="25"
+  //               />
+  //               <p class="small mb-0 ms-2">${user}</p>
+  //               </div>
+  //               <div class="d-flex flex-row align-items-center">
+  //               <p class="small text-muted mb-0">Just now</p>
+  //               <i
+  //                   class="far fa-thumbs-up mx-2 fa-xs text-black"
+  //                   style="margin-top: -0.16rem"
+  //               ></i>
+  //                     <span
+  //                       class="material-symbols-outlined"
+  //                       id="delete-reply"
+  //                       data-bs-toggle="modal"
+  //                       data-bs-target="#deleteModal"
+  //                       data-bs-whatever="@mdo"
+  //                       onclick="document.getElementById('delete-id').value=${data.id}"
+  //                     >
+  //                       delete
+  //                     </span>
+  //               </div>
+  //           </div>
+  //           </div>
+  //       </div>`;
+  // const repliesContainer = document.getElementById("replies");
+  // repliesContainer.insertAdjacentHTML("afterbegin", html);
+  // document.getElementById("reply-content").value = ""
+  location.reload();
 };
 
 const deleteReply = async () => {
