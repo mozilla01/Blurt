@@ -181,74 +181,85 @@
             </div>
 
             <div class="d-flex mb-2 mt-2">
-              <div class="col-6 text-center home-toggle">
-                <a href=""><h5>Requests (15)</h5></a>
+              <div
+                class="col-6 text-center home-toggle"
+                onclick="document.getElementById('sent').style.display='none';document.getElementById('requests').style.display='block';"
+              >
+                <span>Requests (15)</span>
               </div>
-              <div class="col-6 text-center home-toggle">
-                <a href=""><h5>Sent (6)</h5></a>
+              <div
+                class="col-6 text-center home-toggle"
+                onclick="document.getElementById('sent').style.display='block';document.getElementById('requests').style.display='none';"
+              >
+                <span>Sent (5)</span>
               </div>
             </div>
           </div>
           <div class="d-flex container-fluid p-0" id="friend-container">
             <div class="container-fluid m-0 p-0 row">
-              <div class="col-xl-6 p-2 friend-column">
-                <div
-                  class="container-fluid bg-white ps-4 p-3 m-0 mt-2 mb-2"
-                  id="friend"
-                >
-                  <div class="container-fluid row p-0">
-                    <div
-                      class="d-flex col-2 m-0 p-0 justify-content-center"
-                      id="friend-img-container"
-                    >
-                      <img
-                        src="https://res.cloudinary.com/dyg5zmebj/image/upload/c_fill,g_face,h_48,w_48/f_png/r_max/v1688793640/Social-Media/zlxan6mdcglmtrommpr3.webp"
-                        alt=""
-                        class="img-fluid"
-                      />
-                    </div>
-                    <div
-                      class="d-flex col-6 text-break text-wrap align-items-end justify-content-start p-0 m-0"
-                    >
-                      <a href=""><h5 class="ms-1 pb-2">@thor</h5></a>
-                    </div>
-                    <div
-                      class="d-flex col-4 flex-column align-items-end p-0 pt-2 justify-content-start bg-transparent"
-                    >
-                      <button class="btn btn-success ms-auto mr-2 btn-sm">
-                        Accept
-                      </button>
+              <div id="requests">
+                <div class="row-xl-6 p-2 friend-column">
+                  <div
+                    class="container-fluid bg-white ps-4 p-3 m-0 mt-2 mb-2"
+                    id="friend"
+                  >
+                    <div class="container-fluid row p-0">
+                      <div
+                        class="d-flex col-2 m-0 p-0 justify-content-center"
+                        id="friend-img-container"
+                      >
+                        <img
+                          src="https://res.cloudinary.com/dyg5zmebj/image/upload/c_fill,g_face,h_48,w_48/f_png/r_max/v1688793640/Social-Media/zlxan6mdcglmtrommpr3.webp"
+                          alt=""
+                          class="img-fluid"
+                        />
+                      </div>
+                      <div
+                        class="d-flex col-6 text-break text-wrap align-items-end justify-content-start p-0 m-0"
+                      >
+                        <a href=""><h5 class="ms-1 pb-2">@thor</h5></a>
+                      </div>
+                      <div
+                        class="d-flex col-4 flex-column align-items-end p-0 pt-2 justify-content-start bg-transparent"
+                      >
+                        <button class="btn btn-success ms-auto mr-2 btn-sm">
+                          Accept
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="col-xl-6 p-2 friend-column">
-                <div
-                  class="container-fluid bg-white ps-4 p-3 m-0 mt-2 mb-2"
-                  id="friend"
-                >
-                  <div class="container-fluid row p-0">
-                    <div
-                      class="d-flex col-2 m-0 p-0 justify-content-center"
-                      id="friend-img-container"
-                    >
-                      <img
-                        src="https://res.cloudinary.com/dyg5zmebj/image/upload/c_fill,g_face,h_48,w_48/f_png/r_max/v1688793640/Social-Media/zlxan6mdcglmtrommpr3.webp"
-                        alt=""
-                        class="img-fluid"
-                      />
-                    </div>
-                    <div
-                      class="d-flex col-6 text-break text-wrap align-items-end justify-content-start p-0 m-0"
-                    >
-                      <a href=""><h5 class="ms-1 pb-2">@thor</h5></a>
-                    </div>
-                    <div
-                      class="d-flex col-4 flex-column align-items-end p-0 pt-2 justify-content-start bg-transparent"
-                    >
-                      <button class="btn btn-danger ms-auto mr-2 btn-sm">
-                        Cancel
-                      </button>
+              <!------------>
+              <div id="sent" style="display: none">
+                <div class="row-xl-6 p-2 friend-column">
+                  <div
+                    class="container-fluid bg-white ps-4 p-3 m-0 mt-2 mb-2"
+                    id="friend"
+                  >
+                    <div class="container-fluid row p-0">
+                      <div
+                        class="d-flex col-2 m-0 p-0 justify-content-center"
+                        id="friend-img-container"
+                      >
+                        <img
+                          src="https://res.cloudinary.com/dyg5zmebj/image/upload/c_fill,g_face,h_48,w_48/f_png/r_max/v1688793640/Social-Media/zlxan6mdcglmtrommpr3.webp"
+                          alt=""
+                          class="img-fluid"
+                        />
+                      </div>
+                      <div
+                        class="d-flex col-6 text-break text-wrap align-items-end justify-content-start p-0 m-0"
+                      >
+                        <a href=""><h5 class="ms-1 pb-2">@thor</h5></a>
+                      </div>
+                      <div
+                        class="d-flex col-4 flex-column align-items-end p-0 pt-2 justify-content-start bg-transparent"
+                      >
+                        <button class="btn btn-danger ms-auto mr-2 btn-sm">
+                          Cancel
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>

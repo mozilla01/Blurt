@@ -390,6 +390,7 @@
                           <div class="card-body pe-0 m-0 pt-2">
                             <div class="d-flex row container-fluid p-0">
                               <div class="d-inline-flex col-auto ps-0 pe-2">
+                                <% if (reply) { %>
                                 <img
                                   src="<%=reply.pfp%>"
                                   class="m-1"
@@ -397,6 +398,7 @@
                                   height="30"
                                   alt=""
                                 />
+                                <% } %>
                               </div>
                               <div class="col p-0">
                                 <div class="col">

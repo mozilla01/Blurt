@@ -2,7 +2,7 @@ const time = require("../public/javascripts/time");
 const userLikes = require("./mainPage");
 const User = require("../models/user");
 
-const fetchSinglePost = async q => {
+const fetchSinglePost = async (q) => {
   try {
     const response = await fetch(`http://127.0.0.1:8000/api/post/${q}`);
     const data = await response.json();
@@ -41,7 +41,11 @@ module.exports.viewSinglePost = async (req, res) => {
     reply.created = time.timeSince(new Date(reply.created));
 
     const userObject = await User.findOne({ username: reply.user });
-    reply.pfp = userObject.image.pfp;
+    console.log(userObject);
+    if (!userObject.image)
+      reply.pfp =
+        "https://res.cloudinary.com/dyg5zmebj/image/upload//c_fill,g_face,h_48,w_48/f_png/r_max/v1688626927/Social-Media/umntgolhyfldrjkcxm27.jpg";
+    else reply.pfp = userObject.image.pfp;
   }
 
   const currentUser = await res.locals.currentUser;
