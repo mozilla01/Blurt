@@ -28,7 +28,9 @@
               follower of user.followers){%>
               <div class="card mb-3">
                 <div class="card-body d-flex">
+                  <% if(follower.image) { %>
                   <img src="<%=follower.image.thumbnail%>" alt="" />
+                  <% } %>
                   <div class="container d-flex align-items-center ms-3">
                     <blockquote class="blockquote mb-0">
                       <h3><%= follower.username %></h3>
@@ -82,7 +84,9 @@
               user.following.map((obj)=>{ %>
               <div class="card mb-3">
                 <div class="card-body d-flex">
+                  <% if(obj.image){%>
                   <img src="<%=obj.image.thumbnail%>" alt="" />
+                  <% } %>
                   <div class="container d-flex align-items-center ms-3">
                     <blockquote class="blockquote mb-0">
                       <h3><%= obj.username %></h3>
