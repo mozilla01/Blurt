@@ -49,7 +49,7 @@ router.get(
 router.get(
   "/social-media/:username/friends",
   isLoggedIn,
-  isAuthUser,
+  // isAuthUser,
   LogInRedirect,
   catchAsync(request.renderFriendsPage)
 );

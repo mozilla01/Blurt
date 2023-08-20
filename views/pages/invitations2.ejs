@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
     <title><%=thisUser.username%>'s Invitations</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
@@ -242,23 +243,39 @@
             </div>
 
             <div class="d-flex mb-2 mt-2">
-              <div
-                class="col-6 text-center home-toggle"
-                onclick="document.getElementById('sent').style.display='none';document.getElementById('requests').style.display='block';"
-              >
-                <h5>Requests (<%=thisUser.requested_incoming.length%>)</h5>
+              <div class="col-6 text-center home-toggle">
+                <a
+                  href="/social-media/<%=thisUser.username%>/invitations?q=requests"
+                  >
+                  
+              
+                  <h5
+                  <% if(q=='requests'){ %>
+                    class="h5-active"
+                  <%} %>
+                  >
+                    Requests (<%=thisUser.requested_incoming.length%>)
+                  </h5>
+                </a>
               </div>
-              <div
-                class="col-6 text-center home-toggle"
-                onclick="document.getElementById('sent').style.display='block';document.getElementById('requests').style.display='none';"
-              >
-                <h5>Sent (<%=thisUser.requested_outgoing.length%>)</h5>
+              <div class="col-6 text-center home-toggle">
+                <a
+                  href="/social-media/<%=thisUser.username%>/invitations?q=sent"
+                >
+                  <h5
+                  <% if(q=='sent'){ %>
+                    class="h5-active"
+                  <%} %>
+                  >
+                  Sent (<%=thisUser.requested_outgoing.length%>)</h5>
+                </a>
               </div>
             </div>
           </div>
 
           <div class="d-flex container-fluid p-0" id="friend-container">
             <div class="container-fluid m-0 p-0 row">
+              <% if(q=='requests') { %>
               <div id="requests" class="p-0">
                 <div class="row-xl-6 p-2 ps-0 pe-0 friend-column">
                   <% if(thisUser.requested_incoming.length){%> <% for(let
@@ -317,8 +334,10 @@
                   <% } %>
                 </div>
               </div>
+              <% } %>
               <!------------>
-              <div id="sent" class="p-0" style="display: none">
+              <% if(q=='sent') { %>
+              <div id="sent" class="p-0">
                 <div class="row-xl-6 p-2 ps-0 pe-0 friend-column">
                   <% if(thisUser.requested_outgoing.length) { %> <% for(let
                   outfollower of thisUser.requested_outgoing) { %>
@@ -378,6 +397,7 @@
                   <% } %>
                 </div>
               </div>
+              <% } %>
             </div>
           </div>
         </div>
@@ -403,8 +423,8 @@
                 <h3>Find</h3>
               </div>
             </a>
-
-            <a href="/social-media/<%=thisUser.username %>/invitations">
+            
+            <a href="/social-media/<%=thisUser.username %>/invitations?q=requests">
               <div class="d-flex contents">
                 <span class="material-symbols-outlined fs-2">
                   notifications
@@ -497,7 +517,7 @@
             <span class="material-symbols-outlined fs-1"> add_circle </span>
           </button>
 
-          <a href="/social-media/<%=thisUser.username %>/invitations"
+          <a href="/social-media/<%=thisUser.username %>/invitations?q=requests"
             ><span class="material-symbols-outlined fs-1">
               notifications
             </span></a

@@ -279,7 +279,6 @@ footer {
   #flash-2 {
     margin-top: 0rem !important;
     padding-top: 0rem !important;
-    background-color: blue !important;
   }
 
   #centerbar {
@@ -435,5 +434,8 @@ footer {
     padding: 0 !important;
     font: inherit !important;
     outline: inherit !important;
+  }
+  #follow-back-btn-span {
+    font-size: 0.8rem !important;
   }
 }

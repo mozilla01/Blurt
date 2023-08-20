@@ -231,7 +231,7 @@
             <h3>@<%=user.username%></h3>
           </div>
           <div id="follow-container" class="btn-group">
-            <a href="/social-media/<%=user.username %>/friends"
+            <a href="/social-media/<%=user.username %>/friends?q=followers"
               ><button class="btn btn-light mr-1">
                 <h4>
                   <%=user.followers.length %>
@@ -239,7 +239,7 @@
                 </h4>
               </button></a
             >
-            <a href="/social-media/<%=user.username %>/friends"
+            <a href="/social-media/<%=user.username %>/friends?q=following"
               ><button class="btn btn-light ms-1">
                 <h4><%=user.following.length %> Following</h4>
               </button></a
@@ -475,7 +475,9 @@
               </div>
             </a>
 
-            <a href="/social-media/<%=thisUser.username %>/invitations">
+            <a
+              href="/social-media/<%=thisUser.username %>/invitations?q=requests"
+            >
               <div class="d-flex contents">
                 <span class="material-symbols-outlined fs-2">
                   notifications
@@ -568,7 +570,7 @@
             <span class="material-symbols-outlined fs-1"> add_circle </span>
           </button>
 
-          <a href="/social-media/<%=thisUser.username %>/invitations"
+          <a href="/social-media/<%=thisUser.username %>/invitations?q=requests"
             ><span class="material-symbols-outlined fs-1">
               notifications
             </span></a
