@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
     <title><%=thisUser.username%>'s Invitations</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
@@ -132,37 +133,90 @@
           <div
             class="users-container container d-flex flex-column mt-3 mb-3 pt-3 pb-3"
           >
+            <% for(let user of users) { %>
             <div class="container d-flex row m-0 p-3 mt-2 mb-2 suggested">
               <div
                 class="d-flex col-2 bg-transparent m-0 p-0 justify-content-center"
               >
+                <% if(user.image) {%>
+                <img src="<%=user.image.img_36%>" alt="" class="img-fluid" />
+                <% } else {%>
                 <img
-                  src="https://res.cloudinary.com/dyg5zmebj/image/upload/c_fill,g_face,h_36,w_36/f_png/r_max/v1688793640/Social-Media/zlxan6mdcglmtrommpr3.webp"
+                  src="https://res.cloudinary.com/dyg5zmebj/image/upload//c_fill,g_face,h_36,w_36/f_png/r_max/v1688626927/Social-Media/umntgolhyfldrjkcxm27.jpg"
                   alt=""
                   class="img-fluid"
                 />
+                <%} %>
               </div>
               <div
-                class="d-flex col-6 bg-transparent text-wrap text-break align-items-end justify-content-start p-0 m-0"
+                class="d-flex col-6 bg-transparent text-wrap text-break align-items-end justify-content-start p-0 m-0 pe-1"
               >
-                <a href=""><h5 class="ms-1 pb-1">@thor</h5></a>
+                <a href="/social-media/<%= user.username %>"
+                  ><h5 class="ms-1 pb-1">@<%=user.username%></h5></a
+                >
               </div>
               <div
                 class="d-flex col-4 flex-column align-items-end p-0 pt-1 justify-content-start bg-transparent"
               >
-                <button class="btn btn-dark ms-auto mr-2 btn-sm">
-                  Requested
-                </button>
+                <%if (thisUser.following.some((following) => following.username
+                === user.username)) {%>
+                <form
+                  action="/social-media/<%=thisUser.username%>/friends"
+                  class="ms-auto"
+                >
+                  <button class="btn btn-success btn-sm">
+                    <span> Following </span>
+                  </button>
+                </form>
+                <% } else if(thisUser.requested_outgoing.some((req_inc) =>
+                req_inc.username === user.username)) {%>
+                <form
+                  action="/social-media/<%=user.username%>/cancelrequest"
+                  class="ms-auto"
+                >
+                  <button class="btn btn-light btn-sm">
+                    <span> Requested </span>
+                  </button>
+                </form>
+                <% } else if(thisUser.followers.some((followerz) =>
+                followerz.username === user.username)) {%>
+                <form
+                  action="/social-media/<%= user.username %>/followrequest"
+                  class="ms-auto"
+                >
+                  <button class="btn btn-primary btn-sm">
+                    <span id="follow-back-span"> Follow Back</span>
+                  </button>
+                </form>
+
+                <% } else {%>
+                <form
+                  action="/social-media/<%= user.username %>/followrequest"
+                  class="ms-auto"
+                >
+                  <button class="btn btn-dark btn-sm">
+                    <span> Follow </span>
+                  </button>
+                </form>
+                <% }%>
               </div>
             </div>
+            <% } %>
           </div>
         </div>
         <div class="col-xl-7 col-lg-8 text-center" id="centerbar">
           <div class="d-flex flex-column sticky-top" id="home-tag">
+            <div
+              class="d-flex justify-content-center container sticky-top"
+              id="flash-2"
+            >
+              <%- include('../partials/flash')%>
+            </div>
             <div class="container d-flex flex-row m-0 p-0">
               <div class="d-flex col-6 justify-content-start mb-2">
                 <a href=""><h4 class="m-2">Invitations</h4></a>
               </div>
+
               <div class="d-flex col-6 justify-content-end" id="mobile-logout">
                 <button
                   class="d-flex btn border-0 bg-transparent p-0 m-0 dropdown-toggle aria-expanded=false"
@@ -170,17 +224,17 @@
                   data-bs-toggle="dropdown"
                   id="log-out"
                 >
+                  <% if (thisUser.image) { %>
                   <img
-                    src="https://res.cloudinary.com/dyg5zmebj/image/upload/c_fill,g_face,h_36,w_36/f_png/r_max/v1688793640/Social-Media/zlxan6mdcglmtrommpr3.webp"
+                    src="<%=thisUser.image.img_36%>"
                     alt=""
                     class="img-fluid"
                   />
+                  <% } %>
                 </button>
                 <ul class="dropdown-menu">
                   <li class="dropdown-item">
-                    <a
-                      class="text-center bg-warning"
-                      href="https://www.google.com/"
+                    <a class="text-center bg-warning" href="/logout"
                       ><h5>Logout</h5></a
                     >
                   </li>
@@ -189,26 +243,45 @@
             </div>
 
             <div class="d-flex mb-2 mt-2">
-              <div
-                class="col-6 text-center home-toggle"
-                onclick="document.getElementById('sent').style.display='none';document.getElementById('requests').style.display='block';"
-              >
-                <span>Requests (15)</span>
+              <div class="col-6 text-center home-toggle">
+                <a
+                  href="/social-media/<%=thisUser.username%>/invitations?q=requests"
+                  >
+                  
+              
+                  <h5
+                  <% if(q=='requests'){ %>
+                    class="h5-active"
+                  <%} %>
+                  >
+                    Requests (<%=thisUser.requested_incoming.length%>)
+                  </h5>
+                </a>
               </div>
-              <div
-                class="col-6 text-center home-toggle"
-                onclick="document.getElementById('sent').style.display='block';document.getElementById('requests').style.display='none';"
-              >
-                <span>Sent (5)</span>
+              <div class="col-6 text-center home-toggle">
+                <a
+                  href="/social-media/<%=thisUser.username%>/invitations?q=sent"
+                >
+                  <h5
+                  <% if(q=='sent'){ %>
+                    class="h5-active"
+                  <%} %>
+                  >
+                  Sent (<%=thisUser.requested_outgoing.length%>)</h5>
+                </a>
               </div>
             </div>
           </div>
+
           <div class="d-flex container-fluid p-0" id="friend-container">
             <div class="container-fluid m-0 p-0 row">
-              <div id="requests">
-                <div class="row-xl-6 p-2 friend-column">
+              <% if(q=='requests') { %>
+              <div id="requests" class="p-0">
+                <div class="row-xl-6 p-2 ps-0 pe-0 friend-column">
+                  <% if(thisUser.requested_incoming.length){%> <% for(let
+                  follower of thisUser.requested_incoming) { %>
                   <div
-                    class="container-fluid bg-white ps-4 p-3 m-0 mt-2 mb-2"
+                    class="container-fluid bg-white ps-4 p-3 m-0 mt-3 mb-3"
                     id="friend"
                   >
                     <div class="container-fluid row p-0">
@@ -216,33 +289,60 @@
                         class="d-flex col-2 m-0 p-0 justify-content-center"
                         id="friend-img-container"
                       >
+                        <% if(follower.image) {%>
                         <img
-                          src="https://res.cloudinary.com/dyg5zmebj/image/upload/c_fill,g_face,h_48,w_48/f_png/r_max/v1688793640/Social-Media/zlxan6mdcglmtrommpr3.webp"
+                          src="<%=follower.image.img_48%>"
                           alt=""
-                          class="img-fluid"
+                          width="48"
+                          height="48"
                         />
+                        <% } else {%>
+                        <img
+                          src="https://res.cloudinary.com/dyg5zmebj/image/upload//c_fill,g_face,h_48,w_48/f_png/r_max/v1688626927/Social-Media/umntgolhyfldrjkcxm27.jpg"
+                          alt=""
+                          width="48"
+                          height="48"
+                        />
+                        <% } %>
                       </div>
                       <div
                         class="d-flex col-6 text-break text-wrap align-items-end justify-content-start p-0 m-0"
                       >
-                        <a href=""><h5 class="ms-1 pb-2">@thor</h5></a>
+                        <a href=""
+                          ><h5 class="ms-1 pb-2">@<%=follower.username%></h5></a
+                        >
                       </div>
                       <div
                         class="d-flex col-4 flex-column align-items-end p-0 pt-2 justify-content-start bg-transparent"
                       >
-                        <button class="btn btn-success ms-auto mr-2 btn-sm">
-                          Accept
-                        </button>
+                        <form
+                          action="/social-media/<%= follower.username %>/acceptrequest"
+                        >
+                          <button class="btn btn-success ms-auto mr-2 btn-sm">
+                            <span> Accept</span>
+                          </button>
+                        </form>
                       </div>
                     </div>
                   </div>
+                  <% }} else { %>
+                  <div
+                    class="container-fluid bg-transparent ps-4 p-3 m-0 mt-3 mb-3 zero-invitations"
+                  >
+                    <h5>No Incoming Requests</h5>
+                  </div>
+                  <% } %>
                 </div>
               </div>
+              <% } %>
               <!------------>
-              <div id="sent" style="display: none">
-                <div class="row-xl-6 p-2 friend-column">
+              <% if(q=='sent') { %>
+              <div id="sent" class="p-0">
+                <div class="row-xl-6 p-2 ps-0 pe-0 friend-column">
+                  <% if(thisUser.requested_outgoing.length) { %> <% for(let
+                  outfollower of thisUser.requested_outgoing) { %>
                   <div
-                    class="container-fluid bg-white ps-4 p-3 m-0 mt-2 mb-2"
+                    class="container-fluid bg-white ps-4 p-3 m-0 mt-3 mb-3"
                     id="friend"
                   >
                     <div class="container-fluid row p-0">
@@ -250,28 +350,54 @@
                         class="d-flex col-2 m-0 p-0 justify-content-center"
                         id="friend-img-container"
                       >
+                        <% if(outfollower.image) {%>
                         <img
-                          src="https://res.cloudinary.com/dyg5zmebj/image/upload/c_fill,g_face,h_48,w_48/f_png/r_max/v1688793640/Social-Media/zlxan6mdcglmtrommpr3.webp"
+                          src="<%=outfollower.image.img_48%>"
                           alt=""
-                          class="img-fluid"
+                          width="48"
+                          height="48"
                         />
+                        <% } else {%>
+                        <img
+                          src="https://res.cloudinary.com/dyg5zmebj/image/upload//c_fill,g_face,h_48,w_48/f_png/r_max/v1688626927/Social-Media/umntgolhyfldrjkcxm27.jpg"
+                          alt=""
+                          width="48"
+                          height="48"
+                        />
+                        <% } %>
                       </div>
                       <div
                         class="d-flex col-6 text-break text-wrap align-items-end justify-content-start p-0 m-0"
                       >
-                        <a href=""><h5 class="ms-1 pb-2">@thor</h5></a>
+                        <a href=""
+                          ><h5 class="ms-1 pb-2">
+                            @<%=outfollower.username%>
+                          </h5></a
+                        >
                       </div>
                       <div
                         class="d-flex col-4 flex-column align-items-end p-0 pt-2 justify-content-start bg-transparent"
                       >
-                        <button class="btn btn-danger ms-auto mr-2 btn-sm">
-                          Cancel
-                        </button>
+                        <form
+                          action="/social-media/<%= outfollower.username %>/cancelrequest"
+                        >
+                          <button class="btn btn-danger ms-auto mr-2 btn-sm">
+                            <span>Cancel </span>
+                          </button>
+                        </form>
                       </div>
                     </div>
                   </div>
+                  <% }} else { %>
+                  <div
+                    class="container-fluid bg-transparent ps-4 p-3 m-0 mt-3 mb-3 zero-invitations"
+                  >
+                    <h5>No Sent Requests</h5>
+                  </div>
+                  <% } %>
                 </div>
               </div>
+              <% } %>
             </div>
           </div>
         </div>
@@ -297,8 +423,8 @@
                 <h3>Find</h3>
               </div>
             </a>
-
-            <a href="/social-media/<%=thisUser.username %>/invitations">
+            
+            <a href="/social-media/<%=thisUser.username %>/invitations?q=requests">
               <div class="d-flex contents">
                 <span class="material-symbols-outlined fs-2">
                   notifications
@@ -391,7 +517,7 @@
             <span class="material-symbols-outlined fs-1"> add_circle </span>
           </button>
 
-          <a href="/social-media/<%=thisUser.username %>/invitations"
+          <a href="/social-media/<%=thisUser.username %>/invitations?q=requests"
             ><span class="material-symbols-outlined fs-1">
               notifications
             </span></a

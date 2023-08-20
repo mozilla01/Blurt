@@ -73,6 +73,19 @@ nav {
   transform: all 0.1s;
 }
 
+.users-container::-webkit-scrollbar {
+  width: 4px;
+}
+
+.users-container::-webkit-scrollbar-thumb {
+  background-color: rgb(144, 144, 144);
+}
+
+.users-container::-webkit-scrollbar-track {
+  background-color: rgb(235, 235, 235);
+  border-radius: 1px;
+}
+
 .users-container div:hover {
   background-color: #f2f3f5;
 }
@@ -82,6 +95,14 @@ nav {
   font-size: 1.1rem;
   font-weight: 400;
   margin-left: 0.5rem !important;
+}
+
+.users-container button {
+  font-size: 0.8rem;
+}
+
+.suggested h5 {
+  font-size: 1rem !important;
 }
 
 #flash-1 {
@@ -115,9 +136,15 @@ nav {
 
 .home-toggle h5:hover {
   border-bottom: 3px solid rgb(0, 0, 0);
-
   margin-left: 1rem;
   margin-right: 1rem;
+}
+
+.h5-active {
+  border-bottom: 3px solid rgb(0, 0, 0) !important;
+  padding: 0.1rem !important;
+  /* margin-left: 2rem !important;
+  margin-right: 2rem !important; */
 }
 
 button {
@@ -127,6 +154,13 @@ button {
 a {
   text-decoration: none;
   color: inherit;
+}
+
+.zero-invitations {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.5rem;
+  font-weight: lighter;
+  color: rgb(87, 87, 87);
 }
 
 #centerbar {
@@ -243,7 +277,9 @@ footer {
   }
 
   #flash-2 {
-    display: none !important;
+    margin-top: 0rem !important;
+    padding-top: 0rem !important;
+    background-color: blue !important;
   }
 
   #centerbar {
@@ -280,10 +316,10 @@ footer {
     padding-right: 1rem;
   }
 
-  #home-tag a {
+  /* #home-tag a {
     pointer-events: none;
     cursor: default;
-  }
+  } */
 
   .contents {
     margin-left: 0.5rem;
