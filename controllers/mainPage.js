@@ -1,9 +1,12 @@
 const time = require("../public/javascripts/time");
 const User = require("../models/user");
+const config = require("../config");
 
-const fetchPosts = async q => {
+const url = config.url;
+
+const fetchPosts = async (q) => {
   try {
-    const response = await fetch(`http://127.0.0.1:8000/api/posts/?q=${q}`);
+    const response = await fetch(`${url}/api/posts/?q=${q}`);
     const data = await response.json();
     return data;
   } catch (err) {
@@ -11,11 +14,9 @@ const fetchPosts = async q => {
   }
 };
 
-const getLikes = async user => {
+const getLikes = async (user) => {
   try {
-    const response = await fetch(
-      `http://127.0.0.1:8000/api/get-likes/${user}/`
-    );
+    const response = await fetch(`${url}/api/get-likes/${user}/`);
     const data = await response.json();
     return data;
   } catch (err) {
@@ -58,7 +59,7 @@ module.exports.renderMainPage = async (req, res) => {
     { username: 1, image: 1, _id: false }
   );
 
-  res.render("pages/main2", { userPosts, thisUser, users });
+  res.render("pages/main2", { userPosts, thisUser, users, url });
 };
 
 exports.getLikes = getLikes;

@@ -1,10 +1,13 @@
 const time = require("../public/javascripts/time");
 const userLikes = require("./mainPage");
 const User = require("../models/user");
+const config = require("../config");
+
+const url = config.url;
 
 const fetchSinglePost = async (q) => {
   try {
-    const response = await fetch(`http://127.0.0.1:8000/api/post/${q}`);
+    const response = await fetch(`${url}/api/post/${q}`);
     const data = await response.json();
     return data;
   } catch (err) {
@@ -30,7 +33,7 @@ module.exports.viewSinglePost = async (req, res) => {
 
   console.log(user.username);
   //Getting post replies
-  const response = await fetch(`http://127.0.0.1:8000/api/replies/${postId}/`);
+  const response = await fetch(`${url}/api/replies/${postId}/`);
   const replies = await response.json();
 
   for (let likeID of likes[0].post) {
@@ -60,5 +63,5 @@ module.exports.viewSinglePost = async (req, res) => {
     { username: 1, image: 1, _id: false }
   );
 
-  res.render("pages/post2", { singlePost, replies, thisUser, users });
+  res.render("pages/post2", { singlePost, replies, thisUser, users, url });
 };

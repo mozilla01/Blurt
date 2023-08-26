@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="/stylesheets/main.css" />
   </head>
   <body>
+    <input type="hidden" value="<%=url%>" id="url" />
     <div
       class="modal fade modal-font-family"
       id="editModal"
@@ -428,7 +429,7 @@
                     <div class="bg-transparent d-flex justify-content-start">
                       <% if(userPost.image) { %>
                       <img
-                        src="http://127.0.0.1:8000/<%=userPost.image%>"
+                        src="<%=url%>/<%=userPost.image%>"
                         alt=""
                         class="img-fluid"
                         id="user-post-image"

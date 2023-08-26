@@ -1,4 +1,7 @@
 const User = require("../models/user");
+const config = require("../config");
+
+const url = config.url;
 
 module.exports.renderRegister = (req, res) => {
   res.render("users/register");
@@ -21,19 +24,16 @@ module.exports.registerUser = async (req, res) => {
     const registeredUser = await User.register(user, password);
 
     // Creating a Like object for the user
-    const response = await fetch(
-      "http://127.0.0.1:8000/api/create-like-object/",
-      {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({ user: username }),
-      }
-    );
+    const response = await fetch(`${url}/api/create-like-object/`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({ user: username }),
+    });
     const data = await response.json();
 
-    req.login(registeredUser, err => {
+    req.login(registeredUser, (err) => {
       if (err) return next(err);
       req.flash("success", "Registered Successfully !");
       res.redirect("/social-media");
