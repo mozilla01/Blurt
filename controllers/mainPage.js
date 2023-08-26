@@ -25,6 +25,8 @@ const getLikes = async user => {
 
 module.exports.renderMainPage = async (req, res) => {
   const userPosts = await fetchPosts("");
+  const qUser = req.query.username;
+  console.log(qUser);
   const likes = await getLikes(res.locals.currentUser.username);
   for (let post of userPosts) {
     post.created = time.timeSince(new Date(post.created));
@@ -53,10 +55,18 @@ module.exports.renderMainPage = async (req, res) => {
     .populate("requested_outgoing", "username -_id")
     .populate("requested_incoming", "username -_id");
 
-  const users = await User.find(
-    { _id: { $ne: thisUser._id } },
-    { username: 1, image: 1, _id: false }
-  );
+  let users = [];
+  if (qUser) {
+    users = await User.find({
+      username: { $regex: `^${qUser}`, $options: "i" },
+    });
+    console.log(users);
+  } else {
+    users = await User.find(
+      { _id: { $ne: thisUser._id } },
+      { username: 1, image: 1, _id: false }
+    );
+  }
 
   res.render("pages/main2", { userPosts, thisUser, users });
 };

@@ -20,6 +20,7 @@ const profileRoute = require("./routes/profileRoute");
 const mainPageRoute = require("./routes/mainPageRoute");
 const singlePostRoute = require("./routes/singlePostRoute");
 const imageUploadRoute = require("./routes/imageUploadRoute");
+const searchUserRoute = require("./routes/searchUserRoute");
 
 const ExpressError = require("./utils/ExpressError");
 const User = require("./models/user");
@@ -68,6 +69,7 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use("/", searchUserRoute);
 app.use("/", CRUDpostRoute);
 app.use("/", mainPageRoute);
 app.use("/", requestRoute);
@@ -75,7 +77,6 @@ app.use("/", userRoute);
 app.use("/", singlePostRoute);
 app.use("/", imageUploadRoute);
 app.use("/", profileRoute);
-
 app.get("/", (req, res) => {
   res.send("Social Media App");
 });
