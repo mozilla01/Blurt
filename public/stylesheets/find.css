@@ -61,10 +61,6 @@ button {
   margin-top: 3rem;
 }
 
-#no_searchUser {
-  color: rgb(129, 129, 129);
-}
-
 .users-container {
   padding-left: 0 !important;
   overflow: scroll;
@@ -85,14 +81,19 @@ button {
   border-radius: 1px;
 }
 
-.users-container div {
-  border-radius: 50px;
+#suggested-users {
+  margin-right: 0rem !important;
+  margin-left: 0rem !important;
+}
+
+.users-container #suggested-users {
+  border-radius: 5px;
   background-color: white;
   transform: all 0.1s;
 }
 
-.users-container div:hover {
-  background-color: #f2f3f5;
+.users-container #suggested-users:hover {
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
 }
 
 .users-container h5 {
@@ -236,32 +237,6 @@ h5 {
 
 .contents h3 {
   margin-top: 0.3rem;
-}
-
-.notification-icon {
-  position: relative;
-  display: inline-block;
-}
-
-/* .notification-badge {
-  position: absolute;
-  top: -4px;
-  right: 4px;
-  background-color: red;
-  color: white;
-  border-radius: 50%;
-  padding: 4px 4px;
-  font-size: 12px;
-} */
-
-.notification-dot {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 10px;
-  height: 10px;
-  background-color: rgb(218, 89, 89);
-  border-radius: 50%;
 }
 
 .material-symbols-outlined#home {
