@@ -5,10 +5,13 @@ const catchAsync = require("../utils/catchAsync");
 const User = require("../models/user");
 const { isLoggedIn } = require("../middleware");
 const time = require("../public/javascripts/time");
+const config = require("../config");
+
+const url = config.url;
 
 const fetchPosts = async (q) => {
   try {
-    const response = await fetch(`http://127.0.0.1:8000/api/posts/?q=${q}`);
+    const response = await fetch(`${url}/api/posts/?q=${q}`);
     const data = await response.json();
     return data;
   } catch (err) {
@@ -18,9 +21,7 @@ const fetchPosts = async (q) => {
 
 const getLikes = async (user) => {
   try {
-    const response = await fetch(
-      `http://127.0.0.1:8000/api/get-likes/${user}/`
-    );
+    const response = await fetch(`${url}/api/get-likes/${user}/`);
     const data = await response.json();
     return data;
   } catch (err) {
@@ -53,7 +54,7 @@ router.get("/social-media/:username", isLoggedIn, async (req, res) => {
     .populate("requested_outgoing", "username -_id")
     .populate("requested_incoming", "username -_id");
 
-  res.render("pages/profile2", { user, thisUser, userPosts });
+  res.render("pages/profile2", { user, thisUser, userPosts, url });
 });
 
 module.exports = router;

@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="/stylesheets/post.css" />
   </head>
   <body>
+    <input type="hidden" value="<%=url%>" id="url" />
     <div
       class="modal fade modal-font-family"
       id="exampleModal"
@@ -323,7 +324,7 @@
                     <div class="bg-transparent d-flex justify-content-start">
                       <% if(singlePost.image) { %>
                       <img
-                        src="http://127.0.0.1:8000/<%=singlePost.image%>"
+                        src="<%=url%>/<%=singlePost.image%>"
                         alt=""
                         class="img-fluid"
                         id="user-post-image"

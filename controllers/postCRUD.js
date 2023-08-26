@@ -1,7 +1,11 @@
+const config = require("../config");
+
+const url = config.url;
+
 module.exports.editPost = async (req, res) => {
   const id = req.body.post_id;
   const content = req.body.content;
-  const response = await fetch(`http://127.0.0.1:8000/api/edit-post/${id}/`, {
+  const response = await fetch(`${url}/api/edit-post/${id}/`, {
     method: "POST",
     headers: {
       "Content-type": "application/json",
@@ -18,12 +22,9 @@ module.exports.editPost = async (req, res) => {
 module.exports.deletePost = async (req, res) => {
   const id = req.body.post_id;
   try {
-    const response = await fetch(
-      `http://127.0.0.1:8000/api/delete-post/${id}/`,
-      {
-        method: "DELETE",
-      }
-    );
+    const response = await fetch(`${url}/api/delete-post/${id}/`, {
+      method: "DELETE",
+    });
     const data = await response.json();
     console.log(data);
     req.flash("success", "Post Deleted");

@@ -1,3 +1,5 @@
+const url = document.getElementById("url").value;
+
 function getCookie(name) {
   let cookieValue = null;
   if (document.cookie && document.cookie !== "") {
@@ -30,7 +32,7 @@ const likeResponse = async (user, id) => {
   // Manipulating dom to show
   document.getElementById(`explore-likes--${id}`).innerHTML = likeCount;
   like.classList.toggle("heart-div-click");
-  const response = await fetch(`http://127.0.0.1:8000/api/like-post/`, {
+  const response = await fetch(`${url}/api/like-post/`, {
     method: "POST",
     headers: {
       "Content-type": "application/json",

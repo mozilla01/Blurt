@@ -1,4 +1,5 @@
 // Handling the create post form submit
+
 const createPost = async () => {
   const createPostForm = document.querySelector("#createPostForm");
   const content = document.querySelector("#message-text").value;
@@ -13,7 +14,7 @@ const createPost = async () => {
   form_data.append("content", content);
   form_data.append("user", user);
   try {
-    const response = await fetch("http://127.0.0.1:8000/api/create-post/", {
+    const response = await fetch(`${url}/api/create-post/`, {
       method: "POST",
       body: form_data,
     });
