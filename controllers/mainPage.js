@@ -29,6 +29,7 @@ module.exports.renderMainPage = async (req, res) => {
   const qUser = req.query.username;
   console.log(qUser);
   const likes = await getLikes(res.locals.currentUser.username);
+    if (userPosts)
   for (let post of userPosts) {
     post.created = time.timeSince(new Date(post.created));
     const trimmedPost = post.content.split("\r\n");
@@ -44,9 +45,22 @@ module.exports.renderMainPage = async (req, res) => {
       post.pfp = userObject.image.pfp;
     }
 
+
     // Finding which posts the user has liked.
+    if (likes[0])
     for (let likeID of likes[0].post) {
       if (likeID === post.id) post.liked = true;
+    }
+
+    if (post.parent) {
+        try {
+            const response = await fetch(`${url}/api/post/${post.parent}`);
+            const data = await response.json();
+            console.log("This post replies to :"+data.user);
+            post.repliedTo = data.user;
+        } catch (err) {
+            console.log(err);
+        }
     }
   }
   const currentUser = await res.locals.currentUser;

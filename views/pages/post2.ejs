@@ -389,6 +389,12 @@
                           id="reply-content"
                           placeholder="Add a comment..."
                         />
+                        <select 
+                        class="form-control"
+                        name="type" id="post-type">
+                            <option value="P">Post</option>
+                            <option value="R">Reply</option>
+                        </select>
                         <% if (thisUser.image) { %>
                         <button
                           class="btn btn-dark"
@@ -463,7 +469,7 @@
                                     </div>
                                   </div>
 
-                                  <p id="reply-content"><%=reply.content%></p>
+                                  <a href="http://127.0.0.1:3001/social-media/<%=reply.user%>/<%=reply.id%>" id="reply-content"><%=reply.content%></a>
                                 </div>
                               </div>
                             </div>

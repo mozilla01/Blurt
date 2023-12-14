@@ -5,7 +5,7 @@ const config = require("../config");
 
 const url = config.url;
 
-const fetchSinglePost = async (q) => {
+fetchSinglePost = async (q) => {
   try {
     const response = await fetch(`${url}/api/post/${q}`);
     const data = await response.json();
@@ -65,3 +65,4 @@ module.exports.viewSinglePost = async (req, res) => {
 
   res.render("pages/post2", { singlePost, replies, thisUser, users, url });
 };
+
