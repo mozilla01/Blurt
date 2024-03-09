@@ -1,5 +1,5 @@
 const config = {
-  url: "https://blurtapi.moizgsr.me",
+    url: "http://127.0.0.1:8000",
 };
 
 module.exports = config;
