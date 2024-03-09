@@ -96,6 +96,6 @@ app.use((err, req, res, next) => {
   res.status(statusCode).render("pages/error", { err });
 });
 
-app.listen(3001, () => {
-  console.log("Listening on port 3001\nhttp://127.0.0.1:3001/social-media/");
+app.listen(3002, () => {
+  console.log("Listening on port 3002\nhttp://127.0.0.1:3002/social-media/");
 });

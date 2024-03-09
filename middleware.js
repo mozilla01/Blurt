@@ -39,7 +39,7 @@ module.exports.isSelf = async (req, res, next) => {
 
 module.exports.LogInRedirect = async (req, res, next) => {
   if (
-    req.headers.referer === "http://127.0.0.1:3001/login"
+    req.headers.referer === "http://127.0.0.1:3002/login"
   ) {
     return res.redirect("/social-media");
   }
