@@ -38,7 +38,9 @@ module.exports.isSelf = async (req, res, next) => {
 };
 
 module.exports.LogInRedirect = async (req, res, next) => {
-  if (req.headers.referer === "http://localhost:3001/login") {
+  if (
+    req.headers.referer === "http://blurt.eu-north-1.elasticbeanstalk.com/login"
+  ) {
     return res.redirect("/social-media");
   }
   next();

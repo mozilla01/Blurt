@@ -26,11 +26,13 @@ const ExpressError = require("./utils/ExpressError");
 const User = require("./models/user");
 
 mongoose
-  .connect("mongodb://127.0.0.1:27017/social-media")
+  .connect(
+    "mongodb+srv://moiz:ann0@blurt.3n9wfsq.mongodb.net/?retryWrites=true&w=majority&appName=blurt"
+  )
   .then(() => {
     console.log("MONGO CONNECTION OPEN !!");
   })
-  .catch(err => {
+  .catch((err) => {
     console.log("OH NO MONGO ERROR");
     console.log(err);
   });
