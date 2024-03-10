@@ -25,9 +25,36 @@ const getLikes = async (user) => {
 };
 
 module.exports.renderMainPage = async (req, res) => {
-  const userPosts = await fetchPosts("");
+  const currentUser = await res.locals.currentUser;
+  const thisUser = await User.findOne(currentUser._id)
+    .populate("followers", "username -_id")
+    .populate("following", "username -_id")
+    .populate("requested_outgoing", "username -_id")
+    .populate("requested_incoming", "username -_id");
+
+    let userPosts = [];
+    if (req.query.page == "explore") {
+        userPosts = await fetchPosts("");
+    } else {
+        for (const user of thisUser.following) {
+            followerPost = await fetchPosts(user.username);
+            userPosts.push(followerPost[0]);
+        }
+    }
+
+
   const qUser = req.query.username;
-  console.log(qUser);
+  let users = [];
+  if (qUser) {
+    users = await User.find({
+      username: { $regex: `^${qUser}`, $options: "i" },
+    });
+  } else {
+    users = await User.find(
+      { _id: { $ne: thisUser._id } },
+      { username: 1, image: 1, _id: false }
+    );
+  }
   const likes = await getLikes(res.locals.currentUser.username);
     if (userPosts)
   for (let post of userPosts) {
@@ -56,31 +83,12 @@ module.exports.renderMainPage = async (req, res) => {
         try {
             const response = await fetch(`${url}/api/post/${post.parent}`);
             const data = await response.json();
-            console.log("This post replies to :"+data.user);
             post.repliedTo = data.user;
+            post.parentData = data;
         } catch (err) {
             console.log(err);
         }
     }
-  }
-  const currentUser = await res.locals.currentUser;
-  const thisUser = await User.findOne(currentUser._id)
-    .populate("followers", "username -_id")
-    .populate("following", "username -_id")
-    .populate("requested_outgoing", "username -_id")
-    .populate("requested_incoming", "username -_id");
-
-  let users = [];
-  if (qUser) {
-    users = await User.find({
-      username: { $regex: `^${qUser}`, $options: "i" },
-    });
-    console.log(users);
-  } else {
-    users = await User.find(
-      { _id: { $ne: thisUser._id } },
-      { username: 1, image: 1, _id: false }
-    );
   }
 
   res.render("pages/main2", { userPosts, thisUser, users, url });

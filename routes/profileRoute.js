@@ -39,6 +39,17 @@ router.get("/social-media/:username", isLoggedIn, async (req, res) => {
     for (let likeID of likes[0].post) {
       if (likeID === post.id) post.liked = true;
     }
+    if (post.parent) {
+        try {
+            const response = await fetch(`${url}/api/post/${post.parent}`);
+            const data = await response.json();
+            console.log("This post replies to :"+data.user);
+            post.repliedTo = data.user;
+            post.parentData = data;
+        } catch (err) {
+            console.log(err);
+        }
+    }
   }
   const currentUsername = req.user.username;
 

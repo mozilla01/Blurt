@@ -27,7 +27,7 @@ const User = require("./models/user");
 
 mongoose
   .connect(
-    "mongodb+srv://moiz:ann0@blurt.3n9wfsq.mongodb.net/?retryWrites=true&w=majority&appName=blurt"
+    "mongodb://localhost:27017/social-media"
   )
   .then(() => {
     console.log("MONGO CONNECTION OPEN !!");

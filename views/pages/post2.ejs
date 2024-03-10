@@ -470,6 +470,13 @@
 
                                   <a href="/social-media/<%=reply.user%>/<%=reply.id%>" id="reply-content"><%=reply.content%></a>
                                 </div>
+                                <% if (reply.comments > 0) { %>
+                                <button onclick="getNestedReplies(<%=reply.id%>);document.getElementById('button-<%=reply.id%>').style.display='none'" class="get-nested-replies btn btn-link" id="button-<%=reply.id%>">+ Read more replies</button>
+                                <% } %>
+                              <!-- nested reply container -->
+                              <div id="nested-replies-<%=reply.id%>">
+                              </div>
+                              <!-- end nested reply container -->
                               </div>
                             </div>
                           </div>

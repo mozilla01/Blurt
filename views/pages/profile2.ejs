@@ -109,6 +109,7 @@
                   id="message-text"
                   name="content"
                 ></textarea>
+                <img id="img-preview" src="/images/image-preview.png" alt="image preview" class="img-fluid" />
                 <label for="post-image" class="col-form-label"
                   >Attach an image</label
                 ><br />
@@ -402,6 +403,59 @@
                       />
                       <% } %>
                     </div>
+                    <!-- Reference post -->
+                    <% if (userPost.repliedTo) { %>
+            <div class="card mt-3 mb-2 pt-3 pb-3" id="post">
+              <div>
+                <div class="container-fluid d-flex column">
+                  <div class="pe-2">
+                    <% if(userPost.parentData.pfp) {%>
+                    <img
+                      src="<%=userPost.parentData.pfp%>"
+                      alt=""
+                      class="img-fluid post-pfp"
+                    />
+                    <% } else {%>
+                    <img
+                      src="https://res.cloudinary.com/dyg5zmebj/image/upload//c_fill,g_face,h_60,w_60/f_png/r_max/v1688626927/Social-Media/umntgolhyfldrjkcxm27.jpg"
+                      alt=""
+                      class="img-fluid post-pfp"
+                    />
+                    <% } %>
+                  </div>
+                  <div class="container-fluid p-0 pe-3">
+                    <div class="card-title d-flex" id="post-title">
+                      <div
+                        class="text-start text-wrap text-break col-7"
+                        id="post-username"
+                      >
+                        <h4>@<%=userPost.parentData.user %></h4>
+                      </div>
+                      <div class="text-end col-5">
+                        <p class="me-2">- <%=userPost.created%></p>
+                      </div>
+                    </div>
+
+                    <p class="text-start" id="post-content">
+                      <%=userPost.parentData.content%>
+                    </p>
+
+                    <div class="bg-transparent d-flex justify-content-start">
+                      <% if(userPost.parentData.image) { %>
+                      <img
+                        src="<%=url%>/<%=userPost.parentData.image%>"
+                        alt=""
+                        class="img-fluid"
+                        id="user-post-image"
+                      />
+                      <% } %>
+                    </div> 
+                  </div>
+                </div>
+              </div>
+            </div>
+            <% } %>
+            <!-- End Reference post -->
                     <div class="d-flex mt-2" id="post-interactions">
                       <div class="d-flex col-6 pt-2">
                         <% if (userPost.liked) { %>
