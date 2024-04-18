@@ -1,4 +1,7 @@
 const User = require("../models/user");
+const config = require("../config");
+
+const url = config.url;
 
 module.exports.sendRequest = async (req, res) => {
   const { username } = req.params;
@@ -152,5 +155,5 @@ module.exports.renderInvitationsPage = async (req, res) => {
     { _id: { $ne: thisUser._id } },
     { username: 1, image: 1, _id: false }
   );
-  res.render("pages/invitations2", { thisUser, users, q });
+  res.render("pages/invitations2", { thisUser, users, q, url });
 };

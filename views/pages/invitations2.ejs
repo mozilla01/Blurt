@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="/stylesheets/invitations.css" />
   </head>
   <body>
+    <input type="hidden" value="<%=url%>" id="url" />
     <div
       class="modal fade modal-font-family"
       id="exampleModal"
@@ -59,6 +60,7 @@
                   id="message-text"
                   name="content"
                 ></textarea>
+                <img id="img-preview" width="200px" src="/images/image-preview.png" alt="image preview" class="img-fluid" />
                 <label for="post-image" class="col-form-label"
                   >Attach an image</label
                 ><br />

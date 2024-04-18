@@ -1,4 +1,7 @@
 const User = require("../models/user");
+const config = require("../config");
+
+const url = config.url;
 
 module.exports.search = async (req, res) => {
   const qUser = req.query.username;
@@ -22,5 +25,5 @@ module.exports.search = async (req, res) => {
     );
   }
 
-  res.render("pages/find", { thisUser, users });
+  res.render("pages/find", { thisUser, users, url });
 };

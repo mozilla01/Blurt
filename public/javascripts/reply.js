@@ -1,3 +1,49 @@
+
+function timeSince(date) {
+  var seconds = Math.floor((new Date() - date) / 1000);
+
+  var interval = seconds / 31536000;
+
+  if (interval > 1) {
+    return (
+      Math.floor(interval) +
+      `${Math.floor(interval) === 1 ? " year ago" : " years ago"}`
+    );
+  }
+  interval = seconds / 2592000;
+  if (interval > 1) {
+    return (
+      Math.floor(interval) +
+      `${Math.floor(interval) === 1 ? " month ago" : " months ago"}`
+    );
+  }
+  interval = seconds / 86400;
+  if (interval > 1) {
+    return (
+      Math.floor(interval) +
+      `${Math.floor(interval) === 1 ? " day ago" : " days ago"}`
+    );
+  }
+  interval = seconds / 3600;
+  if (interval > 1) {
+    return (
+      Math.floor(interval) +
+      `${Math.floor(interval) === 1 ? " hour ago" : " hours ago"}`
+    );
+  }
+  interval = seconds / 60;
+  if (interval > 1) {
+    return (
+      Math.floor(interval) +
+      `${Math.floor(interval) === 1 ? " minute ago" : " minutes ago"}`
+    );
+  }
+  return (
+    Math.floor(seconds) +
+    `${Math.floor(interval) === 1 ? " second ago" : " seconds ago"}`
+  );
+}
+
 const sendReply = async (user, post, pfp) => {
     console.log(user);
     const content = document.getElementById("reply-content").value;
@@ -43,7 +89,7 @@ const getNestedReplies = async (id) => {
     let html = '';
     for (const reply of replies) {
         const replyHTML = `
-                        <div class="card my-1">
+                        <div class="card my-1 border-0 border-start">
         <div class="card-body pe-0 m-0 pt-2">
                             <div class="d-flex row container-fluid p-0">
                               <div class="d-inline-flex col-auto ps-0 pe-2">
@@ -73,7 +119,7 @@ const getNestedReplies = async (id) => {
                                         class="d-flex container-fluid col-auto p-0"
                                       >
                                         <p id="reply-created">
-                                          - ${reply.created}
+                                          - ${timeSince(new Date(reply.created))}
                                         </p>
                                       </div>
                                     </div>
@@ -84,7 +130,7 @@ const getNestedReplies = async (id) => {
                                   <a href=\'/social-media/${reply.user}/${reply.id}\' id="reply-content">${reply.content}</a>
                                 </div>
                                 ${ reply.comments > 0 ? `<button onclick=\'getNestedReplies(${reply.id});document.getElementById(\"button-${reply.id}\").style.display=\"none\"\' class="get-nested-replies btn btn-link" id=\"button-${reply.id}\">+ Read more replies</button>` : ''}
-                        <div class="card my-1" id='nested-replies-${reply.id}'></div>
+                        <div class="card my-1 border-0 border-start" id='nested-replies-${reply.id}'></div>
                               </div>
                             </div>
                           </div></div>`;

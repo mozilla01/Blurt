@@ -33,13 +33,13 @@ module.exports.renderMainPage = async (req, res) => {
     .populate("requested_incoming", "username -_id");
 
     let userPosts = [];
-    if (req.query.page == "explore") {
-        userPosts = await fetchPosts("");
-    } else {
+    if (req.query.page == "following") {
         for (const user of thisUser.following) {
             followerPost = await fetchPosts(user.username);
             userPosts.push(followerPost[0]);
         }
+    } else {
+        userPosts = await fetchPosts("");
     }
 
 
