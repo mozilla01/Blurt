@@ -15,6 +15,11 @@ nav {
   background-color: transparent;
 }
 
+#zero-posts {
+  font-family: "Montserrat", sans-serif;
+  padding-top: 4rem;
+}
+
 .row {
   display: flex;
 }
@@ -24,23 +29,44 @@ nav {
   background-color: #f1f5f8;
 }
 
+#image-container img {
+  margin: 1rem;
+}
+
 #right-sidebar {
   height: 100vh;
   position: fixed;
   right: 0;
 }
 
-#friend {
+#left-sidebar {
+  height: 100vh;
+}
+
+.edit-options {
+  margin-top: 2rem;
+
   font-family: "Montserrat", sans-serif;
 }
 
-/* .friend-column:nth-of-type(1) {
-  border-right: 1px solid #d8e1e5;
-} */
+.edit-options h5 {
+  font-weight: lighter;
+  margin-bottom: 1rem;
+}
 
-.modal-font-family {
-  font-family: "Montserrat", sans-serif !important;
-  font-weight: lighter !important;
+.edit-options form {
+  font-size: 0.8rem;
+}
+
+.edit-options form button {
+  margin-top: 2rem;
+}
+
+.edit-options form input {
+  background-color: aliceblue;
+  text-align: center !important;
+  padding: 1rem;
+  border-radius: 5px;
 }
 
 /* #left-sidebar {
@@ -49,112 +75,72 @@ nav {
   border-radius: 10px;
 } */
 
-#left-sidebar {
-  background-color: rgb(255, 255, 255);
-  margin-right: calc(100% / 12);
-  display: flex !important;
-  flex-direction: column !important;
+.modal-font-family {
+  font-family: "Montserrat", sans-serif !important;
+  font-weight: lighter !important;
 }
 
-#form-container {
+#name-container h2 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 2.7rem;
+}
+
+#username-container h3 {
+  margin-top: 0rem;
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+  color: rgb(64, 102, 169);
+}
+
+#follow-container {
   margin-top: 3rem;
 }
 
-.users-container {
-  padding-left: 0 !important;
-  overflow: scroll;
-  overflow-x: hidden;
-  flex-grow: 1 !important;
-}
-
-.users-container div {
-  border-radius: 50px;
-  background-color: white;
-  transform: all 0.1s;
-}
-
-.users-container::-webkit-scrollbar {
-  width: 4px;
-}
-
-.users-container::-webkit-scrollbar-thumb {
-  background-color: rgb(144, 144, 144);
-}
-
-.users-container::-webkit-scrollbar-track {
-  background-color: rgb(235, 235, 235);
-  border-radius: 1px;
-}
-
-.users-container div:hover {
-  background-color: #f2f3f5;
-}
-
-.users-container h5 {
+#follow-container h4 {
   font-family: "Montserrat", sans-serif;
-  font-size: 1.1rem;
-  font-weight: 400;
-  margin-left: 0.5rem !important;
-}
-
-#friend-container h5 {
+  font-weight: 100;
   font-size: 1rem;
-  font-weight: normal;
-  margin-left: 0.4rem !important;
 }
 
-.users-container button {
-  font-size: 0.8rem;
+#follow-btn-container {
+  margin: 3rem;
 }
 
-.suggested h5 {
-  font-size: 1rem !important;
+ul {
+  font-family: "Montserrat", sans-serif;
+}
+
+#follow-btn-container button {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.3rem;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+#image-container img {
+  margin: 1rem;
 }
 
 #flash-1 {
   display: none !important;
 }
 
-#home-tag {
+#post-tag {
   background-color: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(18px);
 }
-#home-tag h5 {
-  font-family: "Montserrat", sans-serif;
+#post-tag h5 {
   font-weight: bold;
   font-size: 0.9rem;
 }
 
-#home-tag h4 {
+#post-tag h4 {
   font-family: "Montserrat", sans-serif;
   font-weight: bold;
-  font-size: 1.2rem;
-  margin-left: 2rem !important;
+  color: rgb(0, 0, 0);
 
-  border-radius: 4px;
-}
-
-.home-toggle h5 {
-  transition: all 0.4s;
-  padding: 0.1rem;
-  border-bottom: 3px solid transparent;
-}
-
-.home-toggle h5:hover {
-  border-bottom: 3px solid rgb(0, 0, 0);
-  margin-left: 1rem;
-  margin-right: 1rem;
-}
-
-.h5-active {
-  border-bottom: 3px solid rgb(0, 0, 0) !important;
-  padding: 0.1rem !important;
-  /* margin-left: 2rem !important;
-  margin-right: 2rem !important; */
-}
-
-button {
-  font-family: "Montserrat", sans-serif !important;
+  font-size: 1rem;
 }
 
 a {
@@ -162,13 +148,63 @@ a {
   color: inherit;
 }
 
-.zero-invitations {
+#post h4,
+p,
+h5 {
   font-family: "Montserrat", sans-serif;
-  font-size: 1.5rem;
-  font-weight: lighter;
-  color: rgb(87, 87, 87);
+  font-weight: 100;
 }
 
+#post-username h4 {
+  font-weight: bold;
+}
+
+#post-interactions h5 {
+  font-size: 1.1rem;
+}
+
+#post {
+  background-color: white;
+  transition: all 0.1s;
+}
+
+#user-post-image {
+  border-radius: 15px;
+}
+
+#post:hover {
+  background-color: #f2f3f5;
+}
+
+#post-title p {
+  font-size: 0.8rem;
+  color: rgb(97, 97, 97);
+}
+
+.heart-div-click {
+  font-variation-settings: "FILL" 1, "wght" 700, "GRAD" 0, "opsz" 48 !important;
+}
+
+.heart-div-click span {
+  color: rgb(233, 62, 62) !important;
+}
+
+.heart-div-unclick {
+  font-variation-settings: "FILL" 0, "wght" 700, "GRAD" 0, "opsz" 48;
+}
+
+.heart-div-unclick span {
+  color: rgb(87, 87, 88);
+}
+
+#heart {
+  cursor: pointer;
+  user-select: none;
+}
+
+#center-bar {
+  font-family: "Montserrat", sans-serif;
+}
 #centerbar {
   margin-right: calc((100% / 10));
 }
@@ -199,6 +235,15 @@ a {
   font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 48;
 }
 
+#post button {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  outline: inherit;
+}
+
 #log-out h5 {
   font-weight: bold;
   font-size: 1rem;
@@ -223,6 +268,10 @@ a {
 .suggested img {
   width: 2.5rem !important;
   height: 2.5rem !important;
+}
+
+#log-out-mobile {
+  display: none;
 }
 
 .dropdown-menu h5 {
@@ -262,6 +311,12 @@ footer {
   display: none !important;
 }
 
+@media (min-width: 576px) {
+  #post-content {
+    margin-top: 2rem !important;
+  }
+}
+
 @media (min-width: 576px) and (max-width: 992px) {
   #centerbar {
     margin-right: calc((100% / 12)) !important;
@@ -275,19 +330,25 @@ footer {
 }
 
 @media (max-width: 992px) {
-  #left-sidebar {
-    display: none !important;
+  #post:hover {
+    background-color: white;
   }
   #flash-1 {
     display: flex !important;
   }
 
   #flash-2 {
-    margin-top: 0rem !important;
-    padding-top: 0rem !important;
-    background-color: blue !important;
+    display: none !important;
   }
 
+  #zero-posts {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  #zero-posts h2 {
+    font-size: 1.3rem;
+  }
   #centerbar {
     margin-left: 0 !important;
   }
@@ -295,6 +356,9 @@ footer {
   .d-flex.contents {
     padding-top: 0.4rem;
     padding-bottom: 0.4rem;
+  }
+  #post-tag {
+    margin-top: 2rem;
   }
 }
 
@@ -322,11 +386,6 @@ footer {
     padding-right: 1rem;
   }
 
-  /* #home-tag a {
-    pointer-events: none;
-    cursor: default;
-  } */
-
   .contents {
     margin-left: 0.5rem;
     margin-right: 0.5rem;
@@ -340,6 +399,10 @@ footer {
   }
   #log-out p {
     margin-left: 1rem;
+  }
+
+  #left-sidebar {
+    width: calc((485% / 6));
   }
 }
 
@@ -358,6 +421,10 @@ footer {
     margin-right: 4rem;
   }
 
+  #image-container {
+    display: flex;
+    justify-content: start;
+  }
   #name-container h2 {
     font-size: 2.3rem;
   }
@@ -381,8 +448,15 @@ footer {
 }
 
 @media (width: 992px) {
+  #centerbar {
+    margin-left: calc(100% / 3) !important;
+  }
+
   #post-tag {
     margin: 0rem;
+  }
+  #left-sidebar {
+    width: calc(100% / 3) !important;
   }
   #find-friends {
     display: block;
@@ -397,8 +471,20 @@ footer {
 }
 
 @media (max-width: 576px) {
+  #name-container h2 {
+    font-size: 2rem;
+  }
   #right-sidebar {
     width: 10%;
+  }
+  #post-content {
+    font-size: 0.9rem;
+  }
+  .post-pfp {
+    width: 2rem;
+  }
+  #post-username h4 {
+    font-size: 1rem;
   }
 }
 
@@ -410,10 +496,22 @@ footer {
     margin-right: 0rem !important;
   }
 
-  #left-sidebar {
-    width: 100%;
+  #log-out-mobile {
+    display: block;
   }
 
+  #left-sidebar {
+    width: 100%;
+    height: 100vh !important;
+  }
+
+  #post p {
+    font-size: 0.7rem;
+  }
+
+  #post-content {
+    font-size: 0.9rem !important;
+  }
   footer {
     display: block;
     padding: 0rem !important;
@@ -432,6 +530,16 @@ footer {
     padding-bottom: 1rem;
     padding-right: 0.5rem;
     padding-top: 0.5rem;
+  }
+  /* #post-interactions span {
+    font-size: 1.2rem;
+  } */
+  #post-interactions h5 {
+    font-size: 1rem;
+  }
+
+  #post-tag h4 {
+    font-size: 0.8rem;
   }
 
   #create-post-button {

@@ -109,7 +109,13 @@
                   id="message-text"
                   name="content"
                 ></textarea>
-                <img id="img-preview" width="200px" src="/images/image-preview.png" alt="image preview" class="img-fluid" />
+                <img
+                  id="img-preview"
+                  width="200px"
+                  src="/images/image-preview.png"
+                  alt="image preview"
+                  class="img-fluid"
+                />
                 <label for="post-image" class="col-form-label"
                   >Attach an image</label
                 ><br />
@@ -213,7 +219,11 @@
           id="left-sidebar"
         >
           <div id="form-container">
-            <form class="d-flex" action="/social-media">
+            <form
+              class="d-flex"
+              action="/social-media"
+              style="font-family: Montserrat, sans-serif"
+            >
               <input
                 class="form-control me-2"
                 type="search"
@@ -221,11 +231,15 @@
                 aria-label="Search"
                 name="username"
               />
-              <!-- <button class="btn btn-outline-success btn-sm" type="submit">
+              <button class="btn btn-outline-success btn-sm" type="submit">
                 Search
-              </button> -->
+              </button>
 
-              <input class="btn btn-outline-success btn-sm" type="submit" />
+              <!-- <input
+                class="btn btn-outline-success btn-sm"
+                type="submit"
+                placeholder="Search"
+              /> -->
             </form>
           </div>
           <div
@@ -447,62 +461,66 @@
                         id="user-post-image"
                       />
                       <% } %>
-                    </div> 
+                    </div>
                     <% if (userPost.repliedTo) { %>
                     <div>
-                        <!-- Reference post -->
-            <div class="card mt-3 mb-2 pt-3 pb-3" id="post">
-                <a href="/social-media/<%=userPost.parentData.user%>/<%=userPost.parent%>">
-              <div>
-                <div class="container-fluid d-flex column">
-                  <div class="pe-2">
-                    <% if(userPost.parentData.pfp) {%>
-                    <img
-                      src="<%=userPost.parentData.pfp%>"
-                      alt=""
-                      class="img-fluid post-pfp"
-                    />
-                    <% } else {%>
-                    <img
-                      src="https://res.cloudinary.com/dyg5zmebj/image/upload//c_fill,g_face,h_60,w_60/f_png/r_max/v1688626927/Social-Media/umntgolhyfldrjkcxm27.jpg"
-                      alt=""
-                      class="img-fluid post-pfp"
-                    />
-                    <% } %>
-                  </div>
-                  <div class="container-fluid p-0 pe-3">
-                    <div class="card-title d-flex" id="post-title">
-                      <div
-                        class="text-start text-wrap text-break col-7"
-                        id="post-username"
-                      >
-                        <h4>@<%=userPost.parentData.user %></h4>
-                      </div>
-                      <div class="text-end col-5">
-                        <p class="me-2">- <%=userPost.created%></p>
-                      </div>
-                    </div>
+                      <!-- Reference post -->
+                      <div class="card mt-3 mb-2 pt-3 pb-3" id="post">
+                        <a
+                          href="/social-media/<%=userPost.parentData.user%>/<%=userPost.parent%>"
+                        >
+                          <div>
+                            <div class="container-fluid d-flex column">
+                              <div class="pe-2">
+                                <% if(userPost.parentData.pfp) {%>
+                                <img
+                                  src="<%=userPost.parentData.pfp%>"
+                                  alt=""
+                                  class="img-fluid post-pfp"
+                                />
+                                <% } else {%>
+                                <img
+                                  src="https://res.cloudinary.com/dyg5zmebj/image/upload//c_fill,g_face,h_60,w_60/f_png/r_max/v1688626927/Social-Media/umntgolhyfldrjkcxm27.jpg"
+                                  alt=""
+                                  class="img-fluid post-pfp"
+                                />
+                                <% } %>
+                              </div>
+                              <div class="container-fluid p-0 pe-3">
+                                <div class="card-title d-flex" id="post-title">
+                                  <div
+                                    class="text-start text-wrap text-break col-7"
+                                    id="post-username"
+                                  >
+                                    <h4>@<%=userPost.parentData.user %></h4>
+                                  </div>
+                                  <div class="text-end col-5">
+                                    <p class="me-2">- <%=userPost.created%></p>
+                                  </div>
+                                </div>
 
-                    <p class="text-start" id="post-content">
-                      <%=userPost.parentData.content%>
-                    </p>
+                                <p class="text-start" id="post-content">
+                                  <%=userPost.parentData.content%>
+                                </p>
 
-                    <div class="bg-transparent d-flex justify-content-start">
-                      <% if(userPost.parentData.image) { %>
-                      <img
-                        src="<%=url%>/<%=userPost.parentData.image%>"
-                        alt=""
-                        class="img-fluid"
-                        id="user-post-image"
-                      />
-                      <% } %>
-                    </div> 
-                  </div>
-                </div>
-              </div>
-                </a>
-            </div>
-            <!-- End Reference Post -->
+                                <div
+                                  class="bg-transparent d-flex justify-content-start"
+                                >
+                                  <% if(userPost.parentData.image) { %>
+                                  <img
+                                    src="<%=url%>/<%=userPost.parentData.image%>"
+                                    alt=""
+                                    class="img-fluid"
+                                    id="user-post-image"
+                                  />
+                                  <% } %>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </a>
+                      </div>
+                      <!-- End Reference Post -->
                     </div>
                     <% } %>
                     <div class="d-flex mt-2" id="post-interactions">
@@ -678,8 +696,8 @@
           <a href="/social-media/<%=thisUser.username %>/invitations?q=requests"
             ><span class="material-symbols-outlined fs-1 notification-icon">
               notifications
-              <div class="notification-dot"></div> </span
-          ></a>
+            </span></a
+          >
           <a href="/social-media/<%=thisUser.username %>"
             ><span class="material-symbols-outlined fs-1"> person </span></a
           >

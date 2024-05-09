@@ -16,6 +16,7 @@ module.exports.editPost = async (req, res) => {
     }),
   });
   const data = await response.json();
+  req.flash("success", "Post Edited Successfully");
   res.redirect("/social-media");
 };
 

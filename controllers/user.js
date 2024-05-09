@@ -33,7 +33,7 @@ module.exports.registerUser = async (req, res) => {
     });
     const data = await response.json();
 
-    req.login(registeredUser, (err) => {
+    req.login(registeredUser, err => {
       if (err) return next(err);
       req.flash("success", "Registered Successfully !");
       res.redirect("/social-media");
@@ -45,7 +45,7 @@ module.exports.registerUser = async (req, res) => {
 };
 
 module.exports.loginUser = (req, res) => {
-  req.flash("success", "Welcome back !");
+  req.flash("success", "Welcome Back !");
   const redirectUrl = res.locals.returnTo || "/social-media";
   res.redirect(redirectUrl);
 };
@@ -56,6 +56,6 @@ module.exports.logoutUser = (req, res) => {
       return next(err);
     }
     req.flash("success", "Sucessfully Logged Out!");
-    res.redirect("/welcome");
+    res.redirect("/login");
   });
 };
