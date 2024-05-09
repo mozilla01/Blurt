@@ -1,3 +1,13 @@
+const file = document.querySelector("#post-image");
+let image = file.files[0];
+const imagePreview = document.getElementById("img-preview");
+file.onchange = () => {
+  image = file.files[0];
+  if (image) {
+    imagePreview.src = URL.createObjectURL(image);
+  }
+};
+
 // Handling the create post form submit
 
 let mess = `
@@ -19,10 +29,9 @@ let mess = `
 const createPost = async () => {
   const createPostForm = document.querySelector("#createPostForm");
   const content = document.querySelector("#message-text").value;
-  const file = document.querySelector("#post-image");
   const user = document.querySelector("#create-post-user").value;
   const userPfp = document.querySelector("#user-img").value;
-  const image = file.files[0];
+
   let form_data = new FormData();
   if (image) {
     form_data.append("image", image, image.name);
@@ -36,18 +45,8 @@ const createPost = async () => {
     });
     const data = await response.json();
     console.log(data);
-
     document.getElementById("create-post-close").click();
     createPostForm.reset();
-
-    ////////
-    console.log("working");
-    const tempContainer = document.createElement("div");
-    tempContainer.innerHTML = mess;
-    const alertNode = tempContainer.firstElementChild;
-    document.getElementById("centerbar").appendChild(alertNode);
-    // document.querySelector("body").appendChild(mess);
-    ////////
 
     location.reload();
   } catch (err) {
