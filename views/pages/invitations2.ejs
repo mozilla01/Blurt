@@ -118,16 +118,23 @@
           id="left-sidebar"
         >
           <div id="form-container">
-            <form class="d-flex" role="search">
+            <form class="d-flex" action="/social-media" style="font-family: Montserrat, sans-serif">
               <input
                 class="form-control me-2"
                 type="search"
                 placeholder="Find Your Friends .."
                 aria-label="Search"
+                name="username"
               />
               <button class="btn btn-outline-success btn-sm" type="submit">
                 Search
               </button>
+              
+              <!-- <input
+                class="btn btn-outline-success btn-sm"
+                type="submit"
+                placeholder="Search"
+              /> -->
             </form>
           </div>
           <div
@@ -313,7 +320,7 @@
                       <div
                         class="d-flex col-6 text-break text-wrap align-items-end justify-content-start p-0 m-0"
                       >
-                        <a href=""
+                        <a href="/social-media/<%= follower.username %>/"
                           ><h5 class="ms-1 pb-2">@<%=follower.username%></h5></a
                         >
                       </div>
@@ -374,7 +381,7 @@
                       <div
                         class="d-flex col-6 text-break text-wrap align-items-end justify-content-start p-0 m-0"
                       >
-                        <a href=""
+                        <a href="/social-media/<%= outfollower.username %>/"
                           ><h5 class="ms-1 pb-2">
                             @<%=outfollower.username%>
                           </h5></a

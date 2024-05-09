@@ -212,7 +212,11 @@
           id="left-sidebar"
         >
           <div id="form-container">
-            <form class="d-flex" action="/social-media">
+            <form
+              class="d-flex"
+              action="/social-media"
+              style="font-family: Montserrat, sans-serif"
+            >
               <input
                 class="form-control me-2"
                 type="search"
@@ -220,11 +224,15 @@
                 aria-label="Search"
                 name="username"
               />
-              <!-- <button class="btn btn-outline-success btn-sm" type="submit">
+              <button class="btn btn-outline-success btn-sm" type="submit">
                 Search
-              </button> -->
+              </button>
 
-              <input class="btn btn-outline-success btn-sm" type="submit" />
+              <!-- <input
+                class="btn btn-outline-success btn-sm"
+                type="submit"
+                placeholder="Search"
+              /> -->
             </form>
           </div>
           <div
@@ -446,10 +454,16 @@
                         id="user-post-image"
                       />
                       <% } %>
-                    </div> 
+                    </div>
                     <% if (userPost.repliedTo) { %>
                     <div>
-                    <iframe src="/social-media/<%=userPost.repliedTo%>/<%=userPost.parent%>" height="700" width="700" style="border: 1px solid grey; border-radius: 10px" title="Referenced Post"></iframe> 
+                      <iframe
+                        src="/social-media/<%=userPost.repliedTo%>/<%=userPost.parent%>"
+                        height="700"
+                        width="700"
+                        style="border: 1px solid grey; border-radius: 10px"
+                        title="Referenced Post"
+                      ></iframe>
                     </div>
                     <% } %>
                     <div class="d-flex mt-2" id="post-interactions">
@@ -625,8 +639,8 @@
           <a href="/social-media/<%=thisUser.username %>/invitations?q=requests"
             ><span class="material-symbols-outlined fs-1 notification-icon">
               notifications
-              <div class="notification-dot"></div> </span
-          ></a>
+            </span></a
+          >
           <a href="/social-media/<%=thisUser.username %>"
             ><span class="material-symbols-outlined fs-1"> person </span></a
           >

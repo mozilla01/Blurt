@@ -39,7 +39,7 @@ module.exports.acceptRequest = async (req, res) => {
     await req.user.updateOne({ $addToSet: { followers: user._id } });
     await user.updateOne({ $addToSet: { following: req.user._id } });
 
-    req.flash("success", `${username} started following you`);
+    req.flash("success", `${username} Started Following You`);
 
     const previousUrl = req.headers.referer || "/social-media";
     res.redirect(previousUrl);

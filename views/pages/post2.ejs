@@ -372,47 +372,60 @@
                         Comments <b><%=singlePost.comments%></b>
                       </h5>
                       <div
-                        class="d-flex justify-content-between container-fluid p-0 ps-2 pe-2 sticky-top"
+                        class="d-flex flex-column container-fluid p-0 ps-2 pe-2 sticky-top"
                         id="thisUserComment"
+                        style="font-family: 'Montserrat', sans-serif"
                       >
-                        <% if(thisUser.image) { %>
-                        <img
-                          src="<%=thisUser.image.img_36%>"
-                          alt=""
-                          class="img-fluid"
-                        />
-                        <% } else { %> <%} %>
-                        <textarea
-                          name="reply"
-                          class="form-control me-2 ms-2"
-                          id="reply-content"
-                          placeholder="Add a comment..."
-                        ></textarea>
-                        <select 
-                        class="form-control"
-                        name="type" id="post-type">
-                            <option value="P">Post</option>
-                            <option value="R">Reply</option>
-                        </select>
-                        <% if (thisUser.image) { %>
-                        <button
-                          class="btn btn-dark"
-                          id="send-reply"
-                          type="button"
-                          onclick="sendReply('<%=thisUser.username%>', '<%=singlePost.id%>', '<%=thisUser.image.pfp%>')"
-                        >
-                          Send
-                        </button>
-                        <% } else { %>
-                        <button
-                          class="btn btn-dark"
-                          id="send-reply"
-                          type="button"
-                          onclick="sendReply('<%=thisUser.username%>', '<%=singlePost.id%>', 'https://res.cloudinary.com/dyg5zmebj/image/upload//c_fill,g_face,h_48,w_48/f_png/r_max/v1688626927/Social-Media/umntgolhyfldrjkcxm27.jpg')"
-                        >
-                          Send
-                        </button>
-                        <% } %>
+                        <div class="d-flex mb-3">
+                          <div class="">
+                            <% if(thisUser.image) { %>
+                            <img
+                              src="<%=thisUser.image.img_48%>"
+                              alt=""
+                              class="img-fluid"
+                            />
+                            <% } else { %> <%} %>
+                          </div>
+
+                          <textarea
+                            name="reply"
+                            class="form-control me-2 ms-2"
+                            id="reply-content"
+                            placeholder="Add a comment..."
+                          ></textarea>
+                        </div>
+                        <div class="d-flex justify-content-end grid gap-3">
+                          <div class="span">
+                            <select
+                              class="form-control form-select"
+                              name="type"
+                              id="post-type"
+                            >
+                              <option value="P">Repost</option>
+                              <option value="R">Reply</option>
+                            </select>
+                          </div>
+
+                          <% if (thisUser.image) { %>
+                          <button
+                            class="btn btn-dark"
+                            id="send-reply"
+                            type="button"
+                            onclick="sendReply('<%=thisUser.username%>', '<%=singlePost.id%>', '<%=thisUser.image.pfp%>')"
+                          >
+                            Send
+                          </button>
+                          <% } else { %>
+                          <button
+                            class="btn btn-dark"
+                            id="send-reply"
+                            type="button"
+                            onclick="sendReply('<%=thisUser.username%>', '<%=singlePost.id%>', 'https://res.cloudinary.com/dyg5zmebj/image/upload//c_fill,g_face,h_48,w_48/f_png/r_max/v1688626927/Social-Media/umntgolhyfldrjkcxm27.jpg')"
+                          >
+                            Send
+                          </button>
+                          <% } %>
+                        </div>
                       </div>
                       <div id="replies">
                         <% for(const reply of replies) { %>
@@ -468,7 +481,11 @@
                                     </div>
                                   </div>
 
-                                  <a href="/social-media/<%=reply.user%>/<%=reply.id%>" id="reply-content"><%=reply.content%></a>
+                                  <a
+                                    href="/social-media/<%=reply.user%>/<%=reply.id%>"
+                                    id="reply-content"
+                                    ><%=reply.content%></a
+                                  >
                                 </div>
                               </div>
                             </div>

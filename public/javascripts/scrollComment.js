@@ -1,2 +1,2 @@
-// const comment = document.getElementById("comment-heading");
-// comment.scrollIntoView();
+const comment = document.getElementById("comment-heading");
+comment.scrollIntoView();

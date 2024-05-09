@@ -8,9 +8,9 @@ const user = require("../controllers/user");
 const { storeReturnTo } = require("../middleware");
 
 //Welcome Page
-router.get("/welcome", async (req, res) => {
-  res.render("pages/welcome");
-});
+// router.get("/welcome", async (req, res) => {
+//   res.render("pages/welcome");
+// });
 
 //Register Get
 router.get("/register", user.renderRegister);

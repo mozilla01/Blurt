@@ -1,5 +1,21 @@
 // Handling the create post form submit
 
+let mess = `
+  <div
+    class="alert border-success bg-white alert-dismissible alert-partial fade show"
+    role="alert"
+    style="font-family: 'Montserrat', sans-serif"
+  >
+    Post Created Successfully !
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="alert"
+      aria-label="Close"
+    ></button>
+  </div>
+`;
+
 const createPost = async () => {
   const createPostForm = document.querySelector("#createPostForm");
   const content = document.querySelector("#message-text").value;
@@ -20,8 +36,18 @@ const createPost = async () => {
     });
     const data = await response.json();
     console.log(data);
+
     document.getElementById("create-post-close").click();
     createPostForm.reset();
+
+    ////////
+    console.log("working");
+    const tempContainer = document.createElement("div");
+    tempContainer.innerHTML = mess;
+    const alertNode = tempContainer.firstElementChild;
+    document.getElementById("centerbar").appendChild(alertNode);
+    // document.querySelector("body").appendChild(mess);
+    ////////
 
     location.reload();
   } catch (err) {

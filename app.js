@@ -26,13 +26,11 @@ const ExpressError = require("./utils/ExpressError");
 const User = require("./models/user");
 
 mongoose
-  .connect(
-    "mongodb+srv://moiz:ann0@blurt.3n9wfsq.mongodb.net/?retryWrites=true&w=majority&appName=blurt"
-  )
+  .connect("mongodb://127.0.0.1:27017/social-media")
   .then(() => {
     console.log("MONGO CONNECTION OPEN !!");
   })
-  .catch((err) => {
+  .catch(err => {
     console.log("OH NO MONGO ERROR");
     console.log(err);
   });
@@ -79,13 +77,13 @@ app.use("/", userRoute);
 app.use("/", singlePostRoute);
 app.use("/", imageUploadRoute);
 app.use("/", profileRoute);
-app.get("/", (req, res) => {
-  res.send("Social Media App");
+app.get("/social-nedia", (req, res) => {
+  res.render("pages/welcome");
 });
 
-app.get("/home", (req, res) => {
-  res.render("pages/home");
-});
+// app.get("/home", (req, res) => {
+//   res.render("pages/home");
+// });
 
 app.all("*", (req, res, next) => {
   next(new ExpressError("Page Not Found", 404));

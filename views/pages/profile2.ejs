@@ -217,9 +217,9 @@
           <div id="image-container" class="d-flex justify-content-center">
             <% if(user.image) {%>
             <img src="<%=user.image.profile%>" alt="" class="img-fluid" />
-            <% } else {%>
+            <% } else { %>
             <img
-              src="https://res.cloudinary.com/dyg5zmebj/image/upload//c_fill,g_face,h_200,w_200/f_png/r_max/v1688626927/Social-Media/umntgolhyfldrjkcxm27.jpg"
+              src="https://res.cloudinary.com/dyg5zmebj/image/upload//c_fill,g_face,h_200,w_200/f_png/r_max/v1688624959/user_bzdfvm.jpg"
               alt=""
               class="img-fluid"
             />
@@ -322,7 +322,7 @@
               <div>
                 <div class="container-fluid d-flex column">
                   <div class="pe-2">
-                    <% if(user.image) {%>
+                    <% if(user.image) { console.log()%>
                     <img
                       src="<%=user.image.pfp%>"
                       alt=""
